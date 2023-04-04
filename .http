@@ -1,0 +1,11 @@
+### Muestra todos los productos
+GET http://localhost:8080/products
+
+### Muestra la cantidad de productos que quieras ver 
+GET http://localhost:8080/products?limit=5
+
+### Muestra un producto por id solicitado
+GET http://localhost:8080/products/4
+
+###Muestra que ese producto no existe
+GET http://localhost:8080/products/43
