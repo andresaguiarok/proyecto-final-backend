@@ -4,22 +4,25 @@ const listaDeAutos = []
 class ProductManager {
     constructor (){
         this.products = listaDeAutos
-        this.path = "./proyecto/data.json"
+        this.path = "./data.json"
     }
     
     addProduct = async(title, description, price, thumbnail, code, stock) => {
-        let nuevoAuto = {id: this.products.length+1, title, description, price, thumbnail, code, stock}
+        let busquedaDeCode = await this.readProducts()
+        
+        let nuevoAuto = {...title, ...description, ...price, ...thumbnails, ...code, ...stock}
+        
+        //Validacion si los campos existen o estan vacios
+        if(!nuevoAuto.title || !nuevoAuto.description || !nuevoAuto.price || 
+           !nuevoAuto.thumbnails || !nuevoAuto.code || !nuevoAuto.stock) return 
 
-        if(nuevoAuto.title === '' || nuevoAuto.description === '' || 
-           nuevoAuto.price === '' || nuevoAuto.thumbnail === '' ||
-           nuevoAuto.code === '' || nuevoAuto.stock === '') return 'Complete los campos correctamente'
-    
-        let auto = this.products.find(auto => auto.code == code)
-        if (auto) return  "El auto con este code ya fue ingresado"
+        //Validacion si el code del producto existe
+        let codeExiste = busquedaDeCode.find(auto => auto.code === nuevoAuto.code)
+        if (codeExiste) return
 
-        this.products.push(nuevoAuto)
+        let autoAgregado = [...busquedaDeCode,{id: busquedaDeCode.length+1, ...nuevoAuto}]
 
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products, "null", 2), "utf-8")
+        await fs.promises.writeFile(this.path, JSON.stringify(autoAgregado, "null", 2), "utf-8")
     };
 
     readProducts = async () => {
@@ -36,15 +39,13 @@ class ProductManager {
     getProductById = async(autoId) => {
         let buscarId = await this.readProducts()
         let autoEncontrado = buscarId.find(auto => auto.id == autoId)
-        
-        if (!autoEncontrado) return "Este Producto no existe"
         return autoEncontrado
     }
 
     updateProduct = async (autoId, datosNuevos) => {       
         let datosDesactualizados = await this.readProducts()
         let autoActualizar = await this.getProductById(autoId)
-        let actualizarAuto = datosDesactualizados.filter(auto => auto.id != autoId)
+        let actualizarAuto = datosDesactualizados.findIndex(auto => auto.id === autoId)
 
         let datosActualizados = [...actualizarAuto,{...autoActualizar, ...datosNuevos}]
 
