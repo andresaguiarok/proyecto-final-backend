@@ -7,7 +7,7 @@ class ProductManager {
         this.path = "./data.json"
     }
     
-    addProduct = async(title, description, price, thumbnail, code, stock) => {
+    addProduct = async(title, description, price, thumbnails, code, stock) => {
         let busquedaDeCode = await this.readProducts()
         
         let nuevoAuto = {...title, ...description, ...price, ...thumbnails, ...code, ...stock}
@@ -43,16 +43,14 @@ class ProductManager {
     }
 
     updateProduct = async (autoId, datosNuevos) => {       
-        let datosDesactualizados = await this.readProducts()
-        let autoActualizar = await this.getProductById(autoId)
-        let actualizarAuto = datosDesactualizados.findIndex(auto => auto.id === autoId)
+        let datosDeProductos = await this.readProducts()
+        let actualizarProducto = await this.getProductById(autoId)
+        let index = datosDeProductos.findIndex(auto => auto.id == autoId)
 
-        let datosActualizados = [...actualizarAuto,{...autoActualizar, ...datosNuevos}]
+        datosDeProductos[index] = {...actualizarProducto, ...datosNuevos}
 
-
-        await fs.promises.writeFile(this.path, JSON.stringify(datosActualizados, "null",2), "utf-8")
-        return "Producto actualizado"
-        //node ./Desafios/manejoDeArchivos.js
+        await fs.promises.writeFile(this.path, JSON.stringify(datosDeProductos, "null",2), "utf-8")
+        return 
     }
 
     deleteProduct = async(autoId) => {

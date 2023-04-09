@@ -1,36 +1,48 @@
 ### Muestra todos los productos
-GET http://localhost:8080/products
+GET http://localhost:8080/api/products
 
 ### Muestra la cantidad de productos que quieras ver 
-GET http://localhost:8080/products?limit=3
+GET http://localhost:8080/api/products?limit=3
 
 ### Muestra un producto por id solicitado
-GET http://localhost:8080/products/7
+GET http://localhost:8080/api/products/7
 
 ###Muestra que ese producto no existe
-GET http://localhost:8080/products/43
+GET http://localhost:8080/api/products/43
 
 ### Agrega un producto nuevo al json
-POST http://localhost:8080/products
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
   {
     "title": "Jeep Wrangler",
     "description": "Modelo: 2021",
     "price": 45.599,
-    "status": "true",
+    "status": true,
     "thumbnails":[
       "https://www.jeep.com.ar/content/dam/cross-regional/latam/jeep/es_ar/wrangler/my19/galeria/galeria_1.jpg.img.1440.jpg",  
       "https://mysterio.yahoo.com/mysterio/api/BAEE16CEA6286BCC25D5BCD75880CCD97578DE3F4E536A08DFFDFE35B650F806/autoblog/resizefill_w1200_h720;quality_85;format_webp;cc_31536000;/https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/1062x597/format/jpg/quality/100/https://s.aolcdn.com/os/ab/_cms/2022/07/28160932/JP023_278WRe2agolg71u14ilj33i3dbvdkrt.jpg",
       "https://ddztmb1ahc6o7.cloudfront.net/gosselinauto/wp-content/uploads/2022/12/15200747/jeep-wrangler-willys-4xe-2023-01.jpg"
       ],
-    "category": "",
+    "category": "Camioneta",
     "code": "Jh456rttrt",
     "stock": 9
   }
 
 ### Actualiza el producto por su ID en el json 
-PUT 
+PUT http://localhost:8080/api/products/1
+Content-Type: application/json
+
+  {
+    "title": "Ford Focus Rs",
+    "description": "Modelo : 2020",
+    "price": 80.899,
+    "thumbnails": [
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ford-focus-st-2019-portada-1563442896.jpg",
+      "https://www.megautos.com/wp-content/uploads/2019/12/Focus-RS-2019-delantera.jpg",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ford-focus-rs-mountune-1566379239.jpg"
+    ]
+  }
 
 ### Borra un producto indicado por el ID del archivo JSON 
-DELETE http://localhost:8080/products/1
+DELETE http://localhost:8080/api/products/1

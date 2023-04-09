@@ -1,14 +1,11 @@
-const express = require("express");
-const ProductManager  = require('./productManager');
-const app = express();
-
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+const { Router } = require("express")
+const ProductManager  = require('../managers/productManager.js');
 
 const consulta = async() => {
     const pm = new ProductManager()
+    const router = Router()
 
-    app.get("/products", async (req, res) => {
+    router.get("/", async (req, res) => {
         let productos = await pm.readProducts()
         const limit = req.query.limit
 
@@ -17,14 +14,14 @@ const consulta = async() => {
         :res.send(productos)
     });
 
-    app.get("/products/:pid", async(req,res) =>{
+    router.get("/:pid", async(req,res) =>{
         let {pid} = req.params
         let producto = await pm.getProductById(pid)
         if (!producto){ return res.status(404).send({status: "error", mensaje: "Este Producto no existe"})}
         res.send(producto)
     });
 
-    app.post("/products", async(req, res) => {
+    router.post("/", async(req, res) => {
         let busquedaDeCode = await pm.readProducts()
         let producto = req.body
         await pm.addProduct(producto)
@@ -40,26 +37,21 @@ const consulta = async() => {
         res.status(200).send({producto})
     })
 
-    app.put("./products/:pid", (req, res) => {
-
+    router.put("/:pid", async(req, res) => {
+        let {pid} = req.params
+        let producto = req.body
+        let productoActualizado = await pm.updateProduct(pid,producto)
+        res.status(200).send({status:"Exito", mensaje:"Producto Actualizado",productoActualizado})
     })
 
-    app.delete("/products/:pid", async(req , res) => {
+    router.delete("/:pid", async(req , res) => {
         let {pid} = req.params
         let productoBorrado = await pm.deleteProduct(pid)
         
         res.status(200).send(productoBorrado)
     })
-
-    const PORT = 8080
-
-    app.listen(PORT, () => {
-        console.log(`Esta corriendo en el puerto ${PORT}`);
-    })
+    
+    module.exports = router
 }
 
 consulta()
-
-
-
-

@@ -4,7 +4,7 @@
     "title": "Ford Focus",
     "description": "Modelo: 2018",
     "price": 16.699,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Ax34bv",
     "stock": 12
   },
@@ -13,7 +13,7 @@
     "title": "Jeep Renage",
     "description": "Modelo: 2019",
     "price": 23.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Ab987xz",
     "stock": 10
   },
@@ -22,7 +22,7 @@
     "title": "Bmw 120i",
     "description": "Modelo: 2016",
     "price": 22.999,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Ac67mn8",
     "stock": 8
   },
@@ -31,7 +31,7 @@
     "title": "Ford Fiesta",
     "description": "Modelo: 2020",
     "price": 15.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Ay27op7",
     "stock": 9
   },
@@ -40,7 +40,7 @@
     "title": "Volkswagen Gol",
     "description": "Modelo: 2021",
     "price": 17.299,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Xc45po",
     "stock": 4
   },
@@ -49,7 +49,7 @@
     "title": "Volkswagen Polo",
     "description": "Modelo: 2012",
     "price": 21.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Ws456th",
     "stock": 8
   },
@@ -58,7 +58,7 @@
     "title": "Renault Duster",
     "description": "Modelo: 2018",
     "price": 14.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Hj78lm",
     "stock": 7
   },
@@ -67,7 +67,7 @@
     "title": "Ferrari Purosangue",
     "description": "Modelo: 2022",
     "price": 32.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Po23vb",
     "stock": 11
   },
@@ -76,7 +76,7 @@
     "title": "Ferrari Devoile",
     "description": "Modelo: 2022",
     "price": 60.899,
-    "thumbnail": "Sin imagen",
+    "thumbnails": "Sin imagen",
     "code": "Xx509hh",
     "stock": 10
   }
