@@ -1,23 +1,14 @@
 [
   {
     "id": 1,
-    "product": {
-      "title": "hola",
-      "price": "400"
-    }
+    "products": []
   },
   {
     "id": 2,
-    "product": {
-      "title": "holis",
-      "price": "200"
-    }
+    "product": []
   },
   {
     "id": 3,
-    "product": {
-      "title": "holes",
-      "price": "600"
-    }
+    "product": []
   }
 ]

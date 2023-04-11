@@ -1,0 +1,13 @@
+### Se crea un nuevo carrito
+POST http://localhost:8080/api/carts
+
+### Trae el carrito con su ID indicado 
+GET http://localhost:8080/api/carts/2
+
+### Error por no existir ese ID del carrito
+GET http://localhost:8080/api/carts/6
+
+### Se añade un producto al carrito
+POST http://localhost:8080/api/carts/2/product/5
+
+
