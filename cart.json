@@ -1,14 +1,57 @@
 [
   {
     "id": 1,
-    "products": []
+    "products": [
+      {
+        "id": 1,
+        "title": "Ford Focus",
+        "quantity": 1
+      },
+      {
+        "id": 5,
+        "title": "Volkswagen Gol",
+        "quantity": 3
+      }
+    ]
   },
   {
     "id": 2,
-    "product": []
+    "products": [
+      {
+        "id": 5,
+        "title": "Volkswagen Gol",
+        "quantity": 6
+      }
+    ]
   },
   {
     "id": 3,
-    "product": []
+    "products": [
+      {
+        "id": 1,
+        "title": "Ford Focus",
+        "quantity": 2
+      },
+      {
+        "id": 6,
+        "title": "Volkswagen Polo",
+        "quantity": 3
+      },
+      {
+        "id": 3,
+        "title": "Bmw 120i",
+        "quantity": 3
+      },
+      {
+        "id": 7,
+        "title": "Renault Duster",
+        "quantity": 3
+      },
+      {
+        "id": 8,
+        "title": "Ferrari Purosangue",
+        "quantity": 2
+      }
+    ]
   }
 ]

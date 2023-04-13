@@ -21,15 +21,10 @@ const consulta = async() =>{
     })
 
     router.post("/:cid/product/:pid", async (req, res) =>{
-        let {cdi} = req.params
-        let cart = await cm.cartById(cdi)
-
+        let {cid} = req.params
         let {pid} = req.params
-        let producto = await pm.getProductById(pid)
-
-        let productoAgregado = await cm.addProductCart(cart,producto)
-        res.send({productoAgregado})
-        
+        let cartProd = await cm.addProductCart(cid,pid)
+        res.status(200).send({mensaje:"Se agrego al carrito",cartProd})
     })
 
     

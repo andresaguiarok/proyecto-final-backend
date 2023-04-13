@@ -39,6 +39,7 @@ class ProductManager {
     getProductById = async(autoId) => {
         let buscarId = await this.readProducts()
         let autoEncontrado = buscarId.find(auto => auto.id == autoId)
+        if (!autoEncontrado) return "No existe este producto"
         return autoEncontrado
     }
 
