@@ -1,11 +1,8 @@
 const { Router } = require("express")
 const CartManager = require("../managers/cartManager.js");
-const ProductManager = require ("../managers/productManager.js")
-
 
 const consulta = async() =>{
     const cm = new CartManager()
-    const pm = new ProductManager()
     const router = Router()
 
     router.post("/" , async(req, res) => {
@@ -16,7 +13,7 @@ const consulta = async() =>{
     router.get("/:cdi", async (req, res) => {
         let {cdi} = req.params
         let cart = await cm.cartById(cdi)
-        if(!cart) return res.status(404).send({error: "error", mensaje : "No existe"})
+        if(!cart) return res.status(404).send({status: "error", mensaje : "No existe"})
         res.send(cart)
     })
 

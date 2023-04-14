@@ -33,7 +33,7 @@ class cartManager{
     cartById = async(idCart) => {
         let carts = await this.readCarts()
         let cartId = carts.find(cart => cart.id == idCart)
-        if (!cartId) return "noExiste"
+        if (!cartId) return
         return cartId
     }
     
