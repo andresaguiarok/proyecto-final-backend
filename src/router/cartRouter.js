@@ -25,7 +25,7 @@ const consulta = async() =>{
     })
 
     
-    module.exports= router
+    module.exports = router
 }
 
 consulta()
