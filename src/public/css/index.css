@@ -1,0 +1,11 @@
+section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.card {
+    box-shadow: 0 20px 30px -14px rgba(0,0,0,0.25);
+}
