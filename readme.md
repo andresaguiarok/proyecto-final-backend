@@ -13,4 +13,4 @@ Para el uso del repositorio debe instarlar las siguientes dependencias. :
 1 - `Express`\
 2 - `Express-handlebars`\
 3 - `socket.io`\
-4 - `Boostrap`\
+4 - `Boostrap`
