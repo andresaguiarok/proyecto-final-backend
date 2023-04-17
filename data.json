@@ -79,5 +79,32 @@
     "thumbnails": "https://th.bing.com/th/id/OIP.rxfECsnce9WcPaRIFkbbKQHaGA?pid=ImgDet&rs=1",
     "code": "Xx509hh",
     "stock": 10
+  },
+  {
+    "id": 10,
+    "title": "Chevrolet Onix",
+    "description": "modelo : 2020",
+    "price": "14.555",
+    "thumbnails": "https://th.bing.com/th/id/OIP.vovV_en_B1bDmX4V044EswHaE7?pid=ImgDet&rs=1",
+    "code": "Ax435Ty",
+    "stock": "5"
+  },
+  {
+    "id": 11,
+    "title": "Chevrolet Camaro",
+    "description": "modelo : 2021",
+    "price": "85.888",
+    "thumbnails": "https://th.bing.com/th/id/R.5251494569c348c4199a4c1f85b22a40?rik=1V3e%2f6A%2bld26Jg&riu=http%3a%2f%2fwww.hdcarwallpapers.com%2fwalls%2fchevrolet_camaro_z28_2014-HD.jpg&ehk=PD0qVYyW%2bLUi44BakQOGaGpmT6cBaVpMuUgqvzwe02I%3d&risl=&pid=ImgRaw&r=0",
+    "code": "Gh234Er",
+    "stock": "6"
+  },
+  {
+    "id": 12,
+    "title": "Ford Mustang Shelby",
+    "description": "modelo: 2020",
+    "price": "87.633",
+    "thumbnails": "https://www.automobilemag.com/uploads/sites/11/2019/10/2020-Ford-Mustang-Shelby-GT350R-20.jpg",
+    "code": "Sh354by",
+    "stock": "8"
   }
 ]

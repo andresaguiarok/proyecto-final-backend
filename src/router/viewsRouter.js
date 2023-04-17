@@ -16,6 +16,13 @@ const consulta = async()=>  {
         res.render("home", prodManag)
     })
 
+    router.get("/realTimeProducts", (req, res) =>{
+        view = {
+            title: "RealTimeProducts",
+            style: "index.css"}
+        res.render("realTimeProducts", view)
+    })
+
     module.exports = router
 }
 

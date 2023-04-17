@@ -1,0 +1,37 @@
+<section class="container-fluid">
+    <h2 style="width: 100%">Realtime</h2>
+    <form id="formData">
+        <fieldset class="contenedor">
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Title" id="title">
+                        <input type="text" class="form-control" placeholder="Description" id="description">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Price" id="price">
+                        <input type="text" class="form-control" placeholder="thumbnails" id="thumbnails">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Code" id="code">
+                        <input type="number" class="form-control" placeholder="stock" id="stock">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </fieldset>
+    </form>
+    <section id="listProducts"></section>
+</section>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/javascript/socket.js"></script>

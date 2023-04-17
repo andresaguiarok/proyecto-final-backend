@@ -4,7 +4,8 @@ const productsRouter = require("./router/productsRouter.js")
 const cartsRouter = require("./router/cartRouter.js")
 const viewRouter = require("./router/viewsRouter.js")
 const handlebars = require("express-handlebars")
-const { Server } = require("socket.io")
+const { Server } = require("socket.io");
+const { socketProducts } = require("./utils/socketProducts.js");
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -24,17 +25,4 @@ const httpServer = app.listen(PORT, () => {
 })
 
 const socketServer = new Server(httpServer)
-
-socketServer.on("connection", socket => {
-    console.log("Nuevo cliente conectado")
-
-    socket.on("message", data => {
-        console.log(data);
-    })
-
-    socket.emit("socket-individual", "Este mensaje lo recive el socket del cliente")
-
-    socket.broadcast.emit("event-p-todos-menos-el-socket-actual", "Evento que veran los sockets menos el actual")
-
-    socketServer.emit("event-all", "este mensaje lo reciben todos")
-})
+socketProducts(socketServer)

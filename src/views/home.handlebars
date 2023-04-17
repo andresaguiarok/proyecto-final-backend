@@ -1,12 +1,14 @@
 <section class="container-fluid">
     {{#each products}}
     <div class="card" style="width: 18rem; padding: 16px; margin: 20px">
-        <h2 class="card-title">{{this.title}} </h2>
+        <h2 class="card-title">
+            {{this.title}} 
+        </h2>
         <img src= {{this.thumbnails}} class="card-img-top" style="width: 18rem; height: 12rem" alt={{this.title}} />
-        <h4 class="card-text">Price: {{this.price}} usd </h4>
+        <h4 class="card-text">
+            Price: {{this.price}} usd 
+        </h4>
         <a class="icon-link" style="color:blue" href="">Ver mas...</a>
     </div>
     {{/each}}
 </section>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/static/javascript/socket.js"></script>
