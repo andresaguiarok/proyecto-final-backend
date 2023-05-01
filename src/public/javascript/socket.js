@@ -1,26 +1,27 @@
 const socket = io()
 
 socket.on("products" , data =>{
-    console.log(data);
 
     let article = document.getElementById("listProducts")
     let products = ""
     data.forEach(product => {
         products += `<div class="card" style="width: 18rem; padding: 16px; margin: 20px">
-        <h2 class="card-title">
-            ${product.title} 
-        </h2>
-        <img src= ${product.thumbnails} class="card-img-top" style="width: 18rem; height: 12rem" alt=${this.title} />
-        <h4 class="card-text">
-            Price: ${product.price} usd 
-        </h4>
-        <a class="icon-link" style="color:blue" href="">Ver mas...</a>
-    </div>`
-    });
+                        <h2 class="card-title">
+                            ${product.title} 
+                        </h2>
+                        <img src= ${product.thumbnails} class="card-img-top" style="width: 18rem; height: 12rem" alt=${this.title} />
+                        <h4 class="card-text">
+                            Price: ${product.price} usd 
+                        </h4>
+                        <div class="boxItem">
+                            <a class="icon-link" style="color:blue" href="">Ver mas...</a>
+                            <button id="boton" class="btnDelete"> Delete </button>
+                        </div>
+                    </div>`
+    });  
     article.innerHTML = products
 
     let form = document.querySelector("#formData")
-
     form.addEventListener("submit", event => {
         event.preventDefault()
 
@@ -38,4 +39,3 @@ socket.on("products" , data =>{
     })
 })
 
-console.log("socket")

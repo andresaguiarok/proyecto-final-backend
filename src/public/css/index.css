@@ -30,3 +30,25 @@ form {
     justify-content: space-between;
     justify-items: flex-end; 
 }
+
+.boxItem{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnDelete {
+    height: 26px;
+    width: 60px;
+    background-color: rgb(219, 62, 62);
+    border: rgb(221, 38, 38);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnDelete:hover{
+    background-color: rgb(27, 27, 27);
+    color: rgb(219, 62, 62);
+    border: black;
+    transition: 0.4s;
+}

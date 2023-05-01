@@ -23,6 +23,14 @@ const consulta = async()=>  {
         res.render("realTimeProducts", view)
     })
 
+    router.get("/chat", (req, res) => {
+        view = {
+            title: "chat",
+            style: "chat.css"
+        }
+        res.render("chat", view)
+    })
+
     module.exports = router
 }
 
