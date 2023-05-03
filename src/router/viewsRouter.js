@@ -1,5 +1,5 @@
 const { Router } = require ("express")
-const ProductManager = require("../managers/productManager.js")
+const ProductManager = require("../dao/fileSystem/productManager.js")
 
 const consulta = async()=>  {
     const pm = new ProductManager()

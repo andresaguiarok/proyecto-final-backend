@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const CartManager = require("../managers/cartManager.js");
+const CartManager = require("../dao/fileSystem/cartManager.js");
 
 const consulta = async() =>{
     const cm = new CartManager()

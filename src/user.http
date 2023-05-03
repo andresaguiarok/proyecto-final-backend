@@ -1,0 +1,27 @@
+### Trae todos los usuarios
+GET http://localhost:8080/api/users
+
+### Busca un usuario por id
+GET http://localhost:8080/api/users/6451bf89d67e48a9209cf985
+
+### crea un usuario
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+    "nombre": "juan",
+    "apellido": "riquelme",
+    "email": "juanriquelme@gmail.com"
+}
+### modifica un usuario
+PUT http://localhost:8080/api/users/6451bf89d67e48a9209cf985
+Content-Type: application/json
+
+{
+    "nombre": "andres facundo",
+    "apellido": "aguiar",
+    "email": "andresaguiar@gmail.com"
+}
+
+### Borra un usuarios
+DELETE http://localhost:8080/api/users/6452eeecd02771e86ac2dd28

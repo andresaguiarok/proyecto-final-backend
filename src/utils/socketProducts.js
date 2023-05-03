@@ -1,4 +1,4 @@
-const ProductManager = require("../managers/productManager.js")
+const ProductManager = require("../dao/fileSystem/productManager.js")
 let messages = []
 
 const socketProducts = (io) => {
