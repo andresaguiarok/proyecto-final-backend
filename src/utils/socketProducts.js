@@ -1,10 +1,10 @@
 const ProductManager = require("../dao/fileSystem/productManager.js")
+const messageModel = require("../dao/models/messageModel.js")
 let messages = []
 
 const socketProducts = (io) => {
     io.on("connection", async socket =>{
         console.log("Nuevo cliente")
-        console.log(socket.id)
         //Managers
         const pm = new ProductManager()
         const products = await pm.getProducts()
@@ -18,6 +18,7 @@ const socketProducts = (io) => {
 
         //socket chat
         socket.on("message", data => {
+            messageModel.create(data)
             messages.push(data)
             io.emit("messageLogs",messages)
         }) 

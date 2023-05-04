@@ -1,4 +1,5 @@
 const socket = io()
+
 let user
 
 Swal.fire({
@@ -19,7 +20,7 @@ const inputMessage = document.getElementById("text")
 inputMessage.addEventListener("keyup", event => {
     if (event.key === "Enter"){
         if (inputMessage.value== "") return
-        socket.emit("message", {user , message: inputMessage.value}) 
+        socket.emit("message", {user , message: inputMessage.value})
         inputMessage.value = ""
     } 
 })
@@ -29,7 +30,7 @@ socket.on("messageLogs", data => {
     let messages =""
 
     data.forEach(({user, message}) => {
-        messages += `<li> ${user} message: ${message} </li>`   
+        messages += `<li> ${user} message: ${message} </li>` 
     })
 
     log.innerHTML = messages

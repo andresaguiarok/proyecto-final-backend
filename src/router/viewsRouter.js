@@ -25,7 +25,7 @@ const consulta = async()=>  {
 
     router.get("/chat", (req, res) => {
         view = {
-            title: "chat",
+            title: "Chat",
             style: "chat.css"
         }
         res.render("chat", view)
