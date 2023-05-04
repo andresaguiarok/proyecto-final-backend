@@ -9,9 +9,9 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "nombre": "juan",
-    "apellido": "riquelme",
-    "email": "juanriquelme@gmail.com"
+    "nombre": "enzo",
+    "apellido": "ferrari",
+    "email": "enzof10@gmail.com"
 }
 ### modifica un usuario
 PUT http://localhost:8080/api/users/6451bf89d67e48a9209cf985

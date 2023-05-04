@@ -9,7 +9,7 @@ router.get("/", async(req, res) => {
         console.log(users);
         
         res.send({
-            status:"success",
+            status:"information was successfully extracted from the database",
             payload: users
         })
     } catch (error) {
@@ -23,7 +23,7 @@ router.get("/:uid", async(req, res) => {
         let users = await userModel.findOne({_id: uid})
         
         res.send({
-            status:"success",
+            status:"the user was found",
             payload: users
         })
     } catch (error) {
@@ -44,7 +44,7 @@ router.post("/" , async(req,res) => {
         let result = await userModel.create(newUser)
 
         res.send({
-            status : "success user created",
+            status : "User was successfully created",
             payload: result
         })
     } catch (error) {
@@ -66,7 +66,7 @@ router.put("/:uid", async(req, res) => {
         let result = await userModel.updateOne({_id: uid}, userToReplace)
 
         res.send({
-            status : "success",
+            status : "User information was updated",
             payload: result
         })
     } catch (error) {
@@ -80,7 +80,7 @@ router.delete("/:uid", async(req, res) => {
         let users = await userModel.deleteOne({_id: uid})
         
         res.send({
-            status:"success user to delete",
+            status:"the user was deleted",
             payload: users
         })
     } catch (error) {
