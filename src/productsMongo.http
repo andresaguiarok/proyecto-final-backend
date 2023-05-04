@@ -18,7 +18,14 @@ Content-Type: application/json
 }
 
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/pid
+PUT http://localhost:8080/api/productos/64530670c7bfad2d935779fc
+Content-Type: application/json
+
+{
+    "description": "Modelo: 2023",
+    "price": 35.999,
+    "stock": 15
+}
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/pid
+DELETE http://localhost:8080/api/productos/64530670c7bfad2d935779fc

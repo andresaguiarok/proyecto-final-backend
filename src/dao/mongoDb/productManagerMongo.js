@@ -25,9 +25,9 @@ class ProductManagerMongo {
         }
     }
 
-    async updateProduct(pid){
+    async updateProduct(pid, obj){
         try {
-            
+            return await productModel.updateOne({_id: pid}, obj)
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +35,7 @@ class ProductManagerMongo {
 
     async deleteProduct(pid){
         try {
-            
+            return await productModel.deleteOne({_id: pid})
         } catch (error) {
             console.log(error);
         }
