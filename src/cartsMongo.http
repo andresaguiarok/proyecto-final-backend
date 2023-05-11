@@ -7,7 +7,7 @@ GET http://localhost:8080/api/carrito/645c48ef5b91885cbe3265c9
 ### echo
 POST http://localhost:8080/api/carrito
 
-###
+### echo
 POST http://localhost:8080/api/carrito/645c48ef5b91885cbe3265c9
 
 ### echo
