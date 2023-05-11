@@ -1,0 +1,15 @@
+### echo
+GET http://localhost:8080/api/carrito
+
+### echo
+GET http://localhost:8080/api/carrito/645c48ef5b91885cbe3265c9
+
+### echo
+POST http://localhost:8080/api/carrito
+
+###
+POST http://localhost:8080/api/carrito/645c48ef5b91885cbe3265c9
+
+### echo
+DELETE http://localhost:8080/api/carrito/645c1deb16427a991b1f93ed
+

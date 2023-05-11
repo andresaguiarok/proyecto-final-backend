@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ### Borra un usuarios
-DELETE http://localhost:8080/api/users/6452eeecd02771e86ac2dd28
+DELETE http://localhost:8080/api/users/645598423f67a9637e767d32

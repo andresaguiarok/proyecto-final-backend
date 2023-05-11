@@ -6,6 +6,7 @@ const cartsRouter = require("./router/cartRouter.js")
 const viewRouter = require("./router/viewsRouter.js")
 const userRouter = require("./router/userRouter.js")
 const productMongoRouter = require("./router/productsMongoRouter.js")
+const cartsRouterMongo = require("./router/cartsRouterMongo.js")
 
 const handlebars = require("express-handlebars")
 const { Server } = require("socket.io")
@@ -25,6 +26,7 @@ app.use("/api/carts", cartsRouter)
 app.use("/", viewRouter)
 app.use("/api/users", userRouter)
 app.use("/api/productos", productMongoRouter)
+app.use("/api/carrito", cartsRouterMongo)
 
 objetConfig.connectDB()
 
