@@ -52,14 +52,14 @@ router.post("/" , async(req,res) => {
     }
 })
 
-router.post("/:cid" , async(req, res) => {
+router.put("/:cid/products/:pid" , async(req, res) => {
     try {
-        let {cid} = req.params
-        let cartUpdate = await cm.addProduct(cid)
+        let {cid, pid} = req.params
+        let prodToCart = await cm.addProduct(cid, pid)
 
         res.status(200).send({
             status: "success",
-            payload: cartUpdate
+            payload: prodToCart
         })
         
     } catch (error) {
@@ -67,11 +67,41 @@ router.post("/:cid" , async(req, res) => {
     }
 })
 
-router.delete("/:cid" , async(req,res)=> {
+router.put("/:cid", async(req,res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+router.put("/", async(req,res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+
+router.delete("/:cid/product/:pid" , async(req,res)=> {
+    try {
+        let {cid, pid} = req.params
+        let cart = await cm.deleteProduct(cid, pid)
+
+        res.status(200).send({
+            status: "success",
+            payload: cart
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.delete("/:cid", async(req,res)=>{
     try {
         let {cid} = req.params
-        let cart = await cm.deleteCart(cid)
-
+        let cart = await cm.deleteAllProd(cid)
         res.status(200).send({
             status: "success",
             payload: cart

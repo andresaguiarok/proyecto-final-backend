@@ -8,10 +8,13 @@ const cartSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "products"
         },
-        quantity: Number
-    }]
+        quantity: Number,
+        _id: ""
+    },]
 })
 
 const cartModel = model(collection, cartSchema)
 
-module.exports = cartModel
+module.exports = { 
+    cartModel
+}

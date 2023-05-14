@@ -1,5 +1,5 @@
-const cartModel = require("../models/cartModel")
-const prodModel = require("../models/productModel")
+const { cartModel } = require("../models/cartModel.js")
+const { productModel } = require("../models/productModel")
 
 class CartManager {
     async createCart(){
@@ -26,20 +26,42 @@ class CartManager {
         }
     }
 
-    async addProduct(cid){
+    async addProduct(cid, pid){
         try {
+            let prod = await productModel.findById(pid)
             let cart = await cartModel.findById(cid)
-            cart.products.push({ product : "6452dcbfc6cb9eb064973978", quantity: 1})
 
-            return await cartModel.updateOne(cart)
+            let prodMore = await cartModel.findOneAndUpdate(
+                { _id: cart, "products.product": prod },
+                {$inc : {"products.$.quantity": 1}},
+                {new: true, upset:true}
+            )
+            
+            let prodAdd = await cartModel.updateOne(
+                {_id: cart},{$push: {products: {product:prod, quantity: 1}}}
+            ) 
+            
+            prodAdd = prodMore
+
+            return await cartModel.updateOne(prodAdd)
         } catch (error) {
             console.log(error);
         }
     }
 
-    async deleteCart(cid){
+    async deleteProduct(cid, pid){
         try {
-            return await cartModel.deleteOne({_id: cid})
+            let prod = await productModel.findById(pid)
+
+            return await cartModel.updateOne({_id: cid}, {$pull:{products:{product: prod}}})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteAllProd(cid){
+        try {
+            return await cartModel.updateOne({_id:cid}, {products:[]})
         } catch (error) {
             console.log(error);
         }
