@@ -29,9 +29,8 @@ router.get("/:cid" , async(req,res) => {
             status:"error",
             message:"No se encontro el carrito"
         })
-        : res.status(200).send({
-            status: "success",
-            payload : cart
+        : res.status(200).render("cartById",{
+            cart
         })
         
     } catch (error) {
@@ -39,7 +38,7 @@ router.get("/:cid" , async(req,res) => {
     }
 })
 
-router.post("/" , async(req,res) => {
+router.put("/" , async(req,res) => {
     try {
         const result = await cm.createCart()
         
@@ -56,33 +55,19 @@ router.put("/:cid/products/:pid" , async(req, res) => {
     try {
         let {cid, pid} = req.params
         let prodToCart = await cm.addProduct(cid, pid)
+        
+        if(!prodToCart){
+            res.status(404).send({error:"error", message:"no existe el carrito o el producto"})
+        }
 
         res.status(200).send({
             status: "success",
             payload: prodToCart
         })
-        
     } catch (error) {
         console.log(error);
     }
 })
-
-router.put("/:cid", async(req,res) => {
-    try {
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-router.put("/", async(req,res) => {
-    try {
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-
 
 router.delete("/:cid/product/:pid" , async(req,res)=> {
     try {
@@ -91,6 +76,7 @@ router.delete("/:cid/product/:pid" , async(req,res)=> {
 
         res.status(200).send({
             status: "success",
+            message: "Se elimino el producto correctamente",
             payload: cart
         })
     } catch (error) {
@@ -102,8 +88,15 @@ router.delete("/:cid", async(req,res)=>{
     try {
         let {cid} = req.params
         let cart = await cm.deleteAllProd(cid)
-        res.status(200).send({
+
+        !cart
+        ?res.status(404).send({
+            status: "error",
+            message: "No se encontro el carrito"
+        })
+        :res.status(200).send({
             status: "success",
+            message: "se borro todos los productos",
             payload: cart
         })
     } catch (error) {

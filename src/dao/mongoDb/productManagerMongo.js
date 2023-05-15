@@ -9,9 +9,9 @@ class ProductManagerMongo {
         }
     }
 
-    async getProduct(){
+    async getProduct(page){
         try {
-            return await productModel.find()
+            return await productModel.paginate({}, {limit: 3, page: page , lean: true})
         } catch (error) {
             console.log(error);
         }

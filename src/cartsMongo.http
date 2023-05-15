@@ -5,10 +5,10 @@ GET http://localhost:8080/api/carrito
 GET http://localhost:8080/api/carrito/646006ae039473c3c723ad0d
 
 ### Crea un carrito nuevo #echo
-POST http://localhost:8080/api/carrito
+PUT  http://localhost:8080/api/carrito
 
 ### Agrega un producto a un carrito indicado y si existe actualiza la quantity #echo
-PUT http://localhost:8080/api/carrito/646006ae039473c3c723ad0d/products/6452dc83c6cb9eb064973976
+PUT http://localhost:8080/api/carrito/646006ae039473c3c723ad0d/products/645daefbfd211027e98630cf
 
 ### Borra un producto indicado por ID en el carrito indicado por Id #echo
 DELETE http://localhost:8080/api/carrito/646006ae039473c3c723ad0d/product/645daefbfd211027e98630cf

@@ -6,11 +6,28 @@ const pm = new ProductManagerMongo()
 
 router.get("/", async (req, res) => {
     try {
-        const products = await pm.getProduct()
-        res.status(200).send({
-            status: "information was successfully extracted from the database",
-            payload: products
+        const {page=1} = req.query
+
+        let products = await pm.getProduct(page)
+        const {docs, hasPrevPage, hasNextPage, prevPage, nextPage } = products
+
+        if(!products){
+            res.send({
+                status: "error",
+                payload: "Documentos no encontrados"
+            })
+        }
+        
+        res.render("home", {
+            title: "Home",
+            style: "home.css",
+            products: docs,
+            hasPrevPage,
+            hasNextPage,
+            prevPage,
+            nextPage,
         })
+       // res.send(products)
     } catch (error) {
         console.log(error);
     }
@@ -20,6 +37,11 @@ router.get("/:pid", async (req, res) => {
     try {
         let {pid} = req.params
         let product = await pm.getProductByID(pid)
+
+        if (!product){
+             return res.status(404).send({status: "error", mensaje: "Este Producto no existe"}) 
+        }
+
         res.status(200).send({
             status: "the product has been found successfully",
             payload: product

@@ -21,12 +21,12 @@ app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname+"/views")
 app.set("view engine", "handlebars")
 
-app.use("/api/products", productsRouter)
-app.use("/api/carts", cartsRouter)
+app.use("/api/products", productsRouter) //Con FileSystem
+app.use("/api/carts", cartsRouter) //Con FileSystem
 app.use("/", viewRouter)
 app.use("/api/users", userRouter)
-app.use("/api/productos", productMongoRouter)
-app.use("/api/carrito", cartsRouterMongo)
+app.use("/api/productos", productMongoRouter) //Con Mongo 
+app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 
 objetConfig.connectDB()
 

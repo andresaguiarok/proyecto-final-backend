@@ -20,7 +20,7 @@ class CartManager {
 
     async getCartByID(cid){
         try {
-           return await cartModel.findOne({_id: cid}) 
+           return await cartModel.findOne({_id: cid})
         } catch (error) {
             console.log(error);
         }
@@ -30,7 +30,7 @@ class CartManager {
         try {
             let prod = await productModel.findById(pid)
             let cart = await cartModel.findById(cid)
-
+            
             let prodMore = await cartModel.findOneAndUpdate(
                 { _id: cart, "products.product": prod },
                 {$inc : {"products.$.quantity": 1}},
@@ -42,6 +42,9 @@ class CartManager {
             ) 
             
             prodAdd = prodMore
+
+            if(!prodAdd) return
+            if(!prod) return
 
             return await cartModel.updateOne(prodAdd)
         } catch (error) {
