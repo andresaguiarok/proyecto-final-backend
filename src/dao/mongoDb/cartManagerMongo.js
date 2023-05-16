@@ -28,25 +28,20 @@ class CartManager {
 
     async addProduct(cid, pid){
         try {
-            let prod = await productModel.findById(pid)
-            let cart = await cartModel.findById(cid)
-            
-            let prodMore = await cartModel.findOneAndUpdate(
-                { _id: cart, "products.product": prod },
-                {$inc : {"products.$.quantity": 1}},
-                {new: true, upset:true}
-            )
-            
-            let prodAdd = await cartModel.updateOne(
-                {_id: cart},{$push: {products: {product:prod, quantity: 1}}}
-            ) 
-            
-            prodAdd = prodMore
+            const cart = await cartModel.findById({_id: cid})
+            const products = cart.products.find(prod => prod.product._id == pid)
 
-            if(!prodAdd) return
-            if(!prod) return
-
-            return await cartModel.updateOne(prodAdd)
+            if(!products){
+                return await cartModel.updateOne(
+                    {_id: cid},{$push: {products: {product: pid, quantity: 1}}}
+                )
+            }else{
+                return await cartModel.updateOne(
+                    { _id: cid, "products.product": pid },
+                    {$inc : {"products.$.quantity": 1}},
+                    {new: true, upset:true}
+                )
+            }
         } catch (error) {
             console.log(error);
         }

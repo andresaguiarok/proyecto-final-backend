@@ -9,7 +9,14 @@ router.get("/", async (req, res) => {
         const {page=1} = req.query
 
         let products = await pm.getProduct(page)
-        const {docs, hasPrevPage, hasNextPage, prevPage, nextPage } = products
+        const {docs, hasPrevPage, hasNextPage, prevPage, nextPage} = products
+
+        if(!hasNextPage){
+            res.send({
+                status: "error",
+                payload: "Page no existe"
+            })
+        }
 
         if(!products){
             res.send({

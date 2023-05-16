@@ -55,10 +55,6 @@ router.put("/:cid/products/:pid" , async(req, res) => {
     try {
         let {cid, pid} = req.params
         let prodToCart = await cm.addProduct(cid, pid)
-        
-        if(!prodToCart){
-            res.status(404).send({error:"error", message:"no existe el carrito o el producto"})
-        }
 
         res.status(200).send({
             status: "success",
