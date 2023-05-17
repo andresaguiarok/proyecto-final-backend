@@ -15,14 +15,14 @@ router.get("/", async (req, res) => {
         if(!hasNextPage){
             res.send({
                 status: "error",
-                payload: "Page no existe"
+                message: "Page not found"
             })
         }
 
         if(!products){
             res.send({
                 status: "error",
-                payload: "Documentos no encontrados"
+                message: "documents not found"
             })
         }
         
@@ -47,7 +47,10 @@ router.get("/:pid", async (req, res) => {
         let product = await pm.getProductByID(pid)
 
         if (!product){
-             return res.status(404).send({status: "error", mensaje: "Este Producto no existe"}) 
+            res.status(404).send({
+                status: "error", 
+                message: "product not found"
+            }) 
         }
 
         res.status(200).send({
