@@ -7,8 +7,9 @@ const pm = new ProductManagerMongo()
 router.get("/", async (req, res) => {
     try {
         const {page=1} = req.query
+        const { sort="asc" } = req.query
 
-        let products = await pm.getProduct(page)
+        let products = await pm.getProduct(page, sort)
         const {docs, hasPrevPage, hasNextPage, prevPage, nextPage} = products
 
         if(!hasNextPage){

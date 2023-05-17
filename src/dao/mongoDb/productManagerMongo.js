@@ -9,9 +9,17 @@ class ProductManagerMongo {
         }
     }
 
-    async getProduct(page){
+    async getProduct(page, sort){
         try {
-            return await productModel.paginate({}, {limit: 3, page: page , lean: true})
+            let sortOpt = {}
+
+            if(sort === "asc"){
+                sortOpt = {price : 1}
+            } else if (sort === "des") {
+                sortOpt = {price : -1}
+            }
+
+            return await productModel.paginate({}, {limit: 3, page: page , lean: true, sort: sortOpt})
         } catch (error) {
             console.log(error);
         }
