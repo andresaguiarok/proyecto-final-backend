@@ -27,12 +27,12 @@
     <ul class="pagination">
         {{#if hasPrevPage}}
             <li class="page-item">
-                <a class="page-link" href="/api/productos?page={{prevPage}}/sort={{sort}}"> Previous </a>
+                <a class="page-link" href="/api/productos?page={{prevPage}}&sort={{sort}}"> Previous </a>
             </li>
         {{/if}}
         {{#if hasNextPage}}
             <li class="page-item">
-                <a class="page-link" href="/api/productos?page={{nextPage}}/sort={{sort}}"> Next </a>
+                <a class="page-link" href="/api/productos?page={{nextPage}}&sort={{sort}}"> Next </a>
             </li>
         {{/if}}
     </ul>

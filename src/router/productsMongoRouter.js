@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
         if(!products){
             res.send({
                 status: "error",
-                message: "documents not found"
+                message: "Documents not found"
             })
         }
         
@@ -49,12 +49,12 @@ router.get("/:pid", async (req, res) => {
         if (!product){
             res.status(404).send({
                 status: "error", 
-                message: "product not found"
+                message: "Product not found"
             }) 
         }
 
         res.status(200).send({
-            status: "the product has been found successfully",
+            status: "The product has been found successfully",
             payload: product
         })
     } catch (error) {
@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
         const product = req.body
         let result =  await pm.addProduct(product)
         res.status(200).send({
-            status: "a product has been created successfully",
+            status: "A product has been created successfully",
             payload: result
         })
     } catch (error) {
@@ -83,7 +83,7 @@ router.put("/:pid", async (req, res) => {
         let result = await pm.updateProduct(pid,obj)
 
         res.status(200).send({
-            status: "the product was successfully updated",
+            status: "The product was successfully updated",
             payload: result
         })
     } catch (error) {
@@ -96,7 +96,7 @@ router.delete("/:pid", async (req, res) => {
         let {pid} = req.params
         let result = await pm.deleteProduct(pid)
         res.status(200).send({
-            status: "the product is deleted successfully",
+            status: "The product is deleted successfully",
             payload: result
         })
     } catch (error) {

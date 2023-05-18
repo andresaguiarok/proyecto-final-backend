@@ -26,8 +26,8 @@ router.get("/:cid" , async(req,res) => {
 
         !cart 
         ? res.status(404).send({
-            status:"error",
-            message:"No se encontro el carrito"
+            status: "error",
+            message: "cart not found"
         })
         : res.status(200).render("cartById",{
             cart
@@ -43,7 +43,7 @@ router.put("/" , async(req,res) => {
         const result = await cm.createCart()
         
         res.status(200).send({
-            status: "success",
+            status: "cart created",
             payload : result
         })
     } catch (error) {
@@ -57,7 +57,7 @@ router.put("/:cid/products/:pid" , async(req, res) => {
         let prodToCart = await cm.addProduct(cid, pid)
 
         res.status(200).send({
-            status: "success",
+            status: "The cart was updated successfully",
             payload: prodToCart
         })
     } catch (error) {
@@ -72,7 +72,7 @@ router.delete("/:cid/product/:pid" , async(req,res)=> {
 
         res.status(200).send({
             status: "success",
-            message: "Se elimino el producto correctamente",
+            message: "cart was deleted successfully",
             payload: cart
         })
     } catch (error) {
@@ -88,11 +88,11 @@ router.delete("/:cid", async(req,res)=>{
         !cart
         ?res.status(404).send({
             status: "error",
-            message: "No se encontro el carrito"
+            message: "Cart not found"
         })
         :res.status(200).send({
             status: "success",
-            message: "se borro todos los productos",
+            message: "The cart was emptied successfully",
             payload: cart
         })
     } catch (error) {

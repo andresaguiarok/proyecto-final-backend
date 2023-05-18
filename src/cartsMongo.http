@@ -1,19 +1,19 @@
-### Trae todos los carritos #echo
+### Trae todos los carritos 
 GET http://localhost:8080/api/carrito
 
-### Trae el carrito indicado por ID #echo
+### Trae el carrito indicado por ID 
 GET http://localhost:8080/api/carrito/646008570def47d56e109a94
 
-### Crea un carrito nuevo #echo
+### Crea un carrito nuevo 
 PUT  http://localhost:8080/api/carrito
 
-### Agrega un producto a un carrito indicado y si existe actualiza la quantity #echo
-PUT http://localhost:8080/api/carrito/646008570def47d56e109a94/products/645daefbfd211027e98630cf
+### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
+PUT http://localhost:8080/api/carrito/64613be5fcad9f84136bea12/products/645daefbfd211027e98630cf
 
-### Borra un producto indicado por ID en el carrito indicado por Id #echo
+### Borra un producto indicado por ID en el carrito indicado por Id 
 DELETE http://localhost:8080/api/carrito/646006ae039473c3c723ad0d/product/645daefbfd211027e98630cf
 
-### Se borra todos los productos de un carrito indicado por ID #echo
+### Se borra todos los productos de un carrito indicado por Id
 DELETE http://localhost:8080/api/carrito/646008570def47d56e109a94
 
 
