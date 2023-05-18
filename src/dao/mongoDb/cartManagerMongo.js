@@ -20,7 +20,7 @@ class CartManager {
 
     async getCartByID(cid){
         try {
-           return await cartModel.findOne({_id: cid})
+           return await cartModel.findOne({_id: cid}).lean()
         } catch (error) {
             console.log(error);
         }

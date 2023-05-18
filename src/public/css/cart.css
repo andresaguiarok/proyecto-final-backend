@@ -1,0 +1,8 @@
+.productCart{
+    padding-top: 20px;
+}
+
+p {
+    display: flex;
+    justify-content: flex-end;
+}

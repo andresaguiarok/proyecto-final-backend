@@ -24,14 +24,14 @@ router.get("/:cid" , async(req,res) => {
         let {cid} = req.params
         let cart = await cm.getCartByID(cid)
 
-        !cart 
-        ? res.status(404).send({
-            status: "error",
-            message: "cart not found"
-        })
-        : res.status(200).render("cartById",{
-            cart
-        })
+        const cartObj = {
+            title: "Cart",
+            style: "cart.css",
+            id: cart._id,
+            products : cart.products
+        }
+
+        res.render("cartById", cartObj)
         
     } catch (error) {
         console.log(error);

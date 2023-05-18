@@ -1,7 +1,25 @@
 <article style="padding: 20px">
-    {{#each cart}}
-    <div> 
-        {{this.products}}
+    <div class="container text-center">
+        <p>Tu carrito {{id}} </p>
+        <table class="table productCart table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Quant</th>
+                <th scope="col">Title</th>
+                <th scope="col">Image</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>  
+            {{#each products}}
+                <tr>
+                  <th scope="row"> {{quantity}} </th>
+                  <td> {{this.product.title}}  </td>
+                  <td> <img src= {{this.product.thumbnails}} alt="" style="width: 10rem;"> </td>
+                  <td> {{this.product.price}} usd </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
     </div>
-    {{/each}}
 </article>
