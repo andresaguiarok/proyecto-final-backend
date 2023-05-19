@@ -24,6 +24,8 @@ router.get("/:cid" , async(req,res) => {
         let {cid} = req.params
         let cart = await cm.getCartByID(cid)
 
+        if(!cart) return res.send({status: "error", message: "Cart not found"})
+
         const cartObj = {
             title: "Cart",
             style: "cart.css",
@@ -56,6 +58,10 @@ router.put("/:cid/products/:pid" , async(req, res) => {
         let {cid, pid} = req.params
         let prodToCart = await cm.addProduct(cid, pid)
 
+        if (!prodToCart){
+            res.send({error:"error", message:"Cart not found o product not found"})
+        }
+        
         res.status(200).send({
             status: "The cart was updated successfully",
             payload: prodToCart
@@ -69,6 +75,13 @@ router.delete("/:cid/product/:pid" , async(req,res)=> {
     try {
         let {cid, pid} = req.params
         let cart = await cm.deleteProduct(cid, pid)
+
+        if(!cart){
+            res.status(404).send({
+                status: "error",
+                message:"Cart o product not found"
+            })
+        }
 
         res.status(200).send({
             status: "success",

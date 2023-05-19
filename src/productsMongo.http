@@ -1,9 +1,6 @@
 ### Trae todos los productos en la base de datos
 GET http://localhost:8080/api/productos
 
-### Busqueda por query en productos
-GET http://localhost:8080/api/productos?limit=1
-
 ### busca producto por id
 GET http://localhost:8080/api/productos/6452dc83c6cb9eb064973976
 

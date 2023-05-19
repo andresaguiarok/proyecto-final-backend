@@ -4,6 +4,7 @@ const ProductManagerMongo = require("../dao/mongoDb/productManagerMongo.js")
 const router = Router()
 const pm = new ProductManagerMongo()
 
+//Vista de los productos
 router.get("/", async (req, res) => {
     try {
         const {page=1} = req.query
@@ -35,7 +36,6 @@ router.get("/", async (req, res) => {
             prevPage,
             nextPage,
         })
-       // res.send(products)
     } catch (error) {
         console.log(error);
     }

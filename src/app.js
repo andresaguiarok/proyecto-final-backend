@@ -12,6 +12,7 @@ const handlebars = require("express-handlebars")
 const { Server } = require("socket.io")
 const { socketProducts } = require("./utils/socketProducts.js")
 const objetConfig = require("./config/objetConfig.js")
+const cookieParser = require("cookie-parser")
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -27,6 +28,9 @@ app.use("/", viewRouter)
 app.use("/api/users", userRouter)
 app.use("/api/productos", productMongoRouter) //Con Mongo 
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
+
+// middleware
+app.use(cookieParser())
 
 objetConfig.connectDB()
 
