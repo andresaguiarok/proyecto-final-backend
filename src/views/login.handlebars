@@ -1,0 +1,23 @@
+<article class="backgroundLogin">
+    <div class="login">
+        <h3 class="text-center">Login</h3>
+        <form id="formCookie" action="/cookies/session" method="post">
+            <div>
+                <label for="inputPassword5" class="form-label">User</label>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">@</span>
+                    <input name="userName" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" name="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+            </div>
+            <div class="mb-4 buttons">
+                <button type="submit" class="btn btn-primary">Log in</button>
+                {{!-- <button onclick="setCookie()" class="btn btn-primary">ver cookie</button> --}}
+            </div>
+        </form>
+    </div>
+</article>
+{{!-- <script src="/static/javascript/login.js"></script> --}}

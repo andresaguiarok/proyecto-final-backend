@@ -16,6 +16,7 @@ const productMongoRouter = require("./router/productsMongoRouter.js")
 const cartsRouterMongo = require("./router/cartsRouterMongo.js")
 const cookiesPruebas = require("./router/cookies.js")
 
+// config de app
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use("/static", express.static(__dirname+"/public"))
@@ -27,8 +28,11 @@ app.set("view engine", "handlebars")
 
 // middleware
 app.use(cookieParser("p@l@Br@s3cr3t0"))
-// app.use(session())
-
+app.use(session({
+    secret : "s3cr3t0c0d3",
+    resave: true,
+    saveUninitialized: true
+}))
 
 //rutas
 app.use("/api/products", productsRouter) //Con FileSystem
