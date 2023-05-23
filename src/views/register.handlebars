@@ -1,0 +1,36 @@
+<article class="backgroundRegister">
+    <div class="register">
+        <h2 class="text-center">Register</h2>
+        <form class="row g-3 formRegister" action="/api/session/register" method="post">
+            <div class="col-md-6">
+                <label class="form-label">First name</label>
+                <input name="firtsName" type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Last name</label>
+                <input name="lastName" type="text" class="form-control">
+            </div>
+            <div>
+                <label for="inputPassword5" class="form-label">User</label>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">@</span>
+                    <input name="userName" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input  name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="buttons">
+                <li class="page-item btn btn-dark" style="color:white">
+                    <a class="page-link" href="/login"> Log In </a>
+                </li>
+                <button type="submit" class="btn btn-primary">Create user</button>
+            </div> 
+        </form>  
+    </div>
+</article>

@@ -1,23 +1,21 @@
 <article class="backgroundLogin">
     <div class="login">
-        <h3 class="text-center">Login</h3>
-        <form id="formCookie" action="/cookies/session" method="post">
-            <div>
-                <label for="inputPassword5" class="form-label">User</label>
-                <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping">@</span>
-                    <input name="userName" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
-                </div>
+        <h3 class="text-center">Log In</h3>
+        <form id="formCookie" action="/api/session/login" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="My email">
             </div>
             <div class="mb-4">
                 <label for="inputPassword5" class="form-label">Password</label>
-                <input type="password" name="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+                <input name="password" type="password" name="password" id="inputPassword5" class="form-control" placeholder="My password">
             </div>
             <div class="mb-4 buttons">
                 <button type="submit" class="btn btn-primary">Log in</button>
-                {{!-- <button onclick="setCookie()" class="btn btn-primary">ver cookie</button> --}}
+                <li class="page-item btn btn-dark" style="color:white">
+                    <a class="page-link" href="/register"> Create user </a>
+                </li>
             </div>
         </form>
     </div>
 </article>
-{{!-- <script src="/static/javascript/login.js"></script> --}}

@@ -1,11 +1,12 @@
 const { Router } = require("express")
 const ProductManagerMongo = require("../dao/mongoDb/productManagerMongo.js")
+const authentication = require("../middleware/authentication.js")
 
 const router = Router()
 const pm = new ProductManagerMongo()
 
 //Vista de los productos
-router.get("/", async (req, res) => {
+router.get("/", authentication ,async (req, res) => {
     try {
         const {page=1} = req.query
         const { sort="asc" } = req.query
@@ -35,6 +36,7 @@ router.get("/", async (req, res) => {
             hasNextPage,
             prevPage,
             nextPage,
+            user: req.session
         })
     } catch (error) {
         console.log(error);

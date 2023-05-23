@@ -3,7 +3,10 @@ const {Schema, model} = require("mongoose")
 const collection = "users"
 
 const userSchema = new Schema ({
-    firtsName: String,
+    firtsName: {
+        type: String,
+        required: true
+    },
     lastName : {
         type : String,
         required: true
@@ -12,6 +15,15 @@ const userSchema = new Schema ({
         type: String,
         required: true,
         unique: true
+    },
+    userName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
     }
 })
 
