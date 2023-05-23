@@ -41,12 +41,16 @@ router.post("/login", async(req, res) => {
     if(!userDB) return res.status(404).send({status:"error", message:"Este mail no existe"})
     if(!userPassword) return res.status(404).send({status:"error", password:"Password invalido"})
 
+    let role = "user"
+
+    if(email === "adminCoder@coder.com" && password === "adminCod3r123") return role = "admin"
+
     req.session.user = {
         firtsName: userDB.firtsName,
         lastName: userDB.lastName,
         email: userDB.email,
         userName: userDB.userName,
-        role: "admin"
+        role: role
     }
 
     res.redirect("/api/productos")
