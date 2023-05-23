@@ -43,7 +43,7 @@ router.post("/login", async(req, res) => {
 
     let role = "user"
 
-    if(email === "adminCoder@coder.com" && password === "adminCod3r123") return role = "admin"
+    if(email == "adminCoder@coder.com" && password == "adminCod3r123") role = "admin"
 
     req.session.user = {
         firtsName: userDB.firtsName,
@@ -52,6 +52,8 @@ router.post("/login", async(req, res) => {
         userName: userDB.userName,
         role: role
     }
+    console.log(req.session.user);
+
 
     res.redirect("/api/productos")
 })
