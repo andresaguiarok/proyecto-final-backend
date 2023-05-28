@@ -1,6 +1,7 @@
 const { Router } = require("express")
 const authentication = require("../middleware/authentication.js")
 const UserManager = require("../dao/mongoDb/userManagerMongo.js")
+const { validPassword } = require("../utils/bcryptHash.js")
 
 const userManager = new UserManager()
 const router = Router()
@@ -24,10 +25,11 @@ router.post("/login", async(req, res) => {
         const {email , password} = req.body
         const user = await userManager.getUser(email, password)
         req.session.user = user
-
+        
+        console.log(req.session.user);
         if(email === "adminCoder@coder.com" && password === "adminCod3r123") req.session.user.role = "admin"
 
-        req.session.user.role ? res.redirect("/api/productos") : res.send(user)
+        req.session.user.role ? res.redirect("/api/productos") : res.status(404).send(user)
     } catch (error) {
         console.log(error);
     }

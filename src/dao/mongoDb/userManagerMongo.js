@@ -1,9 +1,10 @@
+const { creaHash, validPassword } = require("../../utils/bcryptHash")
 const { userModel } = require("../models/usersModel")
 
 class UserManager {
     async createUser(firtsName, lastName, userName, email, password){
         try {
-            const newUser = { firtsName, lastName, userName, email, password }
+            const newUser = { firtsName, lastName, userName, email, password: creaHash(password) }
 
             // //validacion si vienen los campos vacios
             if(firtsName == "" || lastName == "" || email == "" || password == "" || userName == ""){
@@ -29,29 +30,26 @@ class UserManager {
 
     async getUser(email, password){
         try {
-            const userEmail = await userModel.findOne({email})
-            const userPassword = await userModel.findOne({password})
+            const userDB = await userModel.findOne({email})
             let role = "user"
             
             //Validacion de campos vacios  
             if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"})
 
             //Validacion si existe el email
-            if(!userEmail && userPassword) throw({status:"error", message:"Invalid email"})
+            if(!userDB) throw({status:"error", message:"Invalid email"})
 
             //Validacion si existe password
-            if(!userPassword && userEmail) throw({status:"error", password:"Invalid password"})
-
-            //Validacion si existe el usuario
-            if(!userEmail && !userPassword) throw({status:"error", message:"This user does not exist"})
+            if(!validPassword(password, userDB)) throw({status:"error", password:"Invalid password"})
 
             const user = {
-                firtsName: userEmail.firtsName,
-                lastName: userEmail.lastName,
-                email: userEmail.email,
-                userName: userEmail.userName,
+                firtsName: userDB.firtsName,
+                lastName: userDB.lastName,
+                email: userDB.email,
+                userName: userDB.userName,
                 role: role
             }
+
             return user
         } catch (error) {
             return error
