@@ -1,61 +1,36 @@
 const { Router } = require("express")
 const authentication = require("../middleware/authentication.js")
-const { userModel } = require("../dao/models/usersModel.js")
+const UserManager = require("../dao/mongoDb/userManagerMongo.js")
+
+const userManager = new UserManager()
 const router = Router()
 
 router.post("/register", async(req,res) => {
-    const {firtsName, lastName, userName, email, password} = req.body
+    try {
+        const {firtsName, lastName, userName, email, password} = req.body
+        const user = await userManager.createUser(firtsName, lastName, userName, email, password)
 
-    //validacion si vienen los campos vacios
-    if(firtsName == "" || lastName == "" || email == "" || password == "" || userName == ""){
-        return res.status(404).send({message:"complete los campos que faltan"})
-    }
-    
-    //validar si existe el username o email
-    const userEmail = await userModel.findOne({email})
-    if(userEmail){
-        return res.status(404).send({status:"error", message:"este email ya esta registrado"})
-    }
-    //validar si existe el userName
-    const uName = await userModel.findOne({userName})
-    if(uName){
-        return res.status(404).send({status:"error", message:"este usuarios ya esta registrado"})
-    }
+        user.firtsName && user.lastName 
+        ? res.status(200).send({status:"success", message:`The user ${user.firtsName} ${user.lastName} registered successfully`})
+        : res.status(404).send(user)
 
-    const newUser = {
-        firtsName, lastName, userName, email, password
+    } catch (error) {
+        console.log(error);
     }
-
-    await userModel.create(newUser)
-    
-    res.status(200).send({message:`El usuario ${firtsName} ${lastName} se creo con exito `})
 })
 
 router.post("/login", async(req, res) => {
-    const {email , password} = req.body
+    try {
+        const {email , password} = req.body
+        const user = await userManager.getUser(email, password)
+        req.session.user = user
 
-    const userDB = await userModel.findOne({email})
-    const userPassword = await userModel.findOne({password})
+        if(email === "adminCoder@coder.com" && password === "adminCod3r123") req.session.user.role = "admin"
 
-    // validacion de email && password
-    if(!userDB) return res.status(404).send({status:"error", message:"Este mail no existe"})
-    if(!userPassword) return res.status(404).send({status:"error", password:"Password invalido"})
-
-    let role = "user"
-
-    if(email == "adminCoder@coder.com" && password == "adminCod3r123") role = "admin"
-
-    req.session.user = {
-        firtsName: userDB.firtsName,
-        lastName: userDB.lastName,
-        email: userDB.email,
-        userName: userDB.userName,
-        role: role
+        req.session.user.role ? res.redirect("/api/productos") : res.send(user)
+    } catch (error) {
+        console.log(error);
     }
-    console.log(req.session.user);
-
-
-    res.redirect("/api/productos")
 })
 
 router.get("/privada", authentication, (req,res) => {

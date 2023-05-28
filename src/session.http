@@ -2,9 +2,21 @@ POST http://localhost:8080/api/session/register
 Content-Type: application/json
 
 {
-    "firtsName": "pepe",
-    "lastName": "sand",
-    "email": "psand@gmail.com",
-    "userName": "pepsanz@gmail.com",
-    "password": "pepe123"
+    "firtsName": "pablo",
+    "lastName": "canseco",
+    "email": "canpablo@hotmail.com",
+    "userName": "canpablo",
+    "password": "canpabli"
+}
+
+###
+POST http://localhost:8080/api/session/register
+Content-Type: application/json
+
+{
+    "firtsName": "pablo",
+    "lastName": "maguirre",
+    "email": "maguirrepablo@hotmail.com",
+    "userName": "macpablo",
+    "password": "macpabli"
 }
