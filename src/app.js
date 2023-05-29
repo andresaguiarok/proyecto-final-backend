@@ -4,6 +4,8 @@ const { Server } = require("socket.io")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const mongoStore = require("connect-mongo")
+const passport = require("passport");
+const initPassport = require("./config/passportConfig.js");
 const app = express()
 
 const { socketProducts } = require("./utils/socketProducts.js")
@@ -16,7 +18,7 @@ const userRouter = require("./router/userRouter.js")
 const productMongoRouter = require("./router/productsMongoRouter.js")
 const cartsRouterMongo = require("./router/cartsRouterMongo.js")
 const cookiesPruebas = require("./router/cookies.js")
-const sessionRouter = require("./router/sessionRouter.js")
+const sessionRouter = require("./router/sessionRouter.js");
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
@@ -30,7 +32,6 @@ app.set("view engine", "handlebars")
 
 // middleware
 app.use(cookieParser("p@l@Br@s3cr3t0"))
-
 app.use(session({
     store: mongoStore.create({
         mongoUrl: "mongodb+srv://andresaguiarok:andres-2408@cluster0.wbacuba.mongodb.net/ecommerceBackend?retryWrites=true&w=majority",
@@ -44,6 +45,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+//passport
+initPassport()
+passport.use(passport.initialize())
+passport.use(passport.session())
 
 //rutas
 app.use("/api/products", productsRouter) //Con FileSystem
