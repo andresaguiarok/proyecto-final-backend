@@ -34,7 +34,7 @@ router.get("/failRegister", async(req,res) => {
 router.post("/login", passport.authenticate("login", {failureRedirect: "/api/session/failLogin"}) ,async(req,res) => {
     if(!req.user) return res.status(404).send({status:"error", message:"Invalid credencial"})
     req.session.user = req.user
-    
+
     res.redirect("/api/productos")
 })
 
@@ -60,6 +60,15 @@ router.get("/failLogin", async(req,res) => {
 
 router.get("/privada", authentication, (req,res) => {
     res.send("Podes ver los productos")
+})
+
+router.get("/github", passport.authenticate("github", {scope:["user:email"]}), async(req,res) => {
+    res.send({status:"success", message:"registro success"})
+})
+
+router.get("/githubcall",passport.authenticate("github", {failureRedirect:"/login"}),async(req,res) => {
+    req.session.user = req.user
+    res.redirect("/api/productos")
 })
 
 

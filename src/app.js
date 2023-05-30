@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const mongoStore = require("connect-mongo")
 const passport = require("passport");
-const initPassport = require("./config/passportConfig.js");
+const {initPassport, initPassportGithub} = require("./config/passportConfig.js");
 const app = express()
 
 const { socketProducts } = require("./utils/socketProducts.js")
@@ -48,6 +48,7 @@ app.use(session({
 
 //passport
 initPassport()
+initPassportGithub()
 passport.use(passport.initialize())
 passport.use(passport.session())
 
