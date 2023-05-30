@@ -16,9 +16,9 @@ const authToken = (req,res, next) => {
     const token = authHeader.split(" ")[1]
     jsonWebToken.verify(token, JWT_PRIVATE_KEY, (error, credentials) => {
         if(error) return res.status(403).send({status:"error", message:"Not authorized"})
+        req.user = credentials.user
+        next()
     })
-    req.user = credentials.user
-    next()
 }
 
 module.exports = {
