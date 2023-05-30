@@ -79,7 +79,7 @@ const initPassportGithub = () => {
                     lastName: profile.username,
                     userName: profile._json.login ,
                     email: profile._json.email,
-                    password: '',
+                    password: " ",
                 }
 
                 let result = await userModel.create(newUser)
