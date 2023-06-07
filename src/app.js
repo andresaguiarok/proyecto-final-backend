@@ -5,7 +5,9 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const mongoStore = require("connect-mongo")
 const passport = require("passport");
-const {initPassport, initPassportGithub} = require("./config/passportConfig.js");
+const { initPassportGithub } = require("./config/passportConfig.js");
+const initPassport = require("./passportJwt/passportJwt.js");
+
 const app = express()
 
 const { socketProducts } = require("./utils/socketProducts.js")

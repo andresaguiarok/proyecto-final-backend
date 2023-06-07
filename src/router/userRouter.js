@@ -1,11 +1,13 @@
 const {Router} = require("express")
 const {userModel} = require("../dao/models/usersModel.js")
+const UserManager = require("../dao/mongoDb/userManagerMongo.js")
 
 const router = Router()
+const userManager = new UserManager()
 
 router.get("/", async(req, res) => {
     try {
-        let users = await userModel.find()
+        let users = await userManager.getUsers()
         console.log(users);
         
         res.send({
@@ -20,11 +22,12 @@ router.get("/", async(req, res) => {
 router.get("/:uid", async(req, res) => {
     try {
         let {uid} = req.params
-        let users = await userModel.findOne({_id: uid})
+        let user = await userManager.getUserr(uid)
+        if(!user) return res.send({status:"error", message: "no se encontro el usuario"})
         
         res.send({
             status:"the user was found",
-            payload: users
+            payload: user
         })
     } catch (error) {
        console.log(error); 

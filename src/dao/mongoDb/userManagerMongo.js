@@ -1,21 +1,26 @@
 const { creaHash, validPassword } = require("../../utils/bcryptHash")
 const { userModel } = require("../models/usersModel")
+const CartManager = require("./cartManagerMongo")
+
+const cartManager = new CartManager()
 
 class UserManager {
-    async createUser(firtsName, lastName, userName, email, password){
+    async createUser(firtsName, lastName, userName, email, birthDate, password){
         try {
-            const newUser = { firtsName, lastName, userName, email, password: creaHash(password) }
+            const newUser = { 
+                firtsName, lastName, userName, email, birthDate,
+                password: creaHash(password), cart: await cartManager.createCart() 
+            }
 
-            // //validacion si vienen los campos vacios
-            if(firtsName == "" || lastName == "" || email == "" || password == "" || userName == ""){
+            // // //validacion si vienen los campos vacios
+            if(firtsName == "" || lastName == "" || email == "" || password == "" || userName == "" || birthDate == ""){
                throw({status: "error" ,message:"Fill in the missing fields"})
             }
 
             // //valida si existe email
-            const userEmail = await userModel.findOne({email})
-            if(userEmail) throw({status:"error", message:"This email is registered"})
+            if(await userModel.findOne({email})) throw({status:"error", message:"This email is registered"})
 
-            // //valida si existe el userName
+            // // //valida si existe el userName
             const uName = await userModel.findOne({userName})
             if(uName) throw({status:"error", message:"This user already exists"})
 
@@ -31,7 +36,7 @@ class UserManager {
     async getUser(email, password){
         try {
             const userDB = await userModel.findOne({email})
-            let role = "user"
+            // let role = "user"
             
             //Validacion de campos vacios  
             if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"})
@@ -43,16 +48,34 @@ class UserManager {
             if(!validPassword(password, userDB)) throw({status:"error", password:"Invalid password"})
 
             const user = {
+                _id: userDB._id,
                 firtsName: userDB.firtsName,
                 lastName: userDB.lastName,
                 email: userDB.email,
                 userName: userDB.userName,
-                role: role
+                birthDate: userDB.birthDate.toISOString().substring(0,10),
+                role: userDB.role
             }
 
             return user
         } catch (error) {
             return error
+        }
+    }
+
+    async getUsers(){
+        try {
+            return await userModel.find()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getUserr(uid){
+        try {
+            return await userModel.findById({_id: uid})
+        } catch (error) {
+            console.log(error);
         }
     }
 

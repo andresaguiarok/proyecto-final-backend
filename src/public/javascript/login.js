@@ -1,3 +1,4 @@
+console.log("Hola somos login");
 const form = document.getElementById("formCookie")
 
 form.addEventListener("submit" , (event) => {
@@ -8,7 +9,7 @@ form.addEventListener("submit" , (event) => {
 
     data.forEach((value , key) => objectUser[key] = value)
 
-    fetch("/cookies/setCookieUser", {
+    fetch("/api/session/login", {
         headers : {
             "Content-Type": "application/json"
         },
@@ -16,9 +17,5 @@ form.addEventListener("submit" , (event) => {
         body: JSON.stringify(objectUser)
 
     })
-    .then(res => res.json()).then(res => console.log(res))
+    .then(res => res.json()).then(res => localStorage.setItem("Codertoken", res.Accesstoken))
 })
-
-const setCookie = () => {
-    console.log(document.cookie)
-}

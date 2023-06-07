@@ -1,12 +1,12 @@
 const { Router } = require("express")
 const ProductManagerMongo = require("../dao/mongoDb/productManagerMongo.js")
-const authentication = require("../middleware/authentication.js")
+const passport = require("passport")
 
 const router = Router()
 const pm = new ProductManagerMongo()
 
 //Vista de los productos
-router.get("/", authentication ,async (req, res) => {
+router.get("/", passport.authenticate("jwt", { session: false }),async (req, res) => {
     try {
         const {page=1} = req.query
         const { sort="asc" } = req.query
@@ -36,7 +36,7 @@ router.get("/", authentication ,async (req, res) => {
             hasNextPage,
             prevPage,
             nextPage,
-            user: req.session
+            user: req.user
         })
     } catch (error) {
         console.log(error);

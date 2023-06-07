@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/carrito
 
 ### Trae el carrito indicado por ID 
-GET http://localhost:8080/api/carrito/646008570def47d56e109a94
+GET http://localhost:8080/api/carrito/647fd1c38e2c1e95493e4e19
 
 ### Crea un carrito nuevo 
 PUT  http://localhost:8080/api/carrito
