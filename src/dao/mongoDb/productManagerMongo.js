@@ -19,7 +19,7 @@ class ProductManagerMongo {
                 sortOpt = {price : -1}
             }
 
-            return await productModel.paginate({}, {limit: 3, page: page , lean: true, sort: sortOpt})
+            return await productModel.paginate({}, {limit: 6, page: page , lean: true, sort: sortOpt})
         } catch (error) {
             console.log(error);
         }

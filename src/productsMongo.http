@@ -11,13 +11,12 @@ POST http://localhost:8080/api/productos
 Content-Type: application/json
 
 {
-    "id": 12,
-    "title": "Ford Mustang Shelby",
-    "description": "modelo: 2020",
-    "price": "87.633",
-    "thumbnails": "https://www.automobilemag.com/uploads/sites/11/2019/10/2020-Ford-Mustang-Shelby-GT350R-20.jpg",
-    "code": "Sh354by",
-    "stock": "8"
+    "title": "Remera Puma Essentials Heather",
+    "description": "Material: Algodón",
+    "price": "6.099",
+    "thumbnails": "https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw31f6dfb9/products/PU_845895-06/PU_845895-06-1.JPG",
+    "code": "N2R86",
+    "stock": "30"
 }
 
 ### actualiza un producto

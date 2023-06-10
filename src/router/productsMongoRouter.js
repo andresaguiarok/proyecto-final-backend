@@ -6,27 +6,17 @@ const router = Router()
 const pm = new ProductManagerMongo()
 
 //Vista de los productos
-router.get("/", passport.authenticate("jwt", { session: false }),async (req, res) => {
+router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         const {page=1} = req.query
         const { sort="asc" } = req.query
 
         let products = await pm.getProduct(page, sort)
-        const {docs, hasPrevPage, hasNextPage, prevPage, nextPage} = products
+        const {docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
 
-        if(!hasNextPage){
-            res.send({
-                status: "error",
-                message: "Page not found"
-            })
-        }
+        if(page > totalPages || page < 1) return res.send({status: "error",message: "Page not found"})
 
-        if(!products){
-            res.send({
-                status: "error",
-                message: "Documents not found"
-            })
-        }
+        if(!products) return res.send({status: "error",message: "Documents not found"})
         
         res.render("home", {
             title: "Home",
@@ -36,6 +26,8 @@ router.get("/", passport.authenticate("jwt", { session: false }),async (req, res
             hasNextPage,
             prevPage,
             nextPage,
+            totalPages,
+            page,
             user: req.user
         })
     } catch (error) {
