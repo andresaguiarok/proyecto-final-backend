@@ -4,7 +4,7 @@ GET http://localhost:8080/api/productos
 # authorization: Bearer 
 
 ### busca producto por id
-GET http://localhost:8080/api/productos/6452dc83c6cb9eb064973976
+GET http://localhost:8080/api/productos/6491e77a212430036714f3b2
 
 ### agrega un producto 
 POST http://localhost:8080/api/productos
@@ -19,8 +19,21 @@ Content-Type: application/json
     "stock": "30"
 }
 
+### agrega un producto 
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{
+    "title": "Ford Focus",
+    "description": "Modelo: 2018",
+    "price": "16.699",
+    "thumbnails": "https://th.bing.com/th/id/R.3208a81b857b301d2b70e48b50bde628?rik=BiLu3sD3Zqx2jQ&pid=ImgRaw&r=0",
+    "code": "Ax34bv",
+    "stock": "12"
+}
+
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/64530670c7bfad2d935779fc
+PUT http://localhost:8080/api/productos/6491e77a212430036714f3b2
 Content-Type: application/json
 
 {
@@ -30,4 +43,4 @@ Content-Type: application/json
 }
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/64530670c7bfad2d935779fc
+DELETE http://localhost:8080/api/productos/6491e77a212430036714f3b2

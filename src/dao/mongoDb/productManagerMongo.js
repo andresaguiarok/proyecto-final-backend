@@ -1,15 +1,15 @@
 const { productModel } = require("../models/productModel")
 
 class ProductManagerMongo {
-    async addProduct(product){
+    async addProduct(title, description, price, thumbnails, code, stock){
         try {
-            return await productModel.create(product)
+            return await productModel.create({title, description, price, thumbnails, code, stock})
         } catch (error) {
             console.log(error);
         }
     }
 
-    async getProduct(page, sort){
+    async getProducts(page, sort){
         try {
             let sortOpt = {}
 
