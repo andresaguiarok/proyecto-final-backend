@@ -1,27 +1,14 @@
 const { Router } = require ("express")
+const ViewsController = require("../controllers/viewsController")
 const router = Router()
+const viewsController = new ViewsController()
 
-router.get("/login", (req,res)=> {
-    res.render("login" , {title : "Log In", style: "login.css"})
-})
+router.get("/login", viewsController.loginView)
 
-router.get("/register", (req,res)=> {
-    res.render("register" , {title : "Register", style: "register.css"})
-})
+router.get("/register", viewsController.registerView)
 
-router.get("/realTimeProducts", (req, res) =>{
-    view = {
-        title: "RealTimeProducts",
-        style: "index.css"}
-    res.render("realTimeProducts", view)
-})
+router.get("/realTimeProducts", viewsController.realTimeProductsView)
 
-router.get("/chat", (req, res) => {
-    view = {
-        title: "Chat",
-        style: "chat.css"
-    }
-    res.render("chat", view)
-})
+router.get("/chat", viewsController.chatView)
 
 module.exports = router
