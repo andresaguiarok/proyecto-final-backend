@@ -1,116 +1,19 @@
 const { Router } = require("express")
-const cartsManagerMongo = require("../dao/mongoDb/cartManagerMongo.js")
+const CartController = require("../controllers/cartsController")
 
 const router = Router()
-const cm = new cartsManagerMongo()
+const cartController = new CartController()
 
-router.get("/" , async(req,res) => {
-    try {
-        const carts = await cm.getCarts()
+router.get("/" , cartController.getCarts)
 
-        res.status(200).send({
-            status: "success",
-            payload : carts
-        })
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
+router.get("/:cid" , cartController.getCart)
 
-router.get("/:cid" , async(req,res) => {
-    try {
+router.post("/" , cartController.createCart)
 
-        let {cid} = req.params
-        let cart = await cm.getCartByID(cid)
+router.put("/:cid/products/:pid" , cartController.addProduct)
 
-        if(!cart) return res.send({status: "error", message: "Cart not found"})
+router.delete("/:cid/product/:pid" , cartController.deleteProductInCart)
 
-        const cartObj = {
-            title: "Cart",
-            style: "cart.css",
-            id: cart._id,
-            products : cart.products
-        }
-
-        res.render("cartById", cartObj)
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.put("/" , async(req,res) => {
-    try {
-        const result = await cm.createCart()
-        
-        res.status(200).send({
-            status: "cart created",
-            payload : result
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.put("/:cid/products/:pid" , async(req, res) => {
-    try {
-        let {cid, pid} = req.params
-        let prodToCart = await cm.addProduct(cid, pid)
-
-        if (!prodToCart){
-            res.send({error:"error", message:"Cart not found o product not found"})
-        }
-        
-        res.status(200).send({
-            status: "The cart was updated successfully",
-            payload: prodToCart
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.delete("/:cid/product/:pid" , async(req,res)=> {
-    try {
-        let {cid, pid} = req.params
-        let cart = await cm.deleteProduct(cid, pid)
-
-        if(!cart){
-            res.status(404).send({
-                status: "error",
-                message:"Cart o product not found"
-            })
-        }
-
-        res.status(200).send({
-            status: "success",
-            message: "cart was deleted successfully",
-            payload: cart
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.delete("/:cid", async(req,res)=>{
-    try {
-        let {cid} = req.params
-        let cart = await cm.deleteAllProd(cid)
-
-        !cart
-        ?res.status(404).send({
-            status: "error",
-            message: "Cart not found"
-        })
-        :res.status(200).send({
-            status: "success",
-            message: "The cart was emptied successfully",
-            payload: cart
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
+router.delete("/:cid", cartController.deleteProductsInCart)
 
 module.exports = router
