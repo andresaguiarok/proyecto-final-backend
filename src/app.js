@@ -19,7 +19,6 @@ const viewRouter = require("./router/viewsRouter.js")
 const userRouter = require("./router/userRouter.js")
 const productMongoRouter = require("./router/productsMongoRouter.js")
 const cartsRouterMongo = require("./router/cartsRouterMongo.js")
-const cookiesPruebas = require("./router/cookies.js")
 const sessionRouter = require("./router/sessionRouter.js");
 
 // config de app
@@ -61,7 +60,6 @@ app.use("/", viewRouter) //Vistas
 app.use("/api/users", userRouter) //Con Mongo
 app.use("/api/productos", productMongoRouter) //Con Mongo 
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
-// app.use("/cookies", cookiesPruebas)
 app.use("/api/session", sessionRouter)
 
 
