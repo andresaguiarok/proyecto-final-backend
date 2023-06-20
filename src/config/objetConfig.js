@@ -1,9 +1,15 @@
 const { connect } = require("mongoose")
+const dotenv = require("dotenv")
+const { commander } = require("../utils/commander")
 
-let url = "mongodb+srv://andresaguiarok:andres-2408@cluster0.wbacuba.mongodb.net/ecommerceBackend?retryWrites=true&w=majority"
+const { mode } = commander.opts()
+dotenv.config({ path: mode === 'development' ? './.env.development' : './.env.production' })
+
+let url = process.env.MONGO_KEY_SECRET
 
 module.exports = {
-    JwtKeySecret: "c0d3rp0w3rT0ken",
+    port: process.env.PORT,
+    JwtKeySecret: process.env.JWT_KEY_SECRET,
     connectDB: ()=> {
         connect(url)
         console.log("Base de datos conectada")

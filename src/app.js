@@ -4,7 +4,7 @@ const { Server } = require("socket.io")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const mongoStore = require("connect-mongo")
-const passport = require("passport");
+const passport = require("passport")
 const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
 
@@ -67,7 +67,7 @@ app.use("/api/session", sessionRouter)
 
 DataBase.connectDB()
 
-const PORT = 8080
+const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {
     console.log(`Esta corriendo en el puerto ${PORT}`);
 })
