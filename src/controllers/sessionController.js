@@ -2,8 +2,8 @@ const { userModel } = require("../dao/models/usersModel.js")
 const UserManager = require("../dao/mongoDb/userManagerMongo.js")
 const { validPassword } = require("../utils/bcryptHash.js")
 const userManager = new UserManager()
-
 const { generateToken } = require("../utils/jsonWebToken.js")
+
 class SessionController {
 
     register = async (req,res) => {
