@@ -16,7 +16,16 @@ Content-Type: application/json
 
 {
     "email": "AguiarAndresok@outlook.es",
-    "password": "andres123"
+    "password": "andres"
+}
+
+### login
+post http://localhost:8080/api/session/login
+Content-Type: application/json
+
+{
+    "email": "adminCoder@coder.com",
+    "password": "adminCod3r123"
 }
 
 ### acceder al current
