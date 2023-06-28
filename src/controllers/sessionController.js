@@ -1,9 +1,8 @@
 const { userModel } = require("../dao/models/usersModel.js")
 const UserManager = require("../dao/mongoDb/userManagerMongo.js")
-const { validPassword } = require("../utils/bcryptHash.js")
-const userManager = new UserManager()
+const { validPassword, creaHash } = require("../utils/bcryptHash.js")
 const { generateToken } = require("../utils/jsonWebToken.js")
-
+const userManager = new UserManager()
 class SessionController {
 
     register = async (req,res) => {
@@ -25,9 +24,9 @@ class SessionController {
                 throw({status:"error", message:"This user already exists"})
             } 
 
-            const user = await userManager.createUser(firtsName, lastName, userName, email, birthDate, password)
+            const user = await userManager.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
+            
             let Accesstoken = generateToken({ firtsName, lastName, email })
-    
             if(user.firtsName && user.lastName){
                 res.status(201).send({
                     status:"success", 
@@ -88,14 +87,12 @@ class SessionController {
         res.send(`Podes ver los productos ${req.user.userName} `)
     }
 
-    gitHub = async(req,res) => {
-        res.send({status:"success", message: "Created"})
-    }
+    gitHub = async(req,res) => {}
 
     gitHubCall = async(req,res) => {
         let Accesstoken = generateToken(req.user)
         res.status(200).cookie("CoderCookieToken", Accesstoken,{maxAge: 60*60*100, httpOnly: true}).redirect("/api/productos")
-    }
+    } 
 
     logout = async(req, res) => {
         res.clearCookie("CoderCookieToken").redirect("/login")

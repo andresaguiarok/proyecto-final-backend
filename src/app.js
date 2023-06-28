@@ -7,6 +7,7 @@ const mongoStore = require("connect-mongo")
 const passport = require("passport")
 const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
+require("dotenv").config()
 
 const app = express()
 
@@ -35,7 +36,7 @@ app.set("view engine", "handlebars")
 app.use(cookieParser("p@l@Br@s3cr3t0"))
 app.use(session({
     store: mongoStore.create({
-        mongoUrl: "mongodb+srv://andresaguiarok:andres-2408@cluster0.wbacuba.mongodb.net/ecommerceBackend?retryWrites=true&w=majority",
+        mongoUrl: process.env.MONGO_KEY_SECRET,
         mongoOptions: {
             useNewUrlParser: true,
             useUnifiedTopology: true

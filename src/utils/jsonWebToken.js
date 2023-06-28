@@ -1,8 +1,10 @@
 const jsonWebToken = require("jsonwebtoken")
-const JWT_PRIVATE_KEY = "c0d3rp0w3rT0ken"
+require("dotenv").config()
+
+const JWT_PRIVATE_KEY = process.env.JWT_KEY
 
 const generateToken = (user) =>{
-    const token = jsonWebToken.sign(user, JWT_PRIVATE_KEY, {expiresIn: "12h"}) 
+    const token = jsonWebToken.sign(JSON.parse(JSON.stringify(user)), JWT_PRIVATE_KEY, {expiresIn: "12h"}) 
     return token
 }
 

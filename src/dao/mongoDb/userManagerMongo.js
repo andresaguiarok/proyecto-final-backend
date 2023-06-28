@@ -1,18 +1,16 @@
-const { creaHash } = require("../../utils/bcryptHash.js")
 const { userModel } = require("../models/usersModel.js")
 const CartManager = require("./cartManagerMongo.js")
 const cartManager = new CartManager()
 
 class UserManager {
-    async createUser(firtsName, lastName, userName, email, birthDate, password){
+    async createUser({firtsName, lastName, userName, email, birthDate, password}){
         try {
             return await userModel.create({ 
                 firtsName, lastName, userName, email, birthDate,
-                password: creaHash(password), cart: await cartManager.createCart() 
+                password, cart: await cartManager.createCart() 
             })
         } catch (error) {
             console.log(error);
-            return error
         }
     }
 
@@ -44,7 +42,7 @@ class UserManager {
         }
     }
 
-    async getUserr(uid){
+    async getUserById(uid){
         try {
             return await userModel.findById({_id: uid})
         } catch (error) {
