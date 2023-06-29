@@ -51,7 +51,7 @@ class SessionController {
             if(!validPassword(password, user)) throw({status:"error", password:"Invalid password"})
  
             //Validacion de usuario ADMIN
-            if(email === "adminCoder@coder.com" && password === "adminCod3r123"){
+            if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
                 user.role = "admin"
             }
             
