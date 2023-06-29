@@ -16,21 +16,9 @@ class UserManager {
 
     async getUser(email){
         try {
-            const userDB = await userModel.findOne({email})
-
-            const user = {
-                _id: userDB._id,
-                firtsName: userDB.firtsName,
-                lastName: userDB.lastName,
-                email: userDB.email,
-                userName: userDB.userName,
-                birthDate: userDB.birthDate.toISOString().substring(0,10),
-                role: userDB.role
-            }
-
-            return user
+            return await userModel.findOne({email})
         } catch (error) {
-            return error
+            console.log(error);
         }
     }
 

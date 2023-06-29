@@ -1,38 +1,35 @@
 const { userModel } = require("../dao/models/usersModel.js")
-const UserManager = require("../dao/mongoDb/userManagerMongo.js")
+const { userService } = require("../service/services.js")
 const { validPassword, creaHash } = require("../utils/bcryptHash.js")
 const { generateToken } = require("../utils/jsonWebToken.js")
-const userManager = new UserManager()
+
 class SessionController {
 
     register = async (req,res) => {
         try {
             const {firtsName, lastName, userName, email, birthDate, password} = req.body
-
-            // // //validacion si vienen los campos vacios
-            if(firtsName == "" || lastName == "" || email == "" || password == "" || userName == "" || birthDate == ""){
+            
+            //validacion si vienen los campos vacios
+            if(firtsName == "" || lastName == "" || email == "" || 
+            password == "" || userName == "" || birthDate == ""){
                 throw({status: "error" ,message:"Fill in the missing fields"})
             }
-
-            // //valida si existe email
+            //valida si existe email
             if(await userModel.findOne({email})){
-                throw({status:"error", message:"This email is registered"})
+                throw({status:"Error", message:"This email is registered"})
             }
 
             //valida si existe el userName
-            if(await userModel.findOne({userName})){
-                throw({status:"error", message:"This user already exists"})
-            } 
-
-            const user = await userManager.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
-            
-            let Accesstoken = generateToken({ firtsName, lastName, email })
-            if(user.firtsName && user.lastName){
-                res.status(201).send({
-                    status:"success", 
-                    message:`The user ${user.firtsName} ${user.lastName} registered successfully`, Accesstoken
-                })
+            if(await userModel.findOne({userName})) {
+                throw({status:"Error", message:"This user already exists"})
             }
+
+            const user = await userService.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
+            let Accesstoken = generateToken({ firtsName, lastName, email })
+            res.status(201).send({
+                status:"success", 
+                message:`The user ${user.firtsName} ${user.lastName} registered successfully`, Accesstoken
+            })   
         } catch (error) {
             console.log(error);
             res.status(400).send(error)
@@ -42,36 +39,29 @@ class SessionController {
     login = async (req, res) => {
         try {
             const { email, password } = req.body
+            const user = await userService.getUser(email)
 
             //Validacion de campos vacios  
-            if(email === "" || password === ""){
-                throw({status:"error", message:"Fill in the missing fields"})
-            } 
+            if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"}) 
 
             //Validacion si no existe el email
-            const userData = await userModel.findOne({email})
-            if(!userData){
-                throw({status:"error", message:"Invalid email"})
-            }
+            if(!user) throw({status:"error", message:"Invalid email"})
 
             //Validacion si existe o no el password
-            if(!validPassword(password, userData)){
-                throw({status:"error", password:"Invalid password"})
-            } 
-
-            const user = await userManager.getUser(email)
-            
+            if(!validPassword(password, user)) throw({status:"error", password:"Invalid password"})
+ 
+            //Validacion de usuario ADMIN
             if(email === "adminCoder@coder.com" && password === "adminCod3r123"){
                 user.role = "admin"
             }
             
             let Accesstoken = generateToken(user)
             req.user = user
-            console.log(req.user.role);
+            console.log(req.user);
 
             req.user.role
             ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 100, httpOnly: true }).redirect("/api/productos")
-            : res.status(404).send({status:"Erorr"})
+            : res.status(404).send({status:"Error"})
 
         } catch (error) {
             console.log(error)
