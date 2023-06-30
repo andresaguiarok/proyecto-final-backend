@@ -1,6 +1,5 @@
 const { productModel } = require("../dao/models/productModel.js")
-const ProductManagerMongo = require("../dao/mongoDb/productManagerMongo.js")
-const pm = new ProductManagerMongo()
+const { productService } = require("../service/services.js")
 
 class ProductController {
 
@@ -9,7 +8,7 @@ class ProductController {
             const {page=1} = req.query
             const { sort="asc" } = req.query
     
-            let products = await pm.getProducts(page, sort)
+            let products = await productService.getProducts(page, sort)
             const {docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
     
             if(page > totalPages || page < 1) throw({status: "error",message: "Page not found"})
@@ -36,7 +35,7 @@ class ProductController {
     getProduct = async (req, res) => {
         try {
             let {pid} = req.params
-            let product = await pm.getProductByID(pid)
+            let product = await productService.getProductByID(pid)
     
             if(!product) throw({ status: "error", message: "Product not found"}) 
     
@@ -63,7 +62,7 @@ class ProductController {
                 throw({status:"error", message: "code already entered"})
             }
 
-            let result =  await pm.addProduct(title, description, price, thumbnails, code, stock)
+            let result =  await productService.addProduct(title, description, price, thumbnails, code, stock)
 
             result 
             ?res.status(200).send({
@@ -84,14 +83,16 @@ class ProductController {
             let {pid} = req.params
             let obj = req.body
     
-            let result = await pm.updateProduct(pid,obj)
+            let result = await productService.updateProduct(pid,obj)
 
             if(!result) throw({status:"error", message:"could not update the product"})
     
-            res.status(200).send({
-                status: "The product was successfully updated",
-                payload: result
-            })
+            if(result){
+                res.status(200).send({
+                    status: "The product was successfully updated",
+                    payload: result
+                })
+            }
         } catch (error) {
             res.status(404).send(error)
         }
@@ -101,10 +102,11 @@ class ProductController {
         try {
             let {pid} = req.params
 
-            let result = await pm.deleteProduct(pid)
+            let result = await productService.deleteProduct(pid)
+
             if(!result) throw({status:"error", message:"could not delete product"})
 
-            res.status(200).send({ status: "The product is deleted successfully", payload: result })
+            if(result) return res.status(200).send({ status: "The product is deleted successfully", payload: result })
         } catch (error) {
             res.status(404).send(error)
         }

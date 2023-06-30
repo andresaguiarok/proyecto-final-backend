@@ -4,19 +4,19 @@ GET http://localhost:8080/api/productos
 # authorization: Bearer 
 
 ### busca producto por id
-GET http://localhost:8080/api/productos/6491e77a212430036714f3b2
+GET http://localhost:8080/api/productos/649e1b939320ec15b2b39aee
 
 ### agrega un producto 
 POST http://localhost:8080/api/productos
 Content-Type: application/json
 
 {
-    "title": "Remera Puma Essentials Heather",
-    "description": "Material: Algodón",
-    "price": "6.099",
-    "thumbnails": "https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw31f6dfb9/products/PU_845895-06/PU_845895-06-1.JPG",
-    "code": "N2R86",
-    "stock": "30"
+    "title": "Chevrolet Onix",
+    "description": "modelo : 2020",
+    "price": "14.555",
+    "thumbnails": "https://th.bing.com/th/id/OIP.vovV_en_B1bDmX4V044EswHaE7?pid=ImgDet&rs=1",
+    "code": "Ax435Ty",
+    "stock": "5"
 }
 
 ### agrega un producto 
@@ -32,15 +32,28 @@ Content-Type: application/json
     "stock": "12"
 }
 
+### agrega un producto 
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{
+    "title": "Ford Mustang Shelby",
+    "description": "modelo: 2020",
+    "price": "87.633",
+    "thumbnails": "https://www.automobilemag.com/uploads/sites/11/2019/10/2020-Ford-Mustang-Shelby-GT350R-20.jpg",
+    "code": "Sh354by",
+    "stock": "8"
+}
+
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/6491e77a212430036714f3b2
+PUT http://localhost:8080/api/productos/649e1b939320ec15b2b39ae
 Content-Type: application/json
 
 {
     "description": "Modelo: 2023",
-    "price": 35.999,
+    "price": 36.999,
     "stock": 15
 }
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/6491e77a212430036714f3b2
+DELETE http://localhost:8080/api/productos/649e1ce7d4448e5c1c126f1d
