@@ -1,11 +1,12 @@
 const cartsManagerMongo = require("../dao/mongoDb/cartManagerMongo.js")
+const { cartService } = require("../service/services.js")
 const cm = new cartsManagerMongo()
 
 class CartController {
 
     getCarts = async(req,res) => {
         try {
-            const carts = await cm.getCarts()
+            const carts = await cartService.getCarts()
     
             res.status(200).send({
                 status: "success",
@@ -20,7 +21,7 @@ class CartController {
     getCart = async(req,res) => {
         try {
             let {cid} = req.params
-            let cart = await cm.getCartByID(cid)
+            let cart = await cartService.getCartByID(cid)
     
             if(!cart) return res.send({status: "error", message: "Cart not found"})
     
@@ -40,7 +41,7 @@ class CartController {
 
     createCart = async(req,res) => {
         try {
-            const result = await cm.createCart()
+            const result = await cartService.createCart()
             
             res.status(200).send({
                 status: "cart created",
@@ -54,7 +55,7 @@ class CartController {
     addProduct = async(req, res) => {
         try {
             let {cid, pid} = req.params
-            let prodToCart = await cm.addProduct(cid, pid)
+            let prodToCart = await cartService.addProduct(cid, pid)
     
             if (!prodToCart){
                 res.send({error:"error", message:"Cart not found o product not found"})
@@ -72,7 +73,7 @@ class CartController {
     deleteProductInCart = async(req,res)=> {
         try {
             let {cid, pid} = req.params
-            let cart = await cm.deleteProduct(cid, pid)
+            let cart = await cartService.deleteProduct(cid, pid)
     
             if(!cart){
                 res.status(404).send({
@@ -94,7 +95,7 @@ class CartController {
     deleteProductsInCart = async(req,res)=>{
         try {
             let {cid} = req.params
-            let cart = await cm.deleteAllProd(cid)
+            let cart = await cartService.deleteAllProd(cid)
     
             !cart
             ?res.status(404).send({
