@@ -11,9 +11,9 @@ class ProductController {
             let products = await productService.getProducts(page, sort)
             const {docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
     
-            if(page > totalPages || page < 1) throw({status: "error",message: "Page not found"})
+            if(page > totalPages || page < 1) throw({status: "Error", message: "Page not found"})
     
-            if(!products) throw({status: "error",message: "Documents not found"})
+            if(!products) throw({status: "Error", message: "Documents not found"})
             
             res.render("home", {
                 title: "Home",
@@ -37,7 +37,7 @@ class ProductController {
             let {pid} = req.params
             let product = await productService.getProductByID(pid)
     
-            if(!product) throw({ status: "error", message: "Product not found"}) 
+            if(!product) throw({ status: "Error", message: "Product not found"}) 
     
             res.status(200).send({
                 status: "The product has been found successfully",
@@ -54,12 +54,12 @@ class ProductController {
 
             //validacion si los campos estan vacios
             if(title === "" || description === "" || price === "" || thumbnails === "" || code === "" || stock === ""){
-                throw({status: "error" ,message:"Fill in the missing fields"})
+                throw({status: "Error" ,message:"Fill in the missing fields"})
             }
 
             //validacion si el code del producto ya existe
-            if(await productModel.findOne({code})){
-                throw({status:"error", message: "code already entered"})
+            if(await productService.getCodeProduct(code)){
+                throw({status:"Error", message: "code already entered"})
             }
 
             let result =  await productService.addProduct(title, description, price, thumbnails, code, stock)
@@ -70,8 +70,8 @@ class ProductController {
                 payload: result
             })
             :res.status(404).send({
-                status:"error",
-                error: "something went wrong"
+                status:"Error",
+                error: "Something went wrong"
             })
         } catch (error) {
             res.status(404).send(error)
@@ -85,7 +85,7 @@ class ProductController {
     
             let result = await productService.updateProduct(pid,obj)
 
-            if(!result) throw({status:"error", message:"could not update the product"})
+            if(!result) throw({status:"Error", message:"Could not update the product"})
     
             if(result){
                 res.status(200).send({
@@ -104,7 +104,7 @@ class ProductController {
 
             let result = await productService.deleteProduct(pid)
 
-            if(!result) throw({status:"error", message:"could not delete product"})
+            if(!result) throw({status:"Error", message:"Could not delete product"})
 
             if(result) return res.status(200).send({ status: "The product is deleted successfully", payload: result })
         } catch (error) {

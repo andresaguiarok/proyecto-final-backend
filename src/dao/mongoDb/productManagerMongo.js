@@ -33,6 +33,14 @@ class ProductManagerMongo {
         }
     }
 
+    async getCodeProduct(code){
+        try {
+            return await productModel.findOne({code})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async updateProduct(pid, obj){
         try {
             return await productModel.updateOne({_id: pid}, obj)
