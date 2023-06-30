@@ -1,6 +1,4 @@
-const cartsManagerMongo = require("../dao/mongoDb/cartManagerMongo.js")
 const { cartService } = require("../service/services.js")
-const cm = new cartsManagerMongo()
 
 class CartController {
 
