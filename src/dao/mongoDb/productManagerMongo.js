@@ -25,17 +25,9 @@ class ProductManagerMongo {
         }
     }
 
-    async getProductByID(pid){
+    async getProduct(data){
         try {
-            return await productModel.findOne({_id: pid})
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async getCodeProduct(code){
-        try {
-            return await productModel.findOne({code})
+            return await productModel.findOne({...data})
         } catch (error) {
             console.log(error);
         }

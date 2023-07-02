@@ -11,14 +11,6 @@ class ProductManager {
         let busquedaDeCode = await this.readProducts()
         
         let nuevoAuto = {...title, ...description, ...price, ...thumbnails, ...code, ...stock}
-        
-        //Validacion si los campos existen o estan vacios
-        if(!nuevoAuto.title || !nuevoAuto.description || !nuevoAuto.price || 
-           !nuevoAuto.thumbnails || !nuevoAuto.code || !nuevoAuto.stock) return 
-
-        //Validacion si el code del producto existe
-        let codeExiste = busquedaDeCode.find(auto => auto.code === nuevoAuto.code)
-        if (codeExiste) return
 
         let autoAgregado = [...busquedaDeCode,{id: busquedaDeCode.length+1, ...nuevoAuto}]
 
@@ -36,7 +28,7 @@ class ProductManager {
         return mostrarAutos
     };
 
-    getProductById = async(autoId) => {
+    getProduct = async(autoId) => {
         let buscarId = await this.readProducts()
         let autoEncontrado = buscarId.find(auto => auto.id == autoId)
         if (!autoEncontrado) return "No existe este producto"

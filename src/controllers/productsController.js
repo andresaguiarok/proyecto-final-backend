@@ -35,7 +35,7 @@ class ProductController {
     getProduct = async (req, res) => {
         try {
             let {pid} = req.params
-            let product = await productService.getProductByID(pid)
+            let product = await productService.getProduct({_id: pid})
     
             if(!product) throw({ status: "Error", message: "Product not found"}) 
     
@@ -58,7 +58,7 @@ class ProductController {
             }
 
             //validacion si el code del producto ya existe
-            if(await productService.getCodeProduct(code)){
+            if(await productService.getProduct({code: code})){
                 throw({status:"Error", message: "code already entered"})
             }
 
