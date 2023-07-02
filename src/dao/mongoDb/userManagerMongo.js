@@ -30,17 +30,13 @@ class UserManager {
         }
     }
 
-    async getUserById(uid){
-        try {
-            return await userModel.findById({_id: uid})
-        } catch (error) {
-            console.log(error);
-        }
+    async updateUser(uid, updateData){
+        return await userModel.updateOne({_id: uid}, updateData)
     }
 
-    async updateUser(){}
-
-    async deleteUser(){}
+    async deleteUser(uid){
+        return await userModel.deleteOne({_id: uid})
+    }
 
 }
 

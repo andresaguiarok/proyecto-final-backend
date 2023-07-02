@@ -2,25 +2,15 @@
 GET http://localhost:8080/api/users
 
 ### Busca un usuario por id
-GET http://localhost:8080/api/users/6475121826abb0aca672f019
+GET http://localhost:8080/api/users/649b9dff3698736061ed82d5
 
-### crea un usuario
-POST http://localhost:8080/api/users
-Content-Type: application/json
-
-{
-    "nombre": "enzo",
-    "apellido": "ferrari",
-    "email": "enzof10@gmail.com"
-}
 ### modifica un usuario
-PUT http://localhost:8080/api/users/6451bf89d67e48a9209cf985
+PUT http://localhost:8080/api/users/649131d6676f635b194f83e4
 Content-Type: application/json
 
 {
-    "nombre": "andres facundo",
-    "apellido": "aguiar",
-    "email": "andresaguiar@gmail.com"
+    "firtsName": "pedro ezequiel",
+    "email": "peterSanchez@gmail.com"
 }
 
 ### Borra un usuarios

@@ -22,7 +22,7 @@ router.get("/", async(req, res) => {
 router.get("/:uid", async(req, res) => {
     try {
         let {uid} = req.params
-        let user = await userManager.getUserr(uid)
+        let user = await userManager.getUser({_id: uid})
         if(!user) return res.send({status:"error", message: "no se encontro el usuario"})
         
         res.send({
@@ -34,39 +34,12 @@ router.get("/:uid", async(req, res) => {
     }
 })
 
-router.post("/" , async(req,res) => {
-    try {
-        let user = req.body
-
-        const newUser = {
-            firtsName: user.nombre,
-            lastName: user.apellido,
-            email: user.email
-        }
-
-        let result = await userModel.create(newUser)
-
-        res.send({
-            status : "User was successfully created",
-            payload: result
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
 router.put("/:uid", async(req, res) => {
     try {
         const {uid} = req.params
-        const user = req.body
+        const userToReplace = req.body
 
-        let userToReplace = {
-            firtsName: user.nombre,
-            lastName: user.apellido,
-            email: user.email
-        }
-
-        let result = await userModel.updateOne({_id: uid}, userToReplace)
+        let result = await userManager.updateUser({_id: uid}, userToReplace)
 
         res.send({
             status : "User information was updated",
@@ -80,7 +53,7 @@ router.put("/:uid", async(req, res) => {
 router.delete("/:uid", async(req, res) => {
     try {
         let {uid} = req.params
-        let users = await userModel.deleteOne({_id: uid})
+        let users = await userManager.deleteUser({_id: uid})
         
         res.send({
             status:"the user was deleted",
