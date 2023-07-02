@@ -14,17 +14,9 @@ class UserManager {
         }
     }
 
-    async getUserName(userName){
+    async getUser(userData){
         try {
-            return await userModel.findOne({userName})
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async getUser(email){
-        try {
-            return await userModel.findOne({email})
+            return await userModel.findOne({...userData})
         } catch (error) {
             console.log(error);
         }

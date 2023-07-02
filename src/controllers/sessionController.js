@@ -14,13 +14,13 @@ class SessionController {
                 throw({status: "error" ,message:"Fill in the missing fields"})
             }
             //valida si existe email
-            if(await userService.getUser(email)){
+            if(await userService.getUser({email})){
                 throw({status:"Error", message:"This email is registered"})
             }
 
             //valida si existe el userName
-            if(await userService.getUserName(userName)) {
-                throw({status:"Error", message:"This user already exists"})
+            if(await userService.getUser({userName})) {
+                throw({status:"Error", message:"Username is not available"})
             }
 
             const user = await userService.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})

@@ -7,12 +7,11 @@ const mongoStore = require("connect-mongo")
 const passport = require("passport")
 const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
-require("dotenv").config()
-
-const app = express()
-
+const cors = require("cors")
 const { socketProducts } = require("./utils/socketProducts.js")
 const DataBase = require("./config/objetConfig.js")
+const app = express()
+require("dotenv").config()
 
 const productsRouter = require("./router/productsRouter.js")
 const cartsRouter = require("./router/cartRouter.js")
@@ -26,6 +25,7 @@ const sessionRouter = require("./router/sessionRouter.js");
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use("/static", express.static(__dirname+"/public"))
+app.use(cors())
 
 //configuracion de Handlebars
 app.engine("handlebars", handlebars.engine())
