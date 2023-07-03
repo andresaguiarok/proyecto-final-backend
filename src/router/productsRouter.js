@@ -6,7 +6,7 @@ const consulta = async() => {
     const router = Router()
 
     router.get("/", async (req, res) => {
-        let productos = await pm.readProducts()
+        let productos = await pm.getProducts()
         const limit = req.query.limit
 
         limit
@@ -16,7 +16,7 @@ const consulta = async() => {
 
     router.get("/:pid", async(req,res) =>{
         let {pid} = req.params
-        let producto = await pm.getProductById(pid)
+        let producto = await pm.getProduct(pid)
         if (!producto){ return res.status(404).send({status: "error", mensaje: "Este Producto no existe"})}
         res.send(producto)
     });

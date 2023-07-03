@@ -5,7 +5,7 @@ const router = Router()
 const prodController = new ProductController()
 
 //Vista de los productos
-router.get("/", passport.authenticate("jwt", { session: false }), prodController.getProductsAll)
+router.get("/", prodController.getProductsAll)
 
 router.get("/:pid", prodController.getProduct)
 

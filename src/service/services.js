@@ -1,3 +1,4 @@
+const ProductManager = require("../dao/fileSystem/productManager.js");
 const CartManager = require("../dao/mongoDb/cartManagerMongo.js");
 const ProductManagerMongo = require("../dao/mongoDb/productManagerMongo.js");
 const UserManagerMongo = require("../dao/mongoDb/userManagerMongo.js");

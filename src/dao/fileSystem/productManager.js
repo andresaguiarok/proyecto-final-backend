@@ -8,50 +8,42 @@ class ProductManager {
     }
     
     addProduct = async(title, description, price, thumbnails, code, stock) => {
-        let busquedaDeCode = await this.readProducts()
-        
-        let nuevoAuto = {...title, ...description, ...price, ...thumbnails, ...code, ...stock}
+        let product = {title, description,price, thumbnails, code, stock}
+        const productsData = await this.getProducts()
 
-        let autoAgregado = [...busquedaDeCode,{id: busquedaDeCode.length+1, ...nuevoAuto}]
-
-        await fs.promises.writeFile(this.path, JSON.stringify(autoAgregado, "null", 2), "utf-8")
+        let prodAdd = [...productsData,{_id: productsData.length+1, ...product}]
+        await fs.promises.writeFile(this.path, JSON.stringify(prodAdd, "null", 2), "utf-8")
+        return product
     };
 
-    readProducts = async () => {
+    getProducts = async () => {
         let listaDeAutos = await fs.promises.readFile(this.path, "utf-8")
-        const autos = JSON.parse(listaDeAutos)
-        return autos
+        return JSON.parse(listaDeAutos)
     };
 
-    getProducts = async() => {
-        let mostrarAutos = await this.readProducts()
-        return mostrarAutos
-    };
-
-    getProduct = async(autoId) => {
-        let buscarId = await this.readProducts()
-        let autoEncontrado = buscarId.find(auto => auto.id == autoId)
-        if (!autoEncontrado) return "No existe este producto"
-        return autoEncontrado
+    getProduct = async(prod) => {
+        const datos = await this.getProducts()
+        return datos.find(product => product._id == prod._id)
     }
 
-    updateProduct = async (autoId, datosNuevos) => {       
-        let datosDeProductos = await this.readProducts()
-        let actualizarProducto = await this.getProductById(autoId)
-        let index = datosDeProductos.findIndex(auto => auto.id == autoId)
+    updateProduct = async (pid, updateBody) => {      
+        const productsData = await this.getProducts()
+        let productOld = await this.getProduct({_id: pid})
+        let index = productsData.findIndex(auto => auto._id == pid)
+        const productUpdate = {...productOld, ...updateBody}
 
-        datosDeProductos[index] = {...actualizarProducto, ...datosNuevos}
+        productsData[index] = productUpdate
 
-        await fs.promises.writeFile(this.path, JSON.stringify(datosDeProductos, "null",2), "utf-8")
-        return 
+        await fs.promises.writeFile(this.path, JSON.stringify(productsData, "null",2), "utf-8")
+        return productUpdate
     }
 
-    deleteProduct = async(autoId) => {
-        let traerDatos = await this.readProducts()
-        let autosFiltrados = traerDatos.filter(auto => auto.id != autoId)
+    deleteProduct = async(pid) => {
+        let productsData = await this.getProducts()
+        let productsFilter = productsData.filter(product => product._id != pid)
 
-        await fs.promises.writeFile(this.path, JSON.stringify(autosFiltrados, "null", 2))
-        return "Producto eliminado"
+        await fs.promises.writeFile(this.path, JSON.stringify(productsFilter, "null", 2))
+        return "Removed product"
     }
 }
 

@@ -13,7 +13,7 @@ class cartManager{
         await fs.promises.writeFile(this.path, JSON.stringify([]))
     }
     
-    newCart = async() => { 
+    createCart = async() => { 
         let productCart= [{id:this.cart.length+1, product:[]}]
         
         if (this.path.length > 1) { 

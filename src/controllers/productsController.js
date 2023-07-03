@@ -101,7 +101,6 @@ class ProductController {
     deleteProduct = async (req, res) => {
         try {
             let {pid} = req.params
-
             let result = await productService.deleteProduct(pid)
 
             if(!result) throw({status:"Error", message:"Could not delete product"})
