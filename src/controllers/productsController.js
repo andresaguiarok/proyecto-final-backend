@@ -1,4 +1,3 @@
-const { productModel } = require("../dao/models/productModel.js")
 const { productService } = require("../service/services.js")
 
 class ProductController {
