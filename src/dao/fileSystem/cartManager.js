@@ -14,50 +14,75 @@ class cartManager{
     }
     
     createCart = async() => { 
-        let productCart= [{id:this.cart.length+1, product:[]}]
+        let newCart= [{id:this.cart.length+1, products:[]}]
         
         if (this.path.length > 1) { 
-            let productList = await this.readCarts()
-            productCart = [...productList,{id:productList.length+1 , product:[]}]
+            const cartList = await this.getCarts()
+            newCart = [...cartList,{id:cartList.length+1 , products:[]}]
         } 
         
-        await fs.promises.writeFile(this.path, JSON.stringify(productCart, "null", 2), "utf-8") 
+        await fs.promises.writeFile(this.path, JSON.stringify(newCart, "null", 2), "utf-8")
+        return 'cart created'
     } 
     
-    readCarts = async () => {
+    getCarts = async () => {
         let listCart = await fs.promises.readFile(this.path, "utf-8")
-        let cartList = JSON.parse(listCart)
-        return cartList
+        return JSON.parse(listCart)
     }
     
-    cartById = async(idCart) => {
-        let carts = await this.readCarts()
-        let cartId = carts.find(cart => cart.id == idCart)
-        if (!cartId) return
-        return cartId
+    getCartByID = async(idCart) => {
+        let carts = await this.getCarts()
+        if(!carts) return
+        return carts.find(cart => cart.id == idCart)
     }
     
-    addProductCart = async(cdi, pid) => {
-        let carts = await this.readCarts()     
-        let cartByID = await this.cartById(cdi)
-        let productById = await pm.getProductById(pid)
-        
-        let cartIndex = carts.findIndex(cart => cart.id == cdi)
-        let product = {id: productById.id, title : productById.title , quantity: 1}
+    addProduct = async(cid, pid) => {
+        const carts = await this.getCarts()     
+        const cart = await this.getCartByID(cid)
+        const productData = await pm.getProduct({ _id: pid })
+        const index = carts.findIndex(cart => cart.id == cid)
+        const productInCart = cart.products.find(prod => prod.id == pid)
+        let product = {id: productData._id, title : productData.title , quantity: 1}
 
-        carts[cartIndex] = {id: cartByID.id, products:[{...product}]}
-        carts[cartIndex] = {id: cartByID.id, products:[...cartByID.products,{...product}]}
-         
-        if (cartByID.products.some(prod => prod.id == pid)){
-            let productInCart = cartByID.products.find(prod => prod.id == pid)
-            productInCart.quantity++;
-            
-            carts[cartIndex] = {id : cartByID.id, products:[productInCart]}
-            carts[cartIndex] = {id: cartByID.id, products:[...cartByID.products]}   
-            await fs.promises.writeFile(this.path, JSON.stringify(carts,"null",2),"utf-8")
+        cart.products == 0 
+        ? carts[index] = {id: cart.id, products:[{...product}]}
+        : carts[index] = {id: cart.id, products:[...cart.products,{...product}]}
+
+        if(cart.products.some(prod => prod.id == pid)){
+            carts[index] = {id : cart.id, products:[productInCart.quantity++]}
+            carts[index] = {id: cart.id, products:[...cart.products]}   
         }
-        
+
         await fs.promises.writeFile(this.path, JSON.stringify(carts,"null",2),"utf-8")
+        return `The product ${productData.title} was added to the cart`
+    }
+
+    deleteProduct = async(cid, pid) => {
+        const carts = await this.getCarts() 
+        const cart = await this.getCartByID(cid)
+        const index = carts.findIndex(cart => cart.id == cid)
+        const product = cart.products.find(prod => prod.id == pid)
+        const productDelete = cart.products.filter(prod => prod != product)
+
+        if(cart.products.some(prod => prod.id == pid)){
+            carts[index] = {id : cart.id, products:[...productDelete]}
+            await fs.promises.writeFile(this.path, JSON.stringify(carts,"null",2),"utf-8")
+            return `The product ${product.title} was removed from the cart`
+        }
+    }
+
+    deleteAllProd = async(cid) => {
+        const carts = await this.getCarts()     
+        const cart = await this.getCartByID(cid)
+        const index = carts.findIndex(cart => cart.id == cid)
+
+        if(!carts[index]) return
+
+        if(cart){
+            carts[index] = {id: cart.id, products: []}
+            await fs.promises.writeFile(this.path, JSON.stringify(carts,"null",2),"utf-8")
+            return {id: cart.id , products: []}
+        }
     }
 }
 

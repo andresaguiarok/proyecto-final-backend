@@ -21,7 +21,7 @@ class CartController {
             let {cid} = req.params
             let cart = await cartService.getCartByID(cid)
     
-            if(!cart) return res.send({status: "error", message: "Cart not found"})
+            if(!cart) return res.send({status: "Error", message: "Cart not found"})
     
             const cartObj = {
                 title: "Cart",
@@ -41,10 +41,9 @@ class CartController {
         try {
             const result = await cartService.createCart()
             
-            res.status(200).send({
-                status: "cart created",
-                payload : result
-            })
+            result ? res.status(200).send({status: "The cart was created successfully",payload : result})
+            : res.status(404).send({status:"Error", message: "There's been a problem"})
+            
         } catch (error) {
             console.log(error);
         }
@@ -95,12 +94,9 @@ class CartController {
             let {cid} = req.params
             let cart = await cartService.deleteAllProd(cid)
     
-            !cart
-            ?res.status(404).send({
-                status: "error",
-                message: "Cart not found"
-            })
-            :res.status(200).send({
+            if(!cart) return res.status(404).send({status: "error", message: "Cart not found"})
+            
+            res.status(200).send({
                 status: "success",
                 message: "The cart was emptied successfully",
                 payload: cart
