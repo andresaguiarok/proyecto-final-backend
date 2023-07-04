@@ -38,7 +38,7 @@ class SessionController {
     login = async (req, res) => {
         try {
             const { email, password } = req.body
-            const user = await userService.getUser(email)
+            const user = await userService.getUser({email})
 
             //Validacion de campos vacios  
             if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"}) 
