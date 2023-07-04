@@ -2,7 +2,33 @@
 GET http://localhost:8080/api/users
 
 ### Busca un usuario por id
-GET http://localhost:8080/api/users/649b9dff3698736061ed82d5
+GET http://localhost:8080/api/users/2
+
+### register
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+    "firtsName": "pablo",
+    "lastName": "maguirre",
+    "email": "maguirrepablo@hotmail.comm",
+    "userName": "macpabloo",
+    "birthDate": "1996-08-15",
+    "password": "macpabli"
+}
+
+### register
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+    "firtsName": "peter",
+    "lastName": "aguirre",
+    "email": "aguirrePeter@gmail.com",
+    "userName": "peterAG",
+    "birthDate": "1996-08-15",
+    "password": "peter"
+}
 
 ### modifica un usuario
 PUT http://localhost:8080/api/users/649131d6676f635b194f83e4
@@ -13,5 +39,17 @@ Content-Type: application/json
     "email": "peterSanchez@gmail.com"
 }
 
+### modifica un usuario
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+    "firtsName": "pedro ezequiel",
+    "email": "peterSanchez@gmail.com"
+}
+
 ### Borra un usuarios
 DELETE http://localhost:8080/api/users/645598423f67a9637e767d32
+
+### Borra un usuarios
+DELETE http://localhost:8080/api/users/2

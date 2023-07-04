@@ -1,13 +1,14 @@
 const {Router} = require("express")
-const {userModel} = require("../dao/models/usersModel.js")
 const UserManager = require("../dao/mongoDb/userManagerMongo.js")
+const { creaHash } = require("../utils/bcryptHash.js")
+const { userService } = require("../service/services.js")
 
 const router = Router()
 const userManager = new UserManager()
 
 router.get("/", async(req, res) => {
     try {
-        let users = await userManager.getUsers()
+        let users = await userService.getUsers()
         console.log(users);
         
         res.send({
@@ -22,7 +23,7 @@ router.get("/", async(req, res) => {
 router.get("/:uid", async(req, res) => {
     try {
         let {uid} = req.params
-        let user = await userManager.getUser({_id: uid})
+        let user = await userService.getUser({_id: uid})
         if(!user) return res.send({status:"error", message: "no se encontro el usuario"})
         
         res.send({
@@ -34,12 +35,22 @@ router.get("/:uid", async(req, res) => {
     }
 })
 
+router.post("/", async(req,res) =>{
+    try {
+        const {firtsName, lastName, userName, email, birthDate, password} = req.body
+        const user = await userService.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
+        res.send({status:"success", payload: user})
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 router.put("/:uid", async(req, res) => {
     try {
         const {uid} = req.params
         const userToReplace = req.body
 
-        let result = await userManager.updateUser({_id: uid}, userToReplace)
+        let result = await userService.updateUser({_id: uid}, userToReplace)
 
         res.send({
             status : "User information was updated",
@@ -53,7 +64,7 @@ router.put("/:uid", async(req, res) => {
 router.delete("/:uid", async(req, res) => {
     try {
         let {uid} = req.params
-        let users = await userManager.deleteUser({_id: uid})
+        let users = await userService.deleteUser({_id: uid})
         
         res.send({
             status:"the user was deleted",
