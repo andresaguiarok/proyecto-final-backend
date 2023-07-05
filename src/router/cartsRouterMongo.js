@@ -8,7 +8,7 @@ const cartController = new CartController()
 
 router.get("/" , passportCall("jwt"), authorization("admin"),cartController.getCarts)
 
-router.get("/:cid" , cartController.getCart)
+router.get("/:cid" , passportCall("jwt"), cartController.getCart)
 
 router.post("/" , cartController.createCart)
 
