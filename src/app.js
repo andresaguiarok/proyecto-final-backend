@@ -9,7 +9,6 @@ const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
 const cors = require("cors")
 const { socketProducts } = require("./utils/socketProducts.js")
-const DataBase = require("./config/objetConfig.js")
 const app = express()
 require("dotenv").config()
 
@@ -37,15 +36,9 @@ app.use(cookieParser("p@l@Br@s3cr3t0"))
 app.use(session({
     store: mongoStore.create({
         mongoUrl: process.env.MONGO_KEY_SECRET,
-        mongoOptions: {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        },
-        ttl: 10000*60
+        mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true }, ttl: 10000*60
     }),
-    secret : "s3cr3t0c0d3",
-    resave: false,
-    saveUninitialized: false
+    secret : "s3cr3t0c0d3", resave: false, saveUninitialized: false
 }))
 
 //passport

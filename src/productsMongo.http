@@ -49,12 +49,12 @@ Content-Type: application/json
 }
 
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/649e1b939320ec15b2b39ae
+PUT http://localhost:8080/api/productos/649e1b939320ec15b2b39aee
 Content-Type: application/json
 
 {
     "description": "Modelo: 2023",
-    "price": 36.999,
+    "price": 38.999,
     "stock": 15
 }
 
