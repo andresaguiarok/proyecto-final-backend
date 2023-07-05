@@ -1,4 +1,4 @@
-const { userService } = require("../service/services.js")
+const { userService, contactService } = require("../service/services.js")
 const { validPassword, creaHash } = require("../utils/bcryptHash.js")
 const { generateToken } = require("../utils/jsonWebToken.js")
 
@@ -56,7 +56,6 @@ class SessionController {
             
             let Accesstoken = generateToken(user)
             req.user = user
-            console.log(req.user);
 
             req.user.role
             ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 100, httpOnly: true }).redirect("/api/productos")
@@ -69,7 +68,12 @@ class SessionController {
     }
 
     infoCurrent = async(req,res) => {
-        res.status(200).send(req.user)
+        const {email} = req.user
+        const contact = await contactService.getContact({email})
+
+        contact 
+        ? res.status(200).send({status:"success", toInfo: contact}) 
+        : res.status(404).send({status:"Error", message:"Your information does not exist"})
     }
 
     privada = async(req,res) => {

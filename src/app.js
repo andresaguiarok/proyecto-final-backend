@@ -63,7 +63,6 @@ app.use("/api/productos", productMongoRouter) //Con Mongo
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 app.use("/api/session", sessionRouter)
 
-DataBase.connectDB()
 const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {
     console.log(`Running in the port: ${PORT}`);
