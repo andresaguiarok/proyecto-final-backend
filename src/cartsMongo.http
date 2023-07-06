@@ -28,4 +28,7 @@ DELETE http://localhost:8080/api/carrito/64910d7703c427a0d5e1a835
 ### Se borra todos los productos de un carrito indicado por ID 
 DELETE http://localhost:8080/api/carrito/1
 
+### Comprar carrito
+POST http://localhost:8080/api/carrito/64910d7703c427a0d5e1a835/purchase
+
 

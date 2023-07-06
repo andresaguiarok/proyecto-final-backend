@@ -9,6 +9,7 @@ const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
 const cors = require("cors")
 const { socketProducts } = require("./utils/socketProducts.js")
+const ticketRouter = require("./router/ticketRouter.js")
 const app = express()
 require("dotenv").config()
 
@@ -55,6 +56,7 @@ app.use("/api/users", userRouter) //Con Mongo
 app.use("/api/productos", productMongoRouter) //Con Mongo 
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 app.use("/api/session", sessionRouter)
+app.use("/api/tickets", ticketRouter)
 
 const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {

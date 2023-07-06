@@ -5,12 +5,17 @@ const collection = "tickets"
 const ticketSchema = new Schema({
     code:{
         type: String,
+        required: true,
+        unique: true
     },
     purchaseDatetime:{
-        type: Date
+        type: Date,
+        default: Date.now,
+        required: true
     },
     amount:{
-        type:Number
+        type:Number,
+        required: true
     },
     purchaser:{ 
         type:String,

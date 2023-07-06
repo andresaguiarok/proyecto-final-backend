@@ -1,0 +1,5 @@
+### Busca todos los tickets
+GET http://localhost:8080/api/tickets
+
+### Busca el ticket por ID
+GET http://localhost:8080/api/tickets/64a62c890c6b1644711498de

@@ -14,7 +14,9 @@ router.post("/" , cartController.createCart)
 
 router.put("/:cid/products/:pid" , passportCall("jwt"), authorization("user"), cartController.addProduct)
 
-router.delete("/:cid/product/:pid" , passportCall("jwt"), authorization("user"),cartController.deleteProductInCart)
+router.delete("/:cid/product/:pid" , passportCall("jwt"), authorization("user"), cartController.deleteProductInCart)
+
+router.post("/:cid/purchase", passportCall("jwt"), cartController.cartPurchase)
 
 router.delete("/:cid", cartController.deleteProductsInCart)
 

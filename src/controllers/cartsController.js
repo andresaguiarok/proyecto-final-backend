@@ -1,4 +1,7 @@
-const { cartService } = require("../service/services.js")
+const TicketManager = require("../dao/mongoDb/ticketManager.js");
+const { cartService, productService } = require("../service/services.js")
+const { v4:uuidv4 } = require("uuid")
+const ticketManager = new TicketManager()
 
 class CartController {
 
@@ -103,6 +106,43 @@ class CartController {
             })
         } catch (error) {
             console.log(error);
+        }
+    }
+    
+    cartPurchase = async(req,res) => {
+        try {
+            const {cid} = req.params
+            const cart = await cartService.getCartByID(cid)
+            const insufficientStock = []
+            const buyProducts = []
+            
+            if(!cart) throw({status:"Error", message:"Cart not found"})
+            
+            cart.products.forEach(async item => {
+                const product = item.product
+                const quantity = item.quantity
+                const stock = item.product.stock
+
+                quantity > stock 
+                ? insufficientStock.push(product) 
+                : buyProducts.push({product, quantity}) 
+                    && await productService.updateProduct(product, {stock: stock - quantity}) 
+                //     && await cartService.deleteProduct(cart, product) 
+            });
+
+            const totalPrice = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
+            
+            if(buyProducts.length > 0){  
+                const ticket = await ticketManager.createTicket({
+                    code: uuidv4(),
+                    amount: totalPrice,
+                    purchaser: req.user.email,
+                })
+                res.send({status:"Success", message:"Successful purchase", toTicket: ticket})
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(404).send(error)
         }
     }
 }
