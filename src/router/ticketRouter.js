@@ -1,17 +1,13 @@
 const { Router } = require("express")
-const { ticketService } = require("../service/services")
+const passportCall = require("../passportJwt/passportCall")
+const { authorization } = require("../passportJwt/authorization")
+const TicketController = require("../controllers/ticketsController")
+
 const router = new Router()
+const ticketController = new TicketController()
 
-router.get("/", async(req,res) => {
-    const tickets = await ticketService.getTickets()
-    res.send({status:"success", payload: tickets})
-})
+router.get("/", passportCall("jwt"), authorization("admin"),ticketController.getTickets)
 
-router.get("/:tid", async(req,res) => {
-    const {tid} = req.params
-    const ticket = await ticketService.getTicket(tid)
-
-    res.status(200).send({status:"success", toTicketIs: ticket})
-})
+router.get("/:tid", passportCall("jwt"), authorization("user"),ticketController.getTicket)
 
 module.exports = router
