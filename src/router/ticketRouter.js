@@ -1,16 +1,15 @@
 const { Router } = require("express")
-const TicketManager = require("../dao/mongoDb/ticketManager")
+const { ticketService } = require("../service/services")
 const router = new Router()
-const ticketManager = new TicketManager()
 
 router.get("/", async(req,res) => {
-    const tickets = await ticketManager.getTickets()
+    const tickets = await ticketService.getTickets()
     res.send({status:"success", payload: tickets})
 })
 
 router.get("/:tid", async(req,res) => {
     const {tid} = req.params
-    const ticket = await ticketManager.getTicket(tid)
+    const ticket = await ticketService.getTicket(tid)
 
     res.status(200).send({status:"success", toTicketIs: ticket})
 })

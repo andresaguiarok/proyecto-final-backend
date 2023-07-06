@@ -1,7 +1,5 @@
-const TicketManager = require("../dao/mongoDb/ticketManager.js");
-const { cartService, productService } = require("../service/services.js")
+const { cartService, productService, ticketService } = require("../service/services.js")
 const { v4:uuidv4 } = require("uuid")
-const ticketManager = new TicketManager()
 
 class CartController {
 
@@ -133,7 +131,7 @@ class CartController {
             const totalPrice = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
             
             if(buyProducts.length > 0){  
-                const ticket = await ticketManager.createTicket({
+                const ticket = await ticketService.createTicket({
                     code: uuidv4(),
                     amount: totalPrice,
                     purchaser: req.user.email,

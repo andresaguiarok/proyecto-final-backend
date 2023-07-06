@@ -10,7 +10,7 @@ class TicketManager {
         }
      }
 
-     async getTickets(tid){
+     async getTickets(){
         try {
             return await ticketModel.find()
         } catch (error) {
