@@ -3,6 +3,7 @@ const config = require("../config/objetConfig.js");
 let UserDao
 let ProductDao
 let CartDao
+let TicketDao
 
 switch (config.persistence) {
     case "MONGO":
@@ -10,20 +11,24 @@ switch (config.persistence) {
         const ProductManagerMongo = require("./mongoDb/productManagerMongo.js");
         const UserManagerMongo = require("./mongoDb/userManagerMongo.js");
         const CartManagerMongo = require("./mongoDb/cartManagerMongo.js");
+        const TicketManager = require("./mongoDb/ticketManager.js");
 
         ProductDao = new ProductManagerMongo()
         UserDao = new UserManagerMongo()
         CartDao = new CartManagerMongo()
+        TicketDao = new TicketManager()
         break;
     case "MONGOTEST":
         config.connectDB()
-        const ProductManagerMongoLocal = require("./mongoDb/productManagerMongo.js");
-        const UserManagerMongoLocal = require("./mongoDb/userManagerMongo.js");
-        const CartManagerMongoLocal = require("./mongoDb/cartManagerMongo.js");
+        const ProductManagerMongoTest = require("./mongoDb/productManagerMongo.js");
+        const UserManagerMongoTest = require("./mongoDb/userManagerMongo.js");
+        const CartManagerMongoTest = require("./mongoDb/cartManagerMongo.js");
+        const TicketManagerTest = require("./mongoDb/ticketManager.js");
     
-        ProductDao = new ProductManagerMongoLocal()
-        UserDao = new UserManagerMongoLocal()
-        CartDao = new CartManagerMongoLocal()
+        ProductDao = new ProductManagerMongoTest()
+        UserDao = new UserManagerMongoTest()
+        CartDao = new CartManagerMongoTest()
+        TicketDao = new TicketManagerTest()
         break;
     case "FILE":
         const CartManagerFs = require("./fileSystem/cartManager.js");
@@ -39,5 +44,6 @@ switch (config.persistence) {
 module.exports = {
     UserDao,
     ProductDao,
-    CartDao
+    CartDao,
+    TicketDao
 }
