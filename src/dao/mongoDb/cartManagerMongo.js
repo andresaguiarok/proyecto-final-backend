@@ -47,7 +47,7 @@ class CartManager {
         }
     }
 
-    async delete(cid, pid){
+    async deleteOne(cid, pid){
         try {
             let prod = await productModel.findById(pid)
 
@@ -60,6 +60,14 @@ class CartManager {
     async deleteAll(id){
         try {
             return await cartModel.updateOne({_id: id}, {products:[]})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async delete(id){
+        try {
+            return await cartModel.deleteOne({_id : id})
         } catch (error) {
             console.log(error);
         }

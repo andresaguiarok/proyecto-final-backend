@@ -1,4 +1,4 @@
-const { userService } = require("../service/services.js")
+const { userService, cartService } = require("../service/services.js")
 
 class UserController{
 
@@ -50,12 +50,17 @@ class UserController{
     deleteByUser = async(req, res) => {
         try {
             let {uid} = req.params
-            let users = await userService.deleteUser({_id: uid})
-            
+            let user = await userService.getUser({_id: uid})
+
+            if(user){
+                await userService.deleteUser({_id: uid})
+                await cartService.deleteCart({_id: user.cart._id})
+            }
+
             res.send({
                 status:"the user was deleted",
-                payload: users
-            })
+                payload: user
+            }) 
         } catch (error) {
            console.log(error); 
         }

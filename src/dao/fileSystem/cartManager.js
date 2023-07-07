@@ -52,7 +52,7 @@ class cartManager{
         return `The product ${productData.title} was added to the cart`
     }
 
-    delete = async(cid, pid) => {
+    deleteOne = async(cid, pid) => {
         const carts = await this.get() 
         const cart = await this.getCart(cid)
         const index = carts.findIndex(cart => cart.id == cid)
@@ -78,6 +78,14 @@ class cartManager{
             await fs.promises.writeFile(this.path, JSON.stringify(carts,"null",2),"utf-8")
             return {id: cart.id , products: []}
         }
+    }
+
+    async delete(cid){
+        let cartsData = await this.get()
+        let productsFilter = cartsData.filter(cart => cart.id != cid)
+
+        await fs.promises.writeFile(this.path, JSON.stringify(productsFilter, "null", 2))
+        return "Removed cart"
     }
 }
 

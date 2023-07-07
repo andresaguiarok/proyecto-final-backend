@@ -37,7 +37,7 @@ class CartRepository {
 
     deleteProduct = async(cid, pid) => {
         try {
-            return await this.dao.delete(cid, pid)
+            return await this.dao.deleteOne(cid, pid)
         } catch (error) {
             console.log(error);
         }
@@ -46,6 +46,14 @@ class CartRepository {
     deleteAllProd = async(cid) => {
         try {
             return await this.dao.deleteAll(cid)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    deleteCart = async(cid) => {
+        try {
+            return await this.dao.delete(cid)
         } catch (error) {
             console.log(error);
         }
