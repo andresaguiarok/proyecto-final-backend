@@ -53,7 +53,7 @@ class CartController {
     addProduct = async(req, res) => {
         try {
             let {cid, pid} = req.params
-            let prodToCart = await cartService.addProduct(cid, pid)
+            let prodToCart = await cartService.addProductAndUpdate(cid, pid)
     
             if (!prodToCart){
                 res.send({error:"error", message:"Cart not found o product not found"})

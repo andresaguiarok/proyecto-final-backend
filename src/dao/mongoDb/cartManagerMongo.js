@@ -2,7 +2,7 @@ const { cartModel } = require("../models/cartModel.js")
 const { productModel } = require("../models/productModel")
 
 class CartManager {
-    async createCart(){
+    async create(){
         try {
             return await cartModel.create({})
         } catch (error) {
@@ -10,7 +10,7 @@ class CartManager {
         }
     }
 
-    async getCarts(){
+    async get(){
         try {
             return await cartModel.find()
         } catch (error) {
@@ -18,15 +18,15 @@ class CartManager {
         }
     }
 
-    async getCartByID(cid){
+    async getCart(id){
         try {
-           return await cartModel.findOne({_id: cid}).lean()
+           return await cartModel.findOne({_id: id}).lean()
         } catch (error) {
             console.log(error);
         }
     }
 
-    async addProduct(cid, pid){
+    async addAndUpdate(cid, pid){
         try {
             const cart = await cartModel.findById({_id: cid})
             const products = cart.products.find(prod => prod.product._id == pid)
@@ -47,7 +47,7 @@ class CartManager {
         }
     }
 
-    async deleteProduct(cid, pid){
+    async delete(cid, pid){
         try {
             let prod = await productModel.findById(pid)
 
@@ -57,9 +57,9 @@ class CartManager {
         }
     }
 
-    async deleteAllProd(cid){
+    async deleteAll(id){
         try {
-            return await cartModel.updateOne({_id:cid}, {products:[]})
+            return await cartModel.updateOne({_id: id}, {products:[]})
         } catch (error) {
             console.log(error);
         }
