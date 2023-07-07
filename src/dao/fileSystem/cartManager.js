@@ -1,6 +1,5 @@
 const fs = require("fs")
 const ProductManager = require("../fileSystem/productManager")
-
 const pm = new ProductManager()
 
 class cartManager{
@@ -9,15 +8,11 @@ class cartManager{
         this.cart = []
     }
     
-    createArray = async() => {
-        await fs.promises.writeFile(this.path, JSON.stringify([]))
-    }
-    
-    createCart = async() => { 
+    create = async() => { 
         let newCart= [{id:this.cart.length+1, products:[]}]
         
         if (this.path.length > 1) { 
-            const cartList = await this.getCarts()
+            const cartList = await this.get()
             newCart = [...cartList,{id:cartList.length+1 , products:[]}]
         } 
         
@@ -25,21 +20,21 @@ class cartManager{
         return 'cart created'
     } 
     
-    getCarts = async () => {
+    get = async () => {
         let listCart = await fs.promises.readFile(this.path, "utf-8")
         return JSON.parse(listCart)
     }
     
-    getCartByID = async(idCart) => {
-        let carts = await this.getCarts()
+    getCart = async(idCart) => {
+        let carts = await this.get()
         if(!carts) return
         return carts.find(cart => cart.id == idCart)
     }
     
-    addProduct = async(cid, pid) => {
-        const carts = await this.getCarts()     
-        const cart = await this.getCartByID(cid)
-        const productData = await pm.getProduct({ _id: pid })
+    addAndUpdate = async(cid, pid) => {
+        const carts = await this.get()     
+        const cart = await this.getCart(cid)
+        const productData = await pm.getBy({ _id: pid })
         const index = carts.findIndex(cart => cart.id == cid)
         const productInCart = cart.products.find(prod => prod.id == pid)
         let product = {id: productData._id, title : productData.title , quantity: 1}
@@ -57,9 +52,9 @@ class cartManager{
         return `The product ${productData.title} was added to the cart`
     }
 
-    deleteProduct = async(cid, pid) => {
-        const carts = await this.getCarts() 
-        const cart = await this.getCartByID(cid)
+    delete = async(cid, pid) => {
+        const carts = await this.get() 
+        const cart = await this.getCart(cid)
         const index = carts.findIndex(cart => cart.id == cid)
         const product = cart.products.find(prod => prod.id == pid)
         const productDelete = cart.products.filter(prod => prod != product)
@@ -72,8 +67,8 @@ class cartManager{
     }
 
     deleteAllProd = async(cid) => {
-        const carts = await this.getCarts()     
-        const cart = await this.getCartByID(cid)
+        const carts = await this.get()     
+        const cart = await this.getCart(cid)
         const index = carts.findIndex(cart => cart.id == cid)
 
         if(!carts[index]) return
