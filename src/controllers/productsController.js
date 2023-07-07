@@ -1,4 +1,5 @@
 const { productService } = require("../service/services.js")
+const { v4:uuidv4 } = require("uuid")
 
 class ProductController {
 
@@ -49,19 +50,20 @@ class ProductController {
 
     createProduct = async (req, res) => {
         try {
-            const {title, description, price, thumbnails, code, stock} = req.body
+            const {title, description, price, thumbnails, stock} = req.body
+            const code = uuidv4()
 
             //validacion si los campos estan vacios
-            if(title === "" || description === "" || price === "" || thumbnails === "" || code === "" || stock === ""){
+            if(title === "" || description === "" || price === "" || thumbnails === ""|| stock === ""){
                 throw({status: "Error" ,message:"Fill in the missing fields"})
             }
 
             //validacion si el code del producto ya existe
-            if(await productService.getProduct({code: code})){
+            if(await productService.getProduct({code})){
                 throw({status:"Error", message: "code already entered"})
             }
 
-            let result =  await productService.addProduct(title, description, price, thumbnails, code, stock)
+            let result = await productService.addProduct(title, description, price, thumbnails, code ,stock)
 
             result 
             ?res.status(200).send({

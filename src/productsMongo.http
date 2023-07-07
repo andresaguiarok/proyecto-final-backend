@@ -57,7 +57,6 @@ Content-Type: application/json
     "description": "modelo: 2020",
     "price": "7.633",
     "thumbnails": "Producto",
-    "code": "AAAA5",
     "stock": "8"
 }
 
