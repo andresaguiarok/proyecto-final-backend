@@ -31,12 +31,11 @@ Content-Type: application/json
 }
 
 ### modifica un usuario
-PUT http://localhost:8080/api/users/649131d6676f635b194f83e4
+PUT http://localhost:8080/api/users/64a76dc733352244508586f9
 Content-Type: application/json
 
 {
-    "firtsName": "pedro ezequiel",
-    "email": "peterSanchez@gmail.com"
+    "userName": "PeterOG"
 }
 
 ### modifica un usuario
@@ -49,7 +48,7 @@ Content-Type: application/json
 }
 
 ### Borra un usuarios
-DELETE http://localhost:8080/api/users/645598423f67a9637e767d32
+DELETE http://localhost:8080/api/users/64a76dc733352244508586f9
 
 ### Borra un usuarios
 DELETE http://localhost:8080/api/users/2

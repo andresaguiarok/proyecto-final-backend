@@ -6,7 +6,7 @@ class ContactRepository {
     }
 
     getContact = async(user) => {
-        const contact = await this.dao.getUser(user)
+        const contact = await this.dao.getByUser(user)
         return new ContactDto(contact)
     }
 }

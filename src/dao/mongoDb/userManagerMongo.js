@@ -3,18 +3,18 @@ const CartManager = require("./cartManagerMongo.js")
 const cartManager = new CartManager()
 
 class UserManager {
-    async createUser({firtsName, lastName, userName, email, birthDate, password}){
+    async create({firtsName, lastName, userName, email, birthDate, password}){
         try {
             return await userModel.create({ 
                 firtsName, lastName, userName, email, birthDate,
-                password, cart: await cartManager.createCart() 
+                password, cart: await cartManager.create() 
             })
         } catch (error) {
             console.log(error);
         }
     }
 
-    async getUser(userData){
+    async getByUser(userData){
         try {
             return await userModel.findOne({...userData})
         } catch (error) {
@@ -22,7 +22,7 @@ class UserManager {
         }
     }
 
-    async getUsers(){
+    async get(){
         try {
             return await userModel.find()
         } catch (error) {
@@ -30,12 +30,12 @@ class UserManager {
         }
     }
 
-    async updateUser(uid, updateData){
-        return await userModel.updateOne({_id: uid}, updateData)
+    async update(id, updateBody){
+        return await userModel.updateOne({_id: id}, updateBody)
     }
 
-    async deleteUser(uid){
-        return await userModel.deleteOne({_id: uid})
+    async delete(id){
+        return await userModel.deleteOne({_id: id})
     }
 
 }
