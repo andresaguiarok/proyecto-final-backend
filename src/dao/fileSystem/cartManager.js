@@ -82,9 +82,9 @@ class cartManager{
 
     async delete(cid){
         let cartsData = await this.get()
-        let productsFilter = cartsData.filter(cart => cart.id != cid)
+        let cartRemove = cartsData.filter(cart => cart.id != cid)
 
-        await fs.promises.writeFile(this.path, JSON.stringify(productsFilter, "null", 2))
+        await fs.promises.writeFile(this.path, JSON.stringify(cartRemove, "null", 2))
         return "Removed cart"
     }
 }
