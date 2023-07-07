@@ -7,28 +7,27 @@ class ProductManager {
         this.path = "./data.json"
     }
     
-    addProduct = async(title, description, price, thumbnails, code, stock) => {
-        let product = {title, description,price, thumbnails, code, stock}
-        const productsData = await this.getProducts()
-
+    create = async(product) => {
+        const productsData = await this.get()
         let prodAdd = [...productsData,{_id: productsData.length+1, ...product}]
+        
         await fs.promises.writeFile(this.path, JSON.stringify(prodAdd, "null", 2), "utf-8")
         return product
     };
 
-    getProducts = async () => {
+    get = async () => {
         let listaDeAutos = await fs.promises.readFile(this.path, "utf-8")
         return JSON.parse(listaDeAutos)
     };
 
-    getProduct = async(prod) => {
-        const datos = await this.getProducts()
+    getBy = async(prod) => {
+        const datos = await this.get()
         return datos.find(product => product._id == prod._id)
     }
 
-    updateProduct = async (pid, updateBody) => {      
-        const productsData = await this.getProducts()
-        let productOld = await this.getProduct({_id: pid})
+    update = async (pid, updateBody) => {      
+        const productsData = await this.get()
+        let productOld = await this.getBy({_id: pid})
         let index = productsData.findIndex(auto => auto._id == pid)
         const productUpdate = {...productOld, ...updateBody}
 
@@ -38,8 +37,8 @@ class ProductManager {
         return productUpdate
     }
 
-    deleteProduct = async(pid) => {
-        let productsData = await this.getProducts()
+    delete = async(pid) => {
+        let productsData = await this.get()
         let productsFilter = productsData.filter(product => product._id != pid)
 
         await fs.promises.writeFile(this.path, JSON.stringify(productsFilter, "null", 2))
