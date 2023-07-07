@@ -34,10 +34,12 @@ switch (config.persistence) {
         const CartManagerFs = require("./fileSystem/cartManager.js");
         const ProductManagerFs = require("./fileSystem/productManager.js");
         const UserManagerFs = require("./fileSystem/userManager.js");
+        const TicketManagerFs = require("./fileSystem/ticketManager.js")
 
         ProductDao = new ProductManagerFs()
         UserDao = new UserManagerFs()
         CartDao = new CartManagerFs() 
+        TicketDao = new TicketManagerFs()
         break;
 }
 
