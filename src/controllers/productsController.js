@@ -80,9 +80,9 @@ class ProductController {
     updateProduct = async (req, res) => {
         try {
             let {pid} = req.params
-            let obj = req.body
+            let updateBody = req.body
     
-            let result = await productService.updateProduct(pid,obj)
+            let result = await productService.updateProduct(pid,updateBody)
 
             if(!result) throw({status:"Error", message:"Could not update the product"})
     

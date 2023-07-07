@@ -1,15 +1,16 @@
 const { productModel } = require("../models/productModel")
 
 class ProductManagerMongo {
-    async addProduct(title, description, price, thumbnails, code, stock){
+
+    async create(newProduct){
         try {
-            return await productModel.create({title, description, price, thumbnails, code, stock})
+            return await productModel.create(newProduct)
         } catch (error) {
             console.log(error);
         }
     }
 
-    async getProducts(page, sort){
+    async get(page, sort){
         try {
             let sortOpt = {}
 
@@ -25,7 +26,7 @@ class ProductManagerMongo {
         }
     }
 
-    async getProduct(data){
+    async getBy(data){
         try {
             return await productModel.findOne({...data})
         } catch (error) {
@@ -33,17 +34,17 @@ class ProductManagerMongo {
         }
     }
 
-    async updateProduct(pid, obj){
+    async update(id, updateBody){
         try {
-            return await productModel.updateOne({_id: pid}, obj)
+            return await productModel.updateOne({_id: id}, updateBody)
         } catch (error) {
             console.log(error);
         }
     }
 
-    async deleteProduct(pid){
+    async delete(id){
         try {
-            return await productModel.deleteOne({_id: pid})
+            return await productModel.deleteOne({_id: id})
         } catch (error) {
             console.log(error);
         }

@@ -48,14 +48,27 @@ Content-Type: application/json
     "stock": "8"
 }
 
+### agrega un producto 
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{
+    "title": "prod 1",
+    "description": "modelo: 2020",
+    "price": "7.633",
+    "thumbnails": "Producto",
+    "code": "AAAA5",
+    "stock": "8"
+}
+
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/649e1b939320ec15b2b39aee
+PUT http://localhost:8080/api/productos/64a75d0be68d8bca56f2c8e6
 Content-Type: application/json
 
 {
     "description": "Modelo: 2023",
-    "price": 38.999,
-    "stock": 15
+    "price": 18.999,
+    "stock": 34
 }
 
 ### actualiza un producto
@@ -69,7 +82,7 @@ Content-Type: application/json
 }
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/649e1ce7d4448e5c1c126f1d
+DELETE http://localhost:8080/api/productos/64a75d0be68d8bca56f2c8e6
 
 ### elimina un producto
 DELETE http://localhost:8080/api/productos/13
