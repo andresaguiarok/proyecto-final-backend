@@ -10,14 +10,14 @@ class ProductManager {
     create = async(product) => {
         const productsData = await this.get()
         let prodAdd = [...productsData,{_id: productsData.length+1, ...product}]
-        
+
         await fs.promises.writeFile(this.path, JSON.stringify(prodAdd, "null", 2), "utf-8")
         return product
     };
 
     get = async () => {
-        let listaDeAutos = await fs.promises.readFile(this.path, "utf-8")
-        return JSON.parse(listaDeAutos)
+        let productsList = await fs.promises.readFile(this.path, "utf-8")
+        return JSON.parse(productsList)
     };
 
     getBy = async(prod) => {
