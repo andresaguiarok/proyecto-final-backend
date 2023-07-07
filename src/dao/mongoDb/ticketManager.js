@@ -2,7 +2,7 @@ const { ticketModel } = require("../models/ticketModel")
 
 class TicketManager {
 
-    async createTicket(ticket){
+    async create(ticket){
         try {
             return await ticketModel.create(ticket)
         } catch (error) {
@@ -10,7 +10,7 @@ class TicketManager {
         }
      }
 
-     async getTickets(){
+     async get(){
         try {
             return await ticketModel.find()
         } catch (error) {
@@ -18,9 +18,9 @@ class TicketManager {
         }
      }
 
-    async getTicket(tid){
+    async getById(id){
        try {
-           return await ticketModel.findById(tid)
+           return await ticketModel.findById(id)
        } catch (error) {
            console.log(error);
        }
