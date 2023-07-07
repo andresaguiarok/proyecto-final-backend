@@ -7,10 +7,10 @@ class UserManager {
         this.path = "./dataUser.json"
     }
     
-    createUser = async({firtsName, lastName, userName, email, birthDate, password}) => {
+    create = async({firtsName, lastName, userName, email, birthDate, password}) => {
         let user = {firtsName, lastName, userName, email, birthDate, password}
 
-        const usersList = await this.getUsers()
+        const usersList = await this.get()
         let userAdd = [...usersList,{_id: usersList.length+1, ...user}]
 
         await fs.promises.writeFile(this.path, JSON.stringify(userAdd, "null", 2), "utf-8")
@@ -18,19 +18,19 @@ class UserManager {
         
     };
 
-    getUsers = async () => {
+    get = async () => {
         let usersData = await fs.promises.readFile(this.path, "utf-8")
         return JSON.parse(usersData)
     };
 
-    getUser = async(userData) => {
-        const datos = await this.getUsers()
+    getByUser = async(userData) => {
+        const datos = await this.get()
         return datos.find(user => user._id == userData._id)
     }
 
-    updateUser = async (uid, updateBody) => {    
-        const userData = await this.getUsers()
-        let userOld = await this.getUser(uid)
+    update = async (uid, updateBody) => {    
+        const userData = await this.get()
+        let userOld = await this.getByUser(uid)
         let index = userData.findIndex(user => user._id == uid._id)
         const userUpdate = {...userOld, ...updateBody}
 
@@ -41,8 +41,8 @@ class UserManager {
 
     }
 
-    deleteUser = async(userDelete) => {
-        let userData = await this.getUsers()
+    delete = async(userDelete) => {
+        let userData = await this.get()
         let userFilter = userData.filter(user => user._id != userDelete._id)
 
         await fs.promises.writeFile(this.path, JSON.stringify(userFilter, "null", 2))
