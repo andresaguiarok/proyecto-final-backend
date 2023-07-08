@@ -133,6 +133,14 @@ class CartController {
             const totalAmount = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
             const totalPrice = buyProducts.reduce((acc, item) => acc + item.product.price * item.quantity, 0 ).toFixed(3)
             
+            if(!buyProducts.length){
+                throw({
+                    status:"Error", 
+                    message:"Insufficient stock in the products", 
+                    products: insufficientStock.map(prod => prod.title)
+                })
+            } 
+
             if(buyProducts.length > 0){  
                 const ticket = await ticketService.createTicket({
                     code: uuidv4(),
@@ -160,8 +168,6 @@ class CartController {
 
                 res.send({status:"Success", message:"Successful purchase", toTicket: ticket})
             }
-
-            if(insufficientStock > 0) throw({status:"Error", message:"Insufficient stock"})
         } catch (error) {
             console.log(error);
             res.status(404).send(error)
