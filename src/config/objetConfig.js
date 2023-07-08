@@ -12,5 +12,9 @@ module.exports = {
     JwtKeySecret: process.env.JWT_KEY_SECRET,
     gmailUser: process.env.GMAIL_USER_APP,
     gmailPassword: process.env.GMAIL_PASSWORD_APP,
+    twilioAccountSid: process.env.TWILIO_ACCOUNT_SID,
+    twilioAuthToken: process.env.TWILIO_AUTH_TOKEN,
+    twilioPhoneNumber: process.env.TWILIO_PHONE_NUMBER,
+    myPhone: process.env.MY_PHONE,
     connectDB: async() => await MongoSingleton.getInstance()
 }
