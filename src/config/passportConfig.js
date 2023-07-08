@@ -1,8 +1,6 @@
 const passport = require("passport")
-const {userModel} = require("../dao/models/usersModel.js")
 const GitHubStrategy = require("passport-github2")
-const UserManager = require("../dao/mongoDb/userManagerMongo.js")
-const userManager = new UserManager()
+const { userService } = require("../service/services.js")
 require("dotenv").config()
 
 const initPassportGithub = () => {
@@ -12,10 +10,10 @@ const initPassportGithub = () => {
         callbackURL: process.env.GITHUB_CALLBACK_URL,
     }, async(accessToken, refreshToken, profile, done) => {
         try {
-            let user = await userManager.getUser(profile._json.email)
+            let user = await userService.getUser({email: profile._json.email})
             
             if(!user.email){
-                let result = await userManager.createUser({
+                let result = await userService.createUser({
                     firtsName: profile._json.name, lastName: profile.username,
                     userName: profile._json.login , email: profile._json.email,
                     birthDate: profile._json.created_at, password: " ",
@@ -34,7 +32,7 @@ const initPassportGithub = () => {
         done(null, user._id)
     })
     passport.deserializeUser((async (id, done) => {
-        let user = await userModel.findOne({_id: id})
+        let user = await userService.getUser({_id: id})
         done(null,user)
     }))
 }
