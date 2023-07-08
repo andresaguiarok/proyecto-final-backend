@@ -11,7 +11,7 @@ GET http://localhost:8080/api/carrito/1
 POST http://localhost:8080/api/carrito
 
 ### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
-PUT http://localhost:8080/api/carrito/64910d7703c427a0d5e1a835/products/6490f4a5017e517c3f04c0dd
+PUT http://localhost:8080/api/carrito/64a8a6efdadc6ff5352310ff/products/6490f4a5017e517c3f04c0dd
 
 ### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
 PUT http://localhost:8080/api/carrito/4/products/2
@@ -30,5 +30,8 @@ DELETE http://localhost:8080/api/carrito/1
 
 ### Comprar carrito
 POST http://localhost:8080/api/carrito/64910d7703c427a0d5e1a835/purchase
+
+### Comprar carrito
+POST http://localhost:8080/api/carrito/64a8a6efdadc6ff5352310ff/purchase
 
 

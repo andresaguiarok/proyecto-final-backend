@@ -16,12 +16,12 @@ POST http://localhost:8080/api/session/register
 Content-Type: application/json
 
 {
-    "firtsName": "lucas",
-    "lastName": "aguirre",
-    "email": "aguirreLuc@hotmail.com",
-    "userName": "LucKa",
-    "birthDate": "1993-10-05",
-    "password": "luckaguirre"
+    "firtsName": "osvaldo",
+    "lastName": "aguiar",
+    "email": "osvaldooaguiar@hotmail.com",
+    "userName": "valiaguiar",
+    "birthDate": "1965-10-05",
+    "password": "valiana"
 }
 
 ### login
@@ -29,8 +29,17 @@ post http://localhost:8080/api/session/login
 Content-Type: application/json
 
 {
-    "email": "AguiarAndresok@outlook.es",
+    "email": "andres22aguiar@gmail.com",
     "password": "andres"
+}
+
+### login
+post http://localhost:8080/api/session/login
+Content-Type: application/json
+
+{
+    "email": "osvaldooaguiar@hotmail.com",
+    "password": "valiana"
 }
 
 ### login

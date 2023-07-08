@@ -1,5 +1,7 @@
 const { cartService, productService, ticketService } = require("../service/services.js")
 const { v4:uuidv4 } = require("uuid")
+const transport = require("../utils/nodeMailer.js")
+const objetConfig = require("../config/objetConfig.js")
 
 class CartController {
 
@@ -113,7 +115,7 @@ class CartController {
             const cart = await cartService.getCartByID(cid)
             const insufficientStock = []
             const buyProducts = []
-            
+
             if(!cart) throw({status:"Error", message:"Cart not found"})
             
             cart.products.forEach(async item => {
@@ -125,19 +127,41 @@ class CartController {
                 ? insufficientStock.push(product) 
                 : buyProducts.push({product, quantity}) 
                     && await productService.updateProduct(product, {stock: stock - quantity}) 
-                //     && await cartService.deleteProduct(cart, product) 
+                    && await cartService.deleteProduct(cart, product) 
             });
 
-            const totalPrice = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
+            const totalAmount = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
+            const totalPrice = buyProducts.reduce((acc, item) => acc + item.product.price * item.quantity, 0 ).toFixed(3)
             
             if(buyProducts.length > 0){  
                 const ticket = await ticketService.createTicket({
                     code: uuidv4(),
-                    amount: totalPrice,
+                    amount: totalAmount,
                     purchaser: req.user.email,
                 })
+
+                await transport.sendMail({
+                    from: objetConfig.gmailUser,
+                    to: req.user.email,
+                    subject: "Thanks for your purchase",
+                    html:`<div>
+                                <h1>
+                                    Thanks for your purchase.
+                                    the total to pay is ${totalPrice}$
+                                </h1>
+                                <img src="cid:gracias-por-comprar">
+                          </div>`,
+                    attachments:[{
+                        filename:'gracias-por-comprar.jpg',
+                        path:"src/public/images/gracias-por-comprar.jpg",
+                        cid:'gracias-por-comprar'
+                    }]
+                })
+
                 res.send({status:"Success", message:"Successful purchase", toTicket: ticket})
             }
+
+            if(insufficientStock > 0) throw({status:"Error", message:"Insufficient stock"})
         } catch (error) {
             console.log(error);
             res.status(404).send(error)
