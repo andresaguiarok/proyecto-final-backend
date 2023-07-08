@@ -1,18 +1,24 @@
-const { userService, cartService } = require("../service/services.js")
+const { userService, cartService } = require("../service/services.js");
+const { sendSms } = require("../utils/twilioMessage.js");
 
 class UserController{
 
     getAllUsers = async(req, res) => {
         try {
-            let users = await userService.getUsers()
-            console.log(users);
+            const users = await userService.getUsers()
             
-            res.send({
-                status:"information was successfully extracted from the database",
-                payload: users
-            })
+            if(users){
+                res.status(200).send({
+                    status:"information was successfully extracted from the database",
+                    payload: users
+                })
+            }else{
+                throw({status:"Error", message: "No user data found"})
+            }
+            
         } catch (error) {
-           console.log(error); 
+           console.log(error);
+           return res.status(500).send(error) 
         }
     }
 
@@ -20,7 +26,7 @@ class UserController{
         try {
             let {uid} = req.params
             let user = await userService.getUser({_id: uid})
-            if(!user) return res.send({status:"error", message: "no se encontro el usuario"})
+            if(!user) return res.send({status:"error", message: "User not available"})
             
             res.send({
                 status:"the user was found",
@@ -28,6 +34,7 @@ class UserController{
             })
         } catch (error) {
            console.log(error); 
+           return res.status(411).send(error) 
         }
     }
 
@@ -35,15 +42,24 @@ class UserController{
         try {
             const {uid} = req.params
             const userToReplace = req.body
-    
+            const user = await userService.getUser({_id: uid})
             let result = await userService.updateUser({_id: uid}, userToReplace)
-    
-            res.send({
-                status : "User information was updated",
-                payload: result
-            })
+
+            if(!user) throw({status:"Error", message:"User not found"})
+
+            if(result){
+                await sendSms(user)
+                res.send({
+                    status : "User information was updated",
+                    payload: result
+                })
+            }else{
+                throw({status:"Error", message:"Could not update user data"})
+            }
         } catch (error) {
             console.log(error);
+            return res.status(410).send(error) 
+
         }
     }
 
@@ -55,14 +71,14 @@ class UserController{
             if(user){
                 await userService.deleteUser({_id: uid})
                 await cartService.deleteCart({_id: user.cart._id})
-            }
 
-            res.send({
-                status:"the user was deleted",
-                payload: user
-            }) 
+                res.send({ status:"the user was deleted", payload: user }) 
+            }else{
+                throw({ status:"Error", message:"Could not delete user" })
+            }
         } catch (error) {
            console.log(error); 
+           return res.status(400).send(error) 
         }
     }
 }
