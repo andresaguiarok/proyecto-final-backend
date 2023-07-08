@@ -1,15 +1,10 @@
 const twilio = require("twilio")
 const Config = require("../config/objetConfig.js")
-
-const twilioSid = Config.twilioAccountSid
-const twilioToken = Config.twilioAuthToken
-const twilioPhone = Config.twilioPhoneNumber
-
-const cliente = twilio(twilioSid, twilioToken)
+const cliente = twilio(Config.twilioAccountSid, Config.twilioAuthToken)
 
 exports.sendSms = (user) => cliente.messages.create({
     body: `The data of the user ${user.firtsName} was updated`,
-    from: twilioPhone,
+    from: Config.twilioPhoneNumber,
     to: Config.myPhone
 
 })

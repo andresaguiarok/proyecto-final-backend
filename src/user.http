@@ -35,7 +35,7 @@ PUT http://localhost:8080/api/users/649131d6676f635b194f83e4
 Content-Type: application/json
 
 {
-    "userName": "PedrooOG"
+    "userName": "PedroOG"
 }
 
 ### modifica un usuario
