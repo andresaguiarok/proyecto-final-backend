@@ -94,7 +94,7 @@ Su archivo es "passportConfig" que se encuentra en la carpeta "config"
 ## 17 - `passport-jwt`
 Nos permite crear middleware passport con estrategia de tipo jwt, que permitirá recibir un token vía cabecera y hacer su validación\
 Su archivo es "passportJwt.js" que se encuentra en la carpeta "passportJwt"\
-Su funcion se declara en `APP.JS`\
+Su funcion se declara en `APP.JS`
 
 ## 18 - `twilio`
 Es una de las principales plataformas de comunicación en la nube que permite atraer clientes a través de los distintos canales: SMS, voz, video, correo electrónico, WhatsApp y más. Las API de pago por uso permiten a las empresas escalar las comunicaciones de manera fiable.\
