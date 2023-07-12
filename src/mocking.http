@@ -1,1 +1,4 @@
-GET http://localhost:8080/mocking
+GET http://localhost:8080/mocking/mockingproducts
+
+###
+GET  http://localhost:8080/mocking/string

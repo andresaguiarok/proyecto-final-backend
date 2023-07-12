@@ -59,7 +59,7 @@ app.use("/api/productos", productMongoRouter) //Con Mongo
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 app.use("/api/session", sessionRouter)
 app.use("/api/tickets", ticketRouter)
-app.use("/mocking" , mockingRouter)
+app.use("/mocking", mockingRouter)
 app.use(errorHandling)
 
 const PORT = process.env.PORT
