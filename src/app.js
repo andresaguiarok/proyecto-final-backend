@@ -61,11 +61,11 @@ app.use("/api/session", sessionRouter)
 app.use("/api/tickets", ticketRouter)
 app.use("/mocking" , mockingRouter)
 
-app.use(errorHandling)
+app.use( errorHandling )
 
 const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {
-    console.log(`Running in the port: ${PORT}`);
+    console.log(`Running in the port: ${PORT}`)
 })
 
 const socketServer = new Server(httpServer)
