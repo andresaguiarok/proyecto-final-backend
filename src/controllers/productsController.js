@@ -1,5 +1,8 @@
-const { productService } = require("../service/services.js")
 const { v4:uuidv4 } = require("uuid")
+const { CustomError } = require("../customErrors/customError.js")
+const { typeErrors } = require("../customErrors/typeErrors.js")
+const { generateInfoProductError } = require("../customErrors/info.js")
+const { productService } = require("../service/services.js")
 
 class ProductController {
 
@@ -48,34 +51,37 @@ class ProductController {
         }
     }
 
-    createProduct = async (req, res) => {
+    createProduct = async (req, res, next) => {
         try {
             const {title, description, price, thumbnails, stock} = req.body
             const code = uuidv4()
 
             //validacion si los campos estan vacios
-            if(title === "" || description === "" || price === "" || thumbnails === ""|| stock === ""){
-                throw({status: "Error" ,message:"Fill in the missing fields"})
+            if(!title || !description || !price || !thumbnails || !stock){
+                CustomError.createError({
+                    name: "Error creating product",
+                    cause: generateInfoProductError({title, description, price, thumbnails, stock, code}),
+                    message: "Error trying to create product",
+                    code: typeErrors.INVALID_TYPE_ERROR,
+                })
             }
 
             //validacion si el code del producto ya existe
             if(await productService.getProduct({code})){
-                throw({status:"Error", message: "code already entered"})
+                CustomError.createError({
+                    name: "Error creating product",
+                    cause: generateInfoProductError({title, description, price, thumbnails, stock, code}),
+                    message: "Existing code error",
+                    code: typeErrors.INVALID_TYPE_ERROR,
+                })
             }
 
             let result = await productService.addProduct(title, description, price, thumbnails, code ,stock)
 
-            result 
-            ?res.status(200).send({
-                status: "A product has been created successfully",
-                payload: result
-            })
-            :res.status(404).send({
-                status:"Error",
-                error: "Something went wrong"
-            })
-        } catch (error) {
-            res.status(404).send(error)
+            result ? res.status(200).send({ status: "A product has been created successfully", payload: result })
+            : res.status(404).send({ status:"Error", error: "Something went wrong" })
+        } catch(error){
+            next(error)
         }
     }
 

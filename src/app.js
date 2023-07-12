@@ -9,7 +9,6 @@ const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
 const cors = require("cors")
 const { socketProducts } = require("./utils/socketProducts.js")
-const ticketRouter = require("./router/ticketRouter.js")
 const app = express()
 require("dotenv").config()
 
@@ -20,6 +19,9 @@ const userRouter = require("./router/userRouter.js")
 const productMongoRouter = require("./router/productsMongoRouter.js")
 const cartsRouterMongo = require("./router/cartsRouterMongo.js")
 const sessionRouter = require("./router/sessionRouter.js");
+const ticketRouter = require("./router/ticketRouter.js")
+const mockingRouter = require("./router/mockingRouter.js");
+const { errorHandling } = require("./middleware/errorHandling.js");
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
@@ -57,6 +59,9 @@ app.use("/api/productos", productMongoRouter) //Con Mongo
 app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 app.use("/api/session", sessionRouter)
 app.use("/api/tickets", ticketRouter)
+app.use("/mocking" , mockingRouter)
+
+app.use(errorHandling)
 
 const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {

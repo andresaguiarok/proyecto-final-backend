@@ -57,7 +57,7 @@ Content-Type: application/json
     "description": "modelo: 2020",
     "price": "7.633",
     "thumbnails": "Producto",
-    "stock": "8"
+    "stock": ""
 }
 
 ### actualiza un producto
