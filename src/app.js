@@ -9,8 +9,9 @@ const { initPassportGithub } = require("./config/passportConfig.js");
 const initPassport = require("./passportJwt/passportJwt.js");
 const cors = require("cors")
 const { socketProducts } = require("./utils/socketProducts.js")
-const app = express()
+const { errorHandling } = require("./middleware/errorHandling.js");
 require("dotenv").config()
+const app = express()
 
 const productsRouter = require("./router/productsRouter.js")
 const cartsRouter = require("./router/cartRouter.js")
@@ -21,7 +22,6 @@ const cartsRouterMongo = require("./router/cartsRouterMongo.js")
 const sessionRouter = require("./router/sessionRouter.js");
 const ticketRouter = require("./router/ticketRouter.js")
 const mockingRouter = require("./router/mockingRouter.js");
-const { errorHandling } = require("./middleware/errorHandling.js");
 
 // config de app
 app.use(express.urlencoded({ extended: true}));

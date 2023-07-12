@@ -1,7 +1,7 @@
 const { typeErrors } = require("../customErrors/typeErrors");
 
 const errorHandling = (error, req, res, next) => {
-    console.log("bug type :",error.code);
+    console.log("bug type:",error.code);
     console.log(error.cause);
     switch (error.code) {
         case typeErrors.ROUTING_ERROR:
