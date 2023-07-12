@@ -60,8 +60,7 @@ app.use("/api/carrito", cartsRouterMongo) //Con Mongo
 app.use("/api/session", sessionRouter)
 app.use("/api/tickets", ticketRouter)
 app.use("/mocking" , mockingRouter)
-
-app.use( errorHandling )
+app.use(errorHandling)
 
 const PORT = process.env.PORT
 const httpServer = app.listen(PORT, () => {
@@ -70,4 +69,3 @@ const httpServer = app.listen(PORT, () => {
 
 const socketServer = new Server(httpServer)
 socketProducts(socketServer)
-
