@@ -31,15 +31,15 @@ switch (config.persistence) {
         TicketDao = new TicketManagerTest()
         break;
     case "FILE":
-        const CartManagerFs = require("./fileSystem/cartManager.js");
-        const ProductManagerFs = require("./fileSystem/productManager.js");
-        const UserManagerFs = require("./fileSystem/userManager.js");
-        const TicketManagerFs = require("./fileSystem/ticketManager.js")
+        const CartDaoFs    = require("./fileSystem/cartDaoFs.js")
+        const ProductDaoFs = require("./fileSystem/productDaoFs.js")
+        const UserDaoFs    = require("./fileSystem/userDaoFs.js")
+        const TicketDaoFs  = require("./fileSystem/ticketDaoFs.js")
 
-        ProductDao = new ProductManagerFs()
-        UserDao = new UserManagerFs()
-        CartDao = new CartManagerFs() 
-        TicketDao = new TicketManagerFs()
+        ProductDao         = new ProductDaoFs()
+        UserDao            = new UserDaoFs()
+        CartDao            = new CartDaoFs() 
+        TicketDao          = new TicketDaoFs()
         break;
 }
 
