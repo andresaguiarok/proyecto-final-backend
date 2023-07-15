@@ -9,38 +9,39 @@ switch (config.persistence) {
     case "MONGO":
         config.connectDB()
 
-        const UserDaoMongo     = require("./mongoDb/userDaoMongo.js")
-        const CartDaoMongo     = require("./mongoDb/cartDaoMongo.js")
-        const ProductDaoMongo  = require("./mongoDb/productDaoMongo.js")
-        const TicketDaoMongo   = require("./mongoDb/ticketDaoMongo.js")
+        const UserDaoMongo    = require("./mongoDb/userDaoMongo.js")
+        const CartDaoMongo    = require("./mongoDb/cartDaoMongo.js")
+        const ProductDaoMongo = require("./mongoDb/productDaoMongo.js")
+        const TicketDaoMongo  = require("./mongoDb/ticketDaoMongo.js")
 
-        ProductDao             = new ProductDaoMongo()
-        UserDao                = new UserDaoMongo()
-        CartDao                = new CartDaoMongo()
-        TicketDao              = new TicketDaoMongo()
+        UserDao               = new UserDaoMongo()
+        CartDao               = new CartDaoMongo()
+        ProductDao            = new ProductDaoMongo()
+        TicketDao             = new TicketDaoMongo()
         break;
     case "MONGOTEST":
         config.connectDB()
-        const UserManagerMongoTest = require("./mongoDb/userDaoMongo.js")
-        const CartManagerMongoTest = require("./mongoDb/cartDaoMongo.js")
-        const ProductManagerMongoTest = require("./mongoDb/productDaoMongo.js")
-        const TicketManagerTest = require("./mongoDb/ticketDaoMongo.js")
+        
+        const UserDaoTest     = require("./mongoDb/userDaoMongo.js")
+        const CartDaoTest     = require("./mongoDb/cartDaoMongo.js")
+        const ProductDaoTest  = require("./mongoDb/productDaoMongo.js")
+        const TicketDaoTest   = require("./mongoDb/ticketDaoMongo.js")
     
-        ProductDao = new ProductManagerMongoTest()
-        UserDao = new UserManagerMongoTest()
-        CartDao = new CartManagerMongoTest()
-        TicketDao = new TicketManagerTest()
+        UserDao               = new UserDaoTest()
+        CartDao               = new CartDaoTest()
+        ProductDao            = new ProductDaoTest()
+        TicketDao             = new TicketDaoTest()
         break;
     case "FILE":
-        const UserDaoFs    = require("./fileSystem/userDaoFs.js")
-        const CartDaoFs    = require("./fileSystem/cartDaoFs.js")
-        const ProductDaoFs = require("./fileSystem/productDaoFs.js")
-        const TicketDaoFs  = require("./fileSystem/ticketDaoFs.js")
-
-        ProductDao         = new ProductDaoFs()
-        UserDao            = new UserDaoFs()
-        CartDao            = new CartDaoFs() 
-        TicketDao          = new TicketDaoFs()
+        const UserDaoFs       = require("./fileSystem/userDaoFs.js")
+        const CartDaoFs       = require("./fileSystem/cartDaoFs.js")
+        const ProductDaoFs    = require("./fileSystem/productDaoFs.js")
+        const TicketDaoFs     = require("./fileSystem/ticketDaoFs.js")
+   
+        UserDao               = new UserDaoFs()
+        CartDao               = new CartDaoFs() 
+        ProductDao            = new ProductDaoFs()
+        TicketDao             = new TicketDaoFs()
         break;
 }
 
