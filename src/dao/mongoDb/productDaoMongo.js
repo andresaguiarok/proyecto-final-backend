@@ -1,6 +1,6 @@
 const { productModel } = require("../models/productModel")
 
-class ProductDao{
+class ProductDaoMongo{
 
     async create(newProduct){
         try {
@@ -51,4 +51,4 @@ class ProductDao{
     }
 }
 
-module.exports = ProductDao
+module.exports = ProductDaoMongo
