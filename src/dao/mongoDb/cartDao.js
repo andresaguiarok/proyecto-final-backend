@@ -1,7 +1,7 @@
 const { cartModel } = require("../models/cartModel.js")
 const { productModel } = require("../models/productModel")
 
-class CartManager {
+class CartDao{
     async create(){
         try {
             return await cartModel.create({})
@@ -74,4 +74,4 @@ class CartManager {
     }
 }
 
-module.exports = CartManager
+module.exports = CartDao
