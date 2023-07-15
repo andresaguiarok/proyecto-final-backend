@@ -2,7 +2,7 @@ const { userModel } = require("../models/usersModel.js")
 const CartManager = require("./cartManagerMongo.js")
 const cartManager = new CartManager()
 
-class UserDao{
+class UserDaoMongo{
     async create({firtsName, lastName, userName, email, birthDate, password}){
         try {
             return await userModel.create({ 
@@ -40,4 +40,4 @@ class UserDao{
 
 }
 
-module.exports = UserDao
+module.exports = UserDaoMongo
