@@ -14,11 +14,11 @@ const { errorHandling }      = require("./middleware/errorHandling.js");
 const app                    = express()
 require("dotenv")
 
-const cartsRouter            = require("./router/cartsRouter.js")
 const viewRouter             = require("./router/viewsRouter.js")
 const userRouter             = require("./router/userRouter.js")
-const productMongoRouter     = require("./router/productsMongoRouter.js")
 const sessionRouter          = require("./router/sessionRouter.js");
+const productsRouter         = require("./router/productsRouter.js")
+const cartsRouter            = require("./router/cartsRouter.js")
 const ticketRouter           = require("./router/ticketRouter.js")
 const mockingRouter          = require("./router/mockingRouter.js");
 
@@ -50,11 +50,11 @@ passport.use(passport.initialize())
 passport.use(passport.session())
 
 //rutas
-app.use("/api/carts",     cartsRouter)
-app.use("/",              viewRouter) //Vistas
-app.use("/api/users",     userRouter) //Con Mongo
-app.use("/api/productos", productMongoRouter) //Con Mongo 
+app.use("/",              viewRouter)
+app.use("/api/users",     userRouter)
 app.use("/api/session",   sessionRouter)
+app.use("/api/products",  productsRouter)
+app.use("/api/carts",     cartsRouter)
 app.use("/api/tickets",   ticketRouter)
 app.use("/mocking",       mockingRouter)
 app.use(errorHandling)

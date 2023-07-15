@@ -1,16 +1,16 @@
 ### Trae todos los productos en la base de datos
-GET http://localhost:8080/api/productos
+GET http://localhost:8080/api/products
 # Content-Type: application/json
 # authorization: Bearer 
 
 ### busca producto por id
-GET http://localhost:8080/api/productos/649e1b939320ec15b2b39aee
+GET http://localhost:8080/api/products/649e1b939320ec15b2b39aee
 
 ### busca producto por id
-GET http://localhost:8080/api/productos/7
+GET http://localhost:8080/api/products/7
 
 ### agrega un producto 
-POST http://localhost:8080/api/productos
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### agrega un producto 
-POST http://localhost:8080/api/productos
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ### agrega un producto 
-POST http://localhost:8080/api/productos
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
@@ -49,7 +49,7 @@ Content-Type: application/json
 }
 
 ### agrega un producto 
-POST http://localhost:8080/api/productos
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
@@ -61,7 +61,7 @@ Content-Type: application/json
 }
 
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/64a75d0be68d8bca56f2c8e6
+PUT http://localhost:8080/api/products/64a75d0be68d8bca56f2c8e6
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ### actualiza un producto
-PUT http://localhost:8080/api/productos/1
+PUT http://localhost:8080/api/products/1
 Content-Type: application/json
 
 {
@@ -81,7 +81,7 @@ Content-Type: application/json
 }
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/64a75d0be68d8bca56f2c8e6
+DELETE http://localhost:8080/api/products/64a75d0be68d8bca56f2c8e6
 
 ### elimina un producto
-DELETE http://localhost:8080/api/productos/13
+DELETE http://localhost:8080/api/products/13
