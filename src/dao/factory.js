@@ -8,6 +8,7 @@ let TicketDao
 switch (config.persistence) {
     case "MONGO":
         config.connectDB()
+
         const ProductManagerMongo = require("./mongoDb/productManagerMongo.js");
         const UserManagerMongo = require("./mongoDb/userManagerMongo.js");
         const CartManagerMongo = require("./mongoDb/cartManagerMongo.js");
@@ -31,9 +32,9 @@ switch (config.persistence) {
         TicketDao = new TicketManagerTest()
         break;
     case "FILE":
+        const UserDaoFs    = require("./fileSystem/userDaoFs.js")
         const CartDaoFs    = require("./fileSystem/cartDaoFs.js")
         const ProductDaoFs = require("./fileSystem/productDaoFs.js")
-        const UserDaoFs    = require("./fileSystem/userDaoFs.js")
         const TicketDaoFs  = require("./fileSystem/ticketDaoFs.js")
 
         ProductDao         = new ProductDaoFs()

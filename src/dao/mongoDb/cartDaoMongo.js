@@ -1,7 +1,7 @@
 const { cartModel } = require("../models/cartModel.js")
 const { productModel } = require("../models/productModel")
 
-class CartDao{
+class CartDaoMongo{
     async create(){
         try {
             return await cartModel.create({})
@@ -74,4 +74,4 @@ class CartDao{
     }
 }
 
-module.exports = CartDao
+module.exports = CartDaoMongo
