@@ -1,22 +1,23 @@
 const fs = require("fs");
 const usersArray = []
 
-class UserManager {
+class UserDaoFs{
     constructor (){
         this.users = usersArray
         this.path = "./dataUser.json"
     }
     
     create = async({firtsName, lastName, userName, email, birthDate, password}) => {
-        let user = {firtsName, lastName, userName, email, birthDate, password}
+        let user = [{firtsName, lastName, userName, email, birthDate, password}]
 
-        const usersList = await this.get()
-        let userAdd = [...usersList,{_id: usersList.length+1, ...user}]
+        if (this.path.length > 1) {  
+            const usersList = await this.get()
+            user = [...usersList,{_id: usersList.length+1, ...user}]
+        } 
 
-        await fs.promises.writeFile(this.path, JSON.stringify(userAdd, "null", 2), "utf-8")
-        return userAdd
-        
-    };
+        await fs.promises.writeFile(this.path, JSON.stringify(user, "null", 2), "utf-8")
+        return user
+    }
 
     get = async () => {
         let usersData = await fs.promises.readFile(this.path, "utf-8")
@@ -50,4 +51,4 @@ class UserManager {
     }
 }
 
-module.exports = UserManager;
+module.exports = UserDaoFs
