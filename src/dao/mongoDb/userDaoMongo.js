@@ -1,13 +1,13 @@
 const { userModel } = require("../models/usersModel.js")
-const CartManager = require("./cartManagerMongo.js")
-const cartManager = new CartManager()
+const CartDaoMongo = require("./cartDaoMongo.js")
+const cart = new CartDaoMongo()
 
 class UserDaoMongo{
     async create({firtsName, lastName, userName, email, birthDate, password}){
         try {
             return await userModel.create({ 
                 firtsName, lastName, userName, email, birthDate,
-                password, cart: await cartManager.create() 
+                password, cart: await cart.create()
             })
         } catch (error) {
             console.log(error);
