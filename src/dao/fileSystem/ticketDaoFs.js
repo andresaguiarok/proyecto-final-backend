@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-class TicketManager{
+class TicketDaoFs{
     constructor(){
         this.path = "./ticket.json"
         this.tickets = []
@@ -30,6 +30,4 @@ class TicketManager{
     }
 }
 
-module.exports = {
-    TicketManager
-}
+module.exports = TicketDaoFs
