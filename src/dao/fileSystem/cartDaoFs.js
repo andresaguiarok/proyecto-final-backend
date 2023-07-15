@@ -2,7 +2,7 @@ const fs = require("fs")
 const ProductManager = require("../fileSystem/productManager")
 const pm = new ProductManager()
 
-class cartManager{
+class CartDaoFs{
     constructor(){
         this.path = "./cart.json"
         this.cart = []
@@ -89,4 +89,4 @@ class cartManager{
     }
 }
 
-module.exports = cartManager
+module.exports = CartDaoFs
