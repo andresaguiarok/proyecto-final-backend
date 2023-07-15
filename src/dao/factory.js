@@ -9,22 +9,22 @@ switch (config.persistence) {
     case "MONGO":
         config.connectDB()
 
-        const ProductManagerMongo = require("./mongoDb/productManagerMongo.js");
-        const UserManagerMongo = require("./mongoDb/userManagerMongo.js");
-        const CartManagerMongo = require("./mongoDb/cartManagerMongo.js");
-        const TicketManager = require("./mongoDb/ticketManager.js");
+        const UserDaoMongo     = require("./mongoDb/userDaoMongo.js")
+        const CartDaoMongo     = require("./mongoDb/cartDaoMongo.js")
+        const ProductDaoMongo  = require("./mongoDb/productDaoMongo.js")
+        const TicketDaoMongo   = require("./mongoDb/ticketDaoMongo.js")
 
-        ProductDao = new ProductManagerMongo()
-        UserDao = new UserManagerMongo()
-        CartDao = new CartManagerMongo()
-        TicketDao = new TicketManager()
+        ProductDao             = new ProductDaoMongo()
+        UserDao                = new UserDaoMongo()
+        CartDao                = new CartDaoMongo()
+        TicketDao              = new TicketDaoMongo()
         break;
     case "MONGOTEST":
         config.connectDB()
-        const ProductManagerMongoTest = require("./mongoDb/productManagerMongo.js");
-        const UserManagerMongoTest = require("./mongoDb/userManagerMongo.js");
-        const CartManagerMongoTest = require("./mongoDb/cartManagerMongo.js");
-        const TicketManagerTest = require("./mongoDb/ticketManager.js");
+        const UserManagerMongoTest = require("./mongoDb/userDaoMongo.js")
+        const CartManagerMongoTest = require("./mongoDb/cartDaoMongo.js")
+        const ProductManagerMongoTest = require("./mongoDb/productDaoMongo.js")
+        const TicketManagerTest = require("./mongoDb/ticketDaoMongo.js")
     
         ProductDao = new ProductManagerMongoTest()
         UserDao = new UserManagerMongoTest()
