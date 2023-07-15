@@ -1,27 +1,26 @@
-const express = require("express");
-const handlebars = require("express-handlebars")
-const { Server } = require("socket.io")
-const cookieParser = require("cookie-parser")
-const session = require("express-session")
-const mongoStore = require("connect-mongo")
-const passport = require("passport")
-const { initPassportGithub } = require("./config/passportConfig.js");
-const initPassport = require("./passportJwt/passportJwt.js");
-const cors = require("cors")
-const { socketProducts } = require("./utils/socketProducts.js")
-const { errorHandling } = require("./middleware/errorHandling.js");
-require("dotenv").config()
-const app = express()
+const express                = require("express");
+const handlebars             = require("express-handlebars")
+const cookieParser           = require("cookie-parser")
+const session                = require("express-session")
+const mongoStore             = require("connect-mongo")
+const passport               = require("passport")
+const cors                   = require("cors")
+const { Server }             = require("socket.io")
 
-const productsRouter = require("./router/productsRouter.js")
-const cartsRouter = require("./router/cartRouter.js")
-const viewRouter = require("./router/viewsRouter.js")
-const userRouter = require("./router/userRouter.js")
-const productMongoRouter = require("./router/productsMongoRouter.js")
-const cartsRouterMongo = require("./router/cartsRouterMongo.js")
-const sessionRouter = require("./router/sessionRouter.js");
-const ticketRouter = require("./router/ticketRouter.js")
-const mockingRouter = require("./router/mockingRouter.js");
+const initPassport           = require("./passportJwt/passportJwt.js");
+const { socketProducts }     = require("./utils/socketProducts.js")
+const { initPassportGithub } = require("./config/passportConfig.js");
+const { errorHandling }      = require("./middleware/errorHandling.js");
+const app                    = express()
+require("dotenv")
+
+const cartsRouter            = require("./router/cartsRouter.js")
+const viewRouter             = require("./router/viewsRouter.js")
+const userRouter             = require("./router/userRouter.js")
+const productMongoRouter     = require("./router/productsMongoRouter.js")
+const sessionRouter          = require("./router/sessionRouter.js");
+const ticketRouter           = require("./router/ticketRouter.js")
+const mockingRouter          = require("./router/mockingRouter.js");
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
@@ -51,21 +50,19 @@ passport.use(passport.initialize())
 passport.use(passport.session())
 
 //rutas
-app.use("/api/products", productsRouter) //Con FileSystem
-app.use("/api/carts", cartsRouter) //Con FileSystem
-app.use("/", viewRouter) //Vistas
-app.use("/api/users", userRouter) //Con Mongo
+app.use("/api/carts",     cartsRouter)
+app.use("/",              viewRouter) //Vistas
+app.use("/api/users",     userRouter) //Con Mongo
 app.use("/api/productos", productMongoRouter) //Con Mongo 
-app.use("/api/carrito", cartsRouterMongo) //Con Mongo
-app.use("/api/session", sessionRouter)
-app.use("/api/tickets", ticketRouter)
-app.use("/mocking", mockingRouter)
+app.use("/api/session",   sessionRouter)
+app.use("/api/tickets",   ticketRouter)
+app.use("/mocking",       mockingRouter)
 app.use(errorHandling)
 
-const PORT = process.env.PORT
-const httpServer = app.listen(PORT, () => {
+const PORT                = process.env.PORT
+const httpServer          = app.listen(PORT, () => {
     console.log(`Running in the port: ${PORT}`)
 })
 
-const socketServer = new Server(httpServer)
+const socketServer        = new Server(httpServer)
 socketProducts(socketServer)

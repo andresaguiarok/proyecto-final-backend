@@ -1,13 +1,40 @@
-### Se crea un nuevo carrito
+### Trae todos los carritos
+GET http://localhost:8080/api/carts
+
+### Trae el carrito indicado por ID 
+GET http://localhost:8080/api/carts/64910d7703c427a0d5e1a835
+
+### Trae el carrito indicado por ID 
+GET http://localhost:8080/api/carts/1
+
+### Crea un carrito nuevo 
 POST http://localhost:8080/api/carts
 
-### Trae el carrito con su ID indicado 
-GET http://localhost:8080/api/carts/4
+### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
+PUT http://localhost:8080/api/carts/64910d7703c427a0d5e1a835/products/6490f4a5017e517c3f04c0dd
 
-### Error por no existir ese ID del carrito
-GET http://localhost:8080/api/carts/6
+### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
+PUT http://localhost:8080/api/carts/64a8a6efdadc6ff5352310ff/products/6490f4a5017e517c3f04c0dd
 
-### Se añade un producto al carrito
-POST http://localhost:8080/api/carts/1/product/3
+### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
+PUT http://localhost:8080/api/carts/4/products/2
+
+### Borra un producto indicado por ID en el carrito indicado por Id 
+DELETE http://localhost:8080/api/carts/64910d7703c427a0d5e1a835/product/6490f4a5017e517c3f04c0dd
+
+### Borra un producto indicado por ID en el carrito indicado por Id 
+DELETE http://localhost:8080/api/carts/3/product/3
+
+### Se borra todos los productos de un carrito indicado por ID 
+DELETE http://localhost:8080/api/carts/64910d7703c427a0d5e1a835
+
+### Se borra todos los productos de un carrito indicado por ID 
+DELETE http://localhost:8080/api/carts/1
+
+### Comprar carrito
+POST http://localhost:8080/api/carts/64910d7703c427a0d5e1a835/purchase
+
+### Comprar carrito
+POST http://localhost:8080/api/carts/64a8a6efdadc6ff5352310ff/purchase
 
 
