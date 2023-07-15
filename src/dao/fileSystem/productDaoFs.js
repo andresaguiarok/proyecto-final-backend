@@ -1,7 +1,7 @@
 const fs = require("fs");
 const listaDeAutos = []
 
-class ProductManager {
+class ProductDaoFs{
     constructor (){
         this.products = listaDeAutos
         this.path = "./data.json"
@@ -46,4 +46,4 @@ class ProductManager {
     }
 }
 
-module.exports = ProductManager;
+module.exports = ProductDaoFs
