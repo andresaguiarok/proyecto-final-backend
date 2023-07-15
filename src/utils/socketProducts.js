@@ -1,5 +1,5 @@
-const ProductDao = require("../dao/fileSystem/productDaoFs.js")
-const messageModel = require("../dao/models/messageModel.js")
+const ProductDao = require("../daos/fileSystem/productDaoFs.js")
+const messageModel = require("../daos/models/messageModel.js")
 let messages = []
 
 const socketProducts = (io) => {
