@@ -1,6 +1,6 @@
 const { ticketModel } = require("../models/ticketModel")
 
-class TicketManager {
+class TicketDao{
 
     async create(ticket){
         try {
@@ -27,5 +27,5 @@ class TicketManager {
     }
 }
 
-module.exports = TicketManager
+module.exports = TicketDao
 
