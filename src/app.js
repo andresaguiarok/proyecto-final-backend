@@ -39,7 +39,7 @@ app.use(cookieParser("p@l@Br@s3cr3t0"))
 app.use(session({
     store: mongoStore.create({
         mongoUrl: process.env.MONGO_KEY_SECRET,
-        mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true }, ttl: 10000*60
+        mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true }, ttl:60*60*1000
     }),
     secret : "s3cr3t0c0d3", resave: false, saveUninitialized: false
 }))
