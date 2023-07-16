@@ -1,5 +1,5 @@
 const twilio = require("twilio")
-const Config = require("../config/objetConfig.js")
+const Config = require("../config/objectConfig.js")
 const cliente = twilio(Config.twilioAccountSid, Config.twilioAuthToken)
 
 exports.sendSms = (user) => cliente.messages.create({
