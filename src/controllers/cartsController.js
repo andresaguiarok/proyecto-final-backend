@@ -1,7 +1,9 @@
-const { cartService, productService, ticketService } = require("../service/services.js")
-const { v4:uuidv4 } = require("uuid")
-const transport = require("../utils/nodeMailer.js")
-const objetConfig = require("../config/objetConfig.js")
+const { cartService, 
+    productService, 
+    ticketService }  = require("../service/services.js")
+const { v4:uuidv4 }  = require("uuid")
+const transport      = require("../utils/nodeMailer.js")
+const objectConfig   = require("../config/objectConfig.js")
 
 class CartController {
 
@@ -149,7 +151,7 @@ class CartController {
                 })
 
                 await transport.sendMail({
-                    from: objetConfig.gmailUser,
+                    from: objectConfig.gmailUser,
                     to: req.user.email,
                     subject: "Thanks for your purchase",
                     html:`<div>
