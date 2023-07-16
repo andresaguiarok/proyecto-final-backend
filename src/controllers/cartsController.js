@@ -57,18 +57,22 @@ class CartController {
     addProduct = async(req, res) => {
         try {
             let {cid, pid} = req.params
-            let prodToCart = await cartService.addProductAndUpdate(cid, pid)
-    
-            if (!prodToCart){
-                res.send({error:"error", message:"Cart not found o product not found"})
-            }
+            const cart = await cartService.getCartByID(cid)
+            const product = await productService.getProduct({_id: pid})
             
-            res.status(200).send({
-                status: "The cart was updated successfully",
-                payload: prodToCart
-            })
+            if(!product) throw({ status:"Error", message:"The product does not exist" })
+            
+            if(!cart) throw({ status:"Error", message:"The cart does not exist" })
+            
+            if(product.stock < 1) throw({ status:"Error", message:"The product does not have enough stock" })
+
+            if(cart && product){
+                let prodToCart = await cartService.addProductAndUpdate(cid, pid)
+
+                res.status(200).send({ status:"The cart was updated successfully", payload: prodToCart })
+            }
         } catch (error) {
-            console.log(error);
+            res.status(404).send(error)
         }
     }
 
