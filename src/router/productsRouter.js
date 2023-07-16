@@ -1,10 +1,10 @@
-const { Router } = require("express")
-const passportCall = require("../passportJwt/passportCall.js")
-const { authorization } = require("../passportJwt/authorization.js")
-const ProductController = require("../controllers/productsController.js")
+const { Router }         = require("express")
+const passportCall       = require("../passportJwt/passportCall.js")
+const { authorization }  = require("../passportJwt/authorization.js")
+const ProductController  = require("../controllers/productsController.js")
 
-const router = Router()
-const prodController = new ProductController()
+const router             = Router()
+const prodController     = new ProductController()
 
 //Vista de los productos
 router.get("/", passportCall("jwt"), prodController.getProductsAll)

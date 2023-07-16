@@ -1,6 +1,6 @@
-const { userService, contactService } = require("../service/services.js")
-const { validPassword, creaHash } = require("../utils/bcryptHash.js")
-const { generateToken } = require("../utils/jsonWebToken.js")
+const { userService, contactService }  = require("../service/services.js")
+const { validPassword, creaHash }      = require("../utils/bcryptHash.js")
+const { generateToken }                = require("../utils/jsonWebToken.js")
 
 class SessionController {
 

@@ -1,8 +1,8 @@
-const { v4:uuidv4 } = require("uuid")
-const { CustomError } = require("../customErrors/customError.js")
-const { typeErrors } = require("../customErrors/typeErrors.js")
-const { generateInfoProductError } = require("../customErrors/info.js")
-const { productService } = require("../service/services.js")
+const { productService }            = require("../service/services.js")
+const { v4:uuidv4 }                 = require("uuid")
+const { CustomError }               = require("../customErrors/customError.js")
+const { typeErrors }                = require("../customErrors/typeErrors.js")
+const { generateInfoProductError }  = require("../customErrors/info.js")
 
 class ProductController {
 

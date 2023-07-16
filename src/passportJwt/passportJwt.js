@@ -1,9 +1,9 @@
-const passport = require("passport")
-const jwt = require("passport-jwt")
-const objectConfig = require("../config/objectConfig.js")
+const passport      = require("passport")
+const jwt           = require("passport-jwt")
+const objectConfig  = require("../config/objectConfig.js")
 
-const JWTStrategy = jwt.Strategy
-const ExtratcJWT = jwt.ExtractJwt
+const JWTStrategy   = jwt.Strategy
+const ExtratcJWT    = jwt.ExtractJwt
 
 const cookieExtratc = req => {
     let token = null
