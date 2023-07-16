@@ -1,4 +1,4 @@
-const config = require("../config/objetConfig.js");
+const config = require("../config/objectConfig.js")
 
 let UserDao
 let ProductDao
