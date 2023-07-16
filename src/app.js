@@ -21,6 +21,7 @@ const productsRouter         = require("./router/productsRouter.js")
 const cartsRouter            = require("./router/cartsRouter.js")
 const ticketRouter           = require("./router/ticketRouter.js")
 const mockingRouter          = require("./router/mockingRouter.js");
+const myProfileRouter        = require("./router/myProfileRouter.js")
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
@@ -57,6 +58,7 @@ app.use("/api/products",  productsRouter)
 app.use("/api/carts",     cartsRouter)
 app.use("/api/tickets",   ticketRouter)
 app.use("/mocking",       mockingRouter)
+app.use("/myProfile",     myProfileRouter)
 app.use(errorHandling)
 
 const PORT                = process.env.PORT
