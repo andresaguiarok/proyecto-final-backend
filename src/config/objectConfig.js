@@ -1,8 +1,8 @@
-const dotenv = require("dotenv")
-const { commander } = require("../utils/commander")
-const MongoSingleton = require("../utils/singleton")
+const dotenv          = require("dotenv")
+const { commander }   = require("../utils/commander")
+const MongoSingleton  = require("../utils/singleton")
+const { mode }        = commander.opts()
 
-const { mode } = commander.opts()
 dotenv.config({ path: mode === 'development' ? './.env.development' : './.env.production'})
 
 console.log(process.env.PERSISTENCE);
