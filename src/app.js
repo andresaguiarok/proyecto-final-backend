@@ -11,6 +11,7 @@ const initPassport           = require("./passportJwt/passportJwt.js");
 const { socketProducts }     = require("./utils/socketProducts.js")
 const { initPassportGithub } = require("./config/passportConfig.js");
 const { errorHandling }      = require("./middleware/errorHandling.js");
+const { addLogger, logger }  = require("./utils/logger.js");
 const app                    = express()
 require("dotenv")
 
@@ -21,7 +22,7 @@ const productsRouter         = require("./router/productsRouter.js")
 const cartsRouter            = require("./router/cartsRouter.js")
 const ticketRouter           = require("./router/ticketRouter.js")
 const mockingRouter          = require("./router/mockingRouter.js");
-const myProfileRouter        = require("./router/myProfileRouter.js")
+const myProfileRouter        = require("./router/myProfileRouter.js");
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
@@ -43,6 +44,7 @@ app.use(session({
     }),
     secret : "s3cr3t0c0d3", resave: false, saveUninitialized: false
 }))
+app.use(addLogger)
 
 //passport
 initPassport()
@@ -63,7 +65,7 @@ app.use(errorHandling)
 
 const PORT                = process.env.PORT
 const httpServer          = app.listen(PORT, () => {
-    console.log(`Running in the port: ${PORT}`)
+    logger.info(`Running in the port: ${PORT}`)
 })
 
 const socketServer        = new Server(httpServer)

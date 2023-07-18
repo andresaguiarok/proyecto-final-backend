@@ -2,3 +2,9 @@ GET http://localhost:8080/mocking/mockingproducts
 
 ###
 GET  http://localhost:8080/mocking/string
+
+### MODO PRUEBA DEVELOPMENT
+GET http://localhost:8080/mocking/logger-test
+
+### MODO PRUEBA PRODUCTION
+GET http://localhost:4000/mocking/logger-test
