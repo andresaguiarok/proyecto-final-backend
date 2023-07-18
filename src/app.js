@@ -1,4 +1,4 @@
-const express                = require("express");
+const express                = require("express")
 const handlebars             = require("express-handlebars")
 const cookieParser           = require("cookie-parser")
 const session                = require("express-session")
@@ -7,22 +7,22 @@ const passport               = require("passport")
 const cors                   = require("cors")
 const { Server }             = require("socket.io")
 
-const initPassport           = require("./passportJwt/passportJwt.js");
+const initPassport           = require("./passportJwt/passportJwt.js")
 const { socketProducts }     = require("./utils/socketProducts.js")
-const { initPassportGithub } = require("./config/passportConfig.js");
-const { errorHandling }      = require("./middleware/errorHandling.js");
-const { addLogger, logger }  = require("./utils/logger.js");
+const { initPassportGithub } = require("./config/passportConfig.js")
+const { errorHandling }      = require("./middleware/errorHandling.js")
+const { addLogger, logger }  = require("./utils/logger.js")
 const app                    = express()
 require("dotenv")
 
 const viewRouter             = require("./router/viewsRouter.js")
 const userRouter             = require("./router/userRouter.js")
-const sessionRouter          = require("./router/sessionRouter.js");
+const sessionRouter          = require("./router/sessionRouter.js")
 const productsRouter         = require("./router/productsRouter.js")
 const cartsRouter            = require("./router/cartsRouter.js")
 const ticketRouter           = require("./router/ticketRouter.js")
-const mockingRouter          = require("./router/mockingRouter.js");
-const myProfileRouter        = require("./router/myProfileRouter.js");
+const mockingRouter          = require("./router/mockingRouter.js")
+const myProfileRouter        = require("./router/myProfileRouter.js")
 
 // config de app
 app.use(express.urlencoded({ extended: true}));
