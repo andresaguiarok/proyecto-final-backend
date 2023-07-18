@@ -1,7 +1,7 @@
 const { Router }    = require("express")
 const compression   = require("express-compression")
 const { faker }     = require("@faker-js/faker")
-const { logger } = require("../utils/logger")
+const { logger }    = require("../utils/logger")
 const router        = Router()
 
 router.use(compression({
