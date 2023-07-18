@@ -1,6 +1,6 @@
-const winston         = require("winston")
-const { commander }   = require("../utils/commander")
-const { mode }        = commander.opts()
+const winston          = require("winston")
+const { commander }    = require("../utils/commander")
+const { mode }         = commander.opts()
 let logger
 
 const customLevels = {
