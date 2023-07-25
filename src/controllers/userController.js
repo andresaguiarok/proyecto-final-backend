@@ -1,4 +1,5 @@
 const { userService, cartService }  = require("../service/services.js");
+const { logger } = require("../utils/logger.js");
 const { sendSms }                   = require("../utils/twilioMessage.js");
 
 class UserController{
@@ -60,6 +61,27 @@ class UserController{
             console.log(error);
             return res.status(410).send(error) 
 
+        }
+    }
+
+    changeOfRole = async(req, res) => {
+        try {
+            let {uid} = req.params
+            let user = await userService.getUser({_id: uid})
+
+            if(!user) return logger.error("User not found")
+
+            switch (user.role) {
+                case "user":
+                    await userService.updateUser({_id: uid}, {role: "premium"})
+                    return res.send({status:"success", message: "You are now a premium user"})
+                case "premium":
+                    await userService.updateUser({_id: uid}, {role: "user"})
+                    return res.send({status:"success", message:"Now you are a common user"})
+            }
+            logger.info(user.role)
+        } catch (error) {
+           console.log(error); 
         }
     }
 

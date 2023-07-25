@@ -12,6 +12,8 @@ router.get("/:uid", passportCall("jwt"), userController.getById)
 
 router.put("/:uid", passportCall("jwt"), userController.updateOldUser)
 
+router.put("/premium/:uid",passportCall("jwt"), userController.changeOfRole)
+
 router.delete("/:uid", passportCall("jwt"), userController.deleteByUser)
 
 module.exports = router
