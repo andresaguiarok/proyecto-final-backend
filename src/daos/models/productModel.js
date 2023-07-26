@@ -28,6 +28,10 @@ const productSchema = new Schema ({
     stock: {
         type: Number,
         required: true
+    },
+    owener: {
+        type: String,
+        default: "admin"
     }
 })
 

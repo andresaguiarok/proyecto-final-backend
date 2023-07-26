@@ -19,9 +19,9 @@ class ProductsRespository {
         }
     }
 
-    addProduct = async(title, description, price, thumbnails, code, stock) => {
+    addProduct = async(title, description, price, thumbnails, code, stock, owener) => {
         try {
-            return await this.dao.create({title, description, price, thumbnails, code, stock});
+            return await this.dao.create({title, description, price, thumbnails, code, stock, owener});
         } catch (error) {
             console.log(error);
         }

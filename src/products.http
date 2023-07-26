@@ -53,11 +53,11 @@ POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
-    "title": "prod 1",
+    "title": "prod 3",
     "description": "modelo: 2020",
     "price": "7.633",
     "thumbnails": "Producto",
-    "stock": ""
+    "stock": "50"
 }
 
 ### actualiza un producto
