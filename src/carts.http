@@ -16,6 +16,12 @@ PUT http://localhost:8080/api/carts/64910d7703c427a0d5e1a835/products/6490f4a501
 ### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
 PUT http://localhost:8080/api/carts/64a8a6efdadc6ff5352310ff/products/6490f4a5017e517c3f04c0dd
 
+### Agrega un producto al carrito de Coder y no puede agregar el producto creado por el
+PUT http://localhost:8080/api/carts/64914bcb732ebc125e2bc006/products/64c1909fc3e1cce54f5d0c7a
+
+### Agrega un producto al carrito de Coder y agrega el producto que no esta creado por el
+PUT http://localhost:8080/api/carts/64914bcb732ebc125e2bc006/products/6490f4a5017e517c3f04c0dd
+
 ### Agrega un producto a un carrito indicado y si existe actualiza la quantity 
 PUT http://localhost:8080/api/carts/4/products/2
 

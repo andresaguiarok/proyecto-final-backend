@@ -59,6 +59,8 @@ class CartController {
             let {cid, pid} = req.params
             const cart = await cartService.getCartByID(cid)
             const product = await productService.getProduct({_id: pid})
+
+            if(product.owener === req.user.email) throw({ status:"Error", message:"You can't add your products to your cart" })
             
             if(!product) throw({ status:"Error", message:"The product does not exist" })
             
@@ -67,9 +69,12 @@ class CartController {
             if(product.stock < 1) throw({ status:"Error", message:"The product does not have enough stock" })
 
             if(cart && product){
-                let prodToCart = await cartService.addProductAndUpdate(cid, pid)
+                await cartService.addProductAndUpdate(cid, pid)
 
-                res.status(200).send({ status:"The cart was updated successfully", payload: prodToCart })
+                res.status(200).send({ 
+                    status:"The cart was updated successfully", 
+                    message: `the product ${product.title} was added to the cart`
+                })
             }
         } catch (error) {
             res.status(404).send(error)
