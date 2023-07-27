@@ -3,7 +3,6 @@ const { v4:uuidv4 }                 = require("uuid")
 const { CustomError }               = require("../customErrors/customError.js")
 const { typeErrors }                = require("../customErrors/typeErrors.js")
 const { generateInfoProductError }  = require("../customErrors/info.js")
-const { logger } = require("../utils/logger.js")
 
 class ProductController {
 
@@ -91,16 +90,21 @@ class ProductController {
         try {
             let {pid} = req.params
             let updateBody = req.body
-    
-            let result = await productService.updateProduct(pid,updateBody)
+            const product = await productService.getProduct({_id: pid})
+            
+            if(!product) throw({status:"Error", message:"The product does not exist"})
 
-            if(!result) throw({status:"Error", message:"Could not update the product"})
+            if(req.user.role == "premium"){
+                if(req.user.email !== product.owener){
+                    throw({ status:"Error",message:"you do not have permission to update this product"})
+                }
+
+                await productService.updateProduct(pid,updateBody)
+                res.status(200).send({ status: "Updated product", message: `The product was updated ${product.title}` })
+            }else {                
+                let result = await productService.updateProduct(pid,updateBody)
     
-            if(result){
-                res.status(200).send({
-                    status: "The product was successfully updated",
-                    payload: result
-                })
+                if(result) return res.status(200).send({ status: "The product was successfully updated", payload: result })
             }
         } catch (error) {
             res.status(404).send(error)

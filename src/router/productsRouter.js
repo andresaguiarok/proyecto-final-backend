@@ -13,7 +13,7 @@ router.get("/:pid", passportCall("jwt"), prodController.getProduct)
 
 router.post("/", passportCall("jwt"), authorization(["admin", "premium"]), prodController.createProduct)
 
-router.put("/:pid", passportCall("jwt"), authorization("admin"), prodController.updateProduct)
+router.put("/:pid", passportCall("jwt"), authorization(["admin", "premium"]), prodController.updateProduct)
 
 router.delete("/:pid", passportCall("jwt"), authorization("admin"), prodController.deleteProduct)
 

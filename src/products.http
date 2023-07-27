@@ -60,14 +60,24 @@ Content-Type: application/json
     "stock": "50"
 }
 
-### actualiza un producto
-PUT http://localhost:8080/api/products/64a75d0be68d8bca56f2c8e6
+### actualiza un producto existente
+PUT http://localhost:8080/api/products/64c1c5e244135f78e5e72020
+Content-Type: application/json
+
+{
+    "description": "Modelo: 2021",
+    "price": "10.999",
+    "stock": "20"
+}
+
+### actualiza un producto existente
+PUT http://localhost:8080/api/products/64c1c60d44135f78e5e72024
 Content-Type: application/json
 
 {
     "description": "Modelo: 2023",
-    "price": 18.999,
-    "stock": 34
+    "price": "15.999",
+    "stock": "25"
 }
 
 ### actualiza un producto
