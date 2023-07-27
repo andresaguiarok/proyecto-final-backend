@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ### modifica el rol del usuario
-PUT http://localhost:8080/api/users/premium/649131d6676f635b194f83e4
+PUT http://localhost:8080/api/users/premium/64910d7803c427a0d5e1a839
 
 ### Borra un usuarios
 DELETE http://localhost:8080/api/users/64a892c287609a604619b495

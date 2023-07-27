@@ -11,7 +11,7 @@ router.get("/", passportCall("jwt"), prodController.getProductsAll)
 
 router.get("/:pid", passportCall("jwt"), prodController.getProduct)
 
-router.post("/", passportCall("jwt"), authorization("admin"), prodController.createProduct)
+router.post("/", passportCall("jwt"), authorization(["admin", "premium"]), prodController.createProduct)
 
 router.put("/:pid", passportCall("jwt"), authorization("admin"), prodController.updateProduct)
 
