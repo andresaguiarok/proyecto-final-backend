@@ -15,6 +15,6 @@ router.post("/", passportCall("jwt"), authorization(["admin", "premium"]), prodC
 
 router.put("/:pid", passportCall("jwt"), authorization(["admin", "premium"]), prodController.updateProduct)
 
-router.delete("/:pid", passportCall("jwt"), authorization("admin"), prodController.deleteProduct)
+router.delete("/:pid", passportCall("jwt"), authorization(["admin", "premium"]), prodController.deleteProduct)
 
 module.exports = router
