@@ -6,6 +6,7 @@ const mongoStore             = require("connect-mongo")
 const passport               = require("passport")
 const cors                   = require("cors")
 const { Server }             = require("socket.io")
+const compression            = require("express-compression")
 
 const initPassport           = require("./passportJwt/passportJwt.js")
 const { socketProducts }     = require("./utils/socketProducts.js")
@@ -29,6 +30,12 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use("/static", express.static(__dirname+"/public"))
 app.use(cors())
+router.use(compression({
+    brotli : {
+        enabled: true,
+        zlib: {}
+    }
+}))
 
 //configuracion de Handlebars
 app.engine("handlebars", handlebars.engine())
