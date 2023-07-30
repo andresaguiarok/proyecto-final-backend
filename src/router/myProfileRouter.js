@@ -1,6 +1,7 @@
-const { Router } = require("express")
-const { userService, cartService }  = require("../service/services.js")
-const passportCall = require("../passportJwt/passportCall.js")
+const { Router }         = require("express")
+const { userService,
+    cartService }        = require("../service/services.js")
+const { passportCall }   = require("../passportJwt/passportCall.js")
 
 const router = Router()
 

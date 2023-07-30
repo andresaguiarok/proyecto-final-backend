@@ -1,5 +1,5 @@
 const { Router }         = require("express")
-const passportCall       = require("../passportJwt/passportCall")
+const { passportCall }   = require("../passportJwt/passportCall")
 const { authorization }  = require("../passportJwt/authorization")
 const TicketController   = require("../controllers/ticketsController")
 

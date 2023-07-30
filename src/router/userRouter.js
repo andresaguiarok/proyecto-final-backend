@@ -1,10 +1,10 @@
-const {Router}            = require("express")
-const { UserController }  = require("../controllers/userController.js")
-const passportCall        = require("../passportJwt/passportCall")
-const { authorization }   = require("../passportJwt/authorization")
+const {Router}           = require("express")
+const { UserController } = require("../controllers/userController.js")
+const { passportCall }   = require("../passportJwt/passportCall")
+const { authorization }  = require("../passportJwt/authorization")
 
-const router              = Router()
-const userController      = new UserController()
+const router             = Router()
+const userController     = new UserController()
 
 router.get("/", passportCall("jwt"), authorization("admin"), userController.getAllUsers)
 
