@@ -14,6 +14,14 @@ class ViewsController {
     chatView = (req, res) => {
         res.render("chat", {title: "Chat",  style: "chat.css"})
     }
+
+    recoverPassword = (req, res) => {
+        res.render("recoverPass", { title: "Recover password", style: "login.css" })
+    }
+
+    changePassword = (req,res) => {
+        res.render("changePassword", {title: "Change of Password", style: "register.css"})
+    }
 }
 
 module.exports = ViewsController

@@ -8,7 +8,12 @@ const generateToken = (user) =>{
     return token
 }
 
-const authToken = (req,res, next) => {
+const generateTokenUrl = (user) =>{
+    const token = jsonWebToken.sign(JSON.parse(JSON.stringify(user)), JWT_PRIVATE_KEY, {expiresIn: "1h"}) 
+    return token
+}
+
+const authToken = (req,res,next) => {
     const authHeader = req.headers["authorization"]
 
     if(!authHeader) return res.status(401).send({status:"error", message:"Not authenticated"})
@@ -24,5 +29,6 @@ const authToken = (req,res, next) => {
 
 module.exports = {
     generateToken,
-    authToken
+    authToken,
+    generateTokenUrl,
 }

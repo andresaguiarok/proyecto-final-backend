@@ -1,7 +1,10 @@
+const objectConfig                     = require("../config/objectConfig.js")
 const { userService, contactService }  = require("../service/services.js")
 const { validPassword, creaHash }      = require("../utils/bcryptHash.js")
-const { generateToken }                = require("../utils/jsonWebToken.js")
-
+const { generateToken,
+     generateTokenUrl }                = require("../utils/jsonWebToken.js")
+const transport                        = require("../utils/nodeMailer.js")
+const { logger } = require("../utils/logger.js")
 class SessionController {
 
     register = async (req,res) => {
@@ -58,12 +61,73 @@ class SessionController {
             req.user = user
 
             req.user.role
-            ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 100, httpOnly: true }).redirect("/api/productos")
+            ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 100, httpOnly: true }).redirect("/api/products")
             : res.status(404).send({status:"Error"})
 
         } catch (error) {
             console.log(error)
             res.status(400).send(error)
+        }
+    }
+
+    recoverPassword = async(req, res) => {
+        try {
+            const { email } = req.body
+            
+            if(email === "") return res.status(428).send({status:"Error", message:"Enter email"})
+
+            const user = await userService.getUser({email})
+
+            if(!user) {
+                return res.status(502).send({status:"Error", message:"The user could not be found in the database"})
+            }
+
+            if(user){
+                const urlToken = generateTokenUrl(user)
+                await transport.sendMail({
+                    from: objectConfig.gmailUser,
+                    to: user.email,
+                    subject: "Change of password",
+                    html:`<div>
+                                <h1>
+                                    Go to this link to change the password
+                                </h1>
+                                <a href="http://localhost:8080/login/change-of-password"> Change of password </a>
+                          </div>`
+                })
+                res.cookie("CoderCookieToken", urlToken, { maxAge: 60 * 60 * 100, httpOnly: true })
+                return res.status(200).send({status:"Success", message:"An email was sent to verify your identity"})
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    changePassword = async(req, res) =>{
+        try {
+            const user = req.user
+            const { password, verifyPassword } = req.body
+
+            if(password == "" || verifyPassword =="") {
+                return res.status(400).send({status:"Error", message:"Fill in the required fields"})
+            }
+
+            if(password !== verifyPassword) {
+                return res.status(400).send({status:"Error", message:"Password does not match"})
+            }
+
+            if(!validPassword(verifyPassword, user)){
+                await userService.updateUser({_id: user._id}, {password: creaHash(verifyPassword)})
+                res.status(200).send({
+                    status:"Success", message:`Have you updated your password ${user.firtsName}`
+                })
+            }else {
+                return res.status(400).send({
+                    status:"error", message:"You can not enter the same current password"
+                })
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 

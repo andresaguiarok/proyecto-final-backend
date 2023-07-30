@@ -1,6 +1,7 @@
 const { Router }         = require("express")
 const passport           = require("passport")
-const passportCall       = require("../passportJwt/passportCall.js")
+const {passportCall, 
+    passportCallUrl}     = require("../passportJwt/passportCall.js")
 const { authorization }  = require("../passportJwt/authorization.js")
 const SessionController  = require("../controllers/sessionController.js")
 
@@ -10,6 +11,10 @@ const sessionControler   = new SessionController()
 router.post("/register", sessionControler.register)
 
 router.post("/login", sessionControler.login)
+
+router.post("/recover-password", sessionControler.recoverPassword)
+
+router.post("/change-of-password", passportCallUrl("urlJwt"), sessionControler.changePassword)
 
 router.get("/current", passportCall("jwt"), authorization("user"), sessionControler.infoCurrent)
 

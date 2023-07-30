@@ -51,6 +51,9 @@ Content-Type: application/json
     "password": "adminCod3r123"
 }
 
+### login
+post http://localhost:8080/api/session/recover-password
+
 ### acceder al current
 GET http://localhost:8080/api/session/current
 

@@ -11,4 +11,18 @@ const passportCall = (strategy) => {
     }
 }
 
-module.exports = passportCall
+const passportCallUrl = (strategy) => {
+    return async (req, res, next) => {
+        passport.authenticate(strategy, function (err, user, info) {
+            if(err) return next(err)
+            if(!user) return res.redirect("/login/recover-password")
+            req.user = user
+            next()
+        })(req, res, next)
+    }
+}
+
+module.exports = {
+    passportCall,
+    passportCallUrl
+}
