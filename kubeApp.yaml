@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeservice
+spec:
+  selector:
+    app: kubeaplicativo
+  ports:
+    - port: 8080
+      targetPort: 4000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeaplicativo
+spec: 
+  replicas: 6
+  selector:
+    matchLabels:
+      app: kubeaplicativo
+  template:
+    metadata:
+      labels:
+        app: kubeaplicativo
+    spec:
+      containers:
+        - name: kubecontainer
+          image: andresaguiarok/app:1.0.0
+          ports:
+            - containerPort: 4000
+          env:
+            - name: MONGO_URL
+              value: mongodb+srv://andresaguiarok:andres-2408@cluster0.wbacuba.mongodb.net/ecommerceBackend?retryWrites=true&w=majority
+          imagePullPolicy: Always
