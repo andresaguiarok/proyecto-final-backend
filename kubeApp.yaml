@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kubeserviceappv1
+  name: appservice
 spec:
   selector:
-    app: kubeapp
+    app: appdeploy
   ports:
     - port: 8080
       targetPort: 4000
@@ -13,20 +13,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubedeploy
+  name: appdeploy
 spec: 
-  replicas: 4
+  replicas: 5
   selector:
     matchLabels:
-      app: kubeapp
+      app: appdeploy
   template:
     metadata:
       labels:
-        app: kubeapp
+        app: appdeploy
     spec:
       containers:
         - name: kubecontainer
-          image: andresaguiarok/aplicativo:1.0.0
+          image: andresaguiarok/appdocker:1.0.0
           ports:
             - containerPort: 4000
           env:
