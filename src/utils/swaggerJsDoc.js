@@ -11,4 +11,4 @@ const swaggerOptions = {
     apis: [`${__dirname}/docs/**/*.yml `]
 }
 
-exports.spect = swaggerJsDoc(swaggerOptions)
+exports.specs = swaggerJsDoc(swaggerOptions)
