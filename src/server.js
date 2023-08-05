@@ -14,6 +14,8 @@ const { socketProducts }     = require("./utils/socketProducts.js")
 const { initPassportGithub } = require("./config/passportConfig.js")
 const { errorHandling }      = require("./middleware/errorHandling.js")
 const { addLogger, logger }  = require("./utils/logger.js")
+const swaggerUiExpress       = require("swagger-ui-express")
+const { specs }              = require("./utils/swaggerJsDoc.js")
 require("dotenv")
 
 const viewRouter             = require("./router/viewsRouter.js")
@@ -73,6 +75,7 @@ app.use("/api/carts",        cartsRouter)
 app.use("/api/tickets",      ticketRouter)
 app.use("/mocking",          mockingRouter)
 app.use("/myProfile",        myProfileRouter)
+app.use("/docs",             swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 app.use(errorHandling)
 
 exports.startServer = () => serverHttp.listen(PORT, () => {
