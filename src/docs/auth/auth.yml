@@ -1,0 +1,53 @@
+paths:
+  /api/session/login:
+    post:
+      tags:
+        - Auth
+      summary: Access to your account
+      requestBody:
+        required: true
+        description: Access with your email and password
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      segurity: []
+      responses:
+        "200":
+          description: You accessed your account successfully
+          headers:
+            Set-Cookie:
+              schema:
+                type: String
+                example: CoderCookieToken=treherg35fd; path=/; httpOnly
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: String
+          example: adminCoder@coder.com
+        password:
+          type: String
+          example: adminCod3r123
+  seguritySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: CoderCookieToken
+  responses:
+    UnauthorizedError:
+      description: Invalid authentication
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: String
+                example: Error
+              error:
+                type: String
+                example: No auth token
