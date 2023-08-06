@@ -11,10 +11,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LoginRequest"
-      segurity: []
+      security: []
       responses:
         "200":
-          description: You accessed your account successfully
+          description: You accessed your account successfully , `CoderCookieToken`
           headers:
             Set-Cookie:
               schema:
@@ -32,7 +32,7 @@ components:
         password:
           type: String
           example: adminCod3r123
-  seguritySchemes:
+  securitySchemes:
     cookieAuth:
       type: apiKey
       in: cookie

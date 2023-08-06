@@ -4,6 +4,8 @@ paths:
       summary : Gets all products
       tags: 
         - Products
+      security:
+        - cookieAuth: []
       responses:
         "200":
           description: The products were obtained successfully
@@ -19,6 +21,8 @@ paths:
       summary: Create product
       tags: 
         - Products
+      segurity:
+        - cookieAuth: []
       requestBody:
         required: true
         content:
@@ -35,6 +39,8 @@ paths:
       summary : Search by id a product
       tags: 
         - Products
+      segurity:
+        - cookieAuth: []
       parameters:
       - name: pid
         in: path
@@ -53,6 +59,8 @@ paths:
       summary: Update fields of a product passed by id
       tags:
         - Products
+      segurity:
+        - cookieAuth: []
       parameters:
         - name: pid
           in: path
@@ -75,6 +83,8 @@ paths:
       summary: Delete a product by its id
       tags:
         - Products
+      segurity:
+        - cookieAuth: []
       parameters:
       - name: pid
         in: path
