@@ -28,10 +28,10 @@ components:
       properties:
         email:
           type: String
-          example: adminCoder@coder.com
+          example: tuEmail@coder.com
         password:
           type: String
-          example: adminCod3r123
+          example: tuPassword123
   securitySchemes:
     cookieAuth:
       type: apiKey
