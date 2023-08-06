@@ -17,6 +17,129 @@ paths:
                   $ref: "#components/schemas/Carts"
         "500":
           description: Internal Server Error
+    post:
+      summary: Create cart
+      tags:
+        - Carts
+      security: []
+      responses:
+        "200":
+          description: The cart was created successfully
+          content:
+            application/json:
+              schema:
+                  $ref: "#components/schemas/Carts"
+        "500":
+          description: Internal Server Error
+  /api/carts/{cid}:
+    get:
+      summary : Search by id the cart
+      tags: 
+        - Carts
+      security:
+        - cookieAuth: []
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Cart id to request
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: cart found successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Carts"
+        "500":
+          description: Internal Server Error
+    delete:
+      summary: Removes all products from cart selected by id
+      tags:
+        - Carts
+      security:
+        - cookieAuth: []
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Cart id to request
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: All products were removed from the cart
+        "500":
+          description: Internal Server Error
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: Add product and update its quantity if it exists in the cart
+      tags:
+        - Carts
+      security:
+        - cookieAuth: []
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Cart id to request
+        schema:
+          $type: String
+      - name: pid
+        in: path
+        required: true
+        description: Id of the product to request
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: A `product` was added to the cart
+        "500":
+          description: Internal Server Error
+    delete:
+      summary: A product by id is removed from a cart
+      tags:
+        - Carts
+      security:
+        - cookieAuth: []
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Cart id to request
+        schema:
+          $type: String
+      - name: pid
+        in: path
+        required: true
+        description: Id of the product to request
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: A product was deleted successfully
+        "500":
+          description: Internal Server Error
+  /api/carts/{cid}/purchase:
+    post:
+      summary: Purchase ticket is generated
+      tags:
+        - Carts
+      security: 
+        - cookieAuth: []
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Cart id to request
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Your ticket was generated correctly
+        "500":
+          description: Internal Server Error
 
 components:
   schemas:
