@@ -21,7 +21,7 @@ paths:
       summary: Create product
       tags: 
         - Products
-      segurity:
+      security:
         - cookieAuth: []
       requestBody:
         required: true
@@ -39,7 +39,7 @@ paths:
       summary : Search by id a product
       tags: 
         - Products
-      segurity:
+      security:
         - cookieAuth: []
       parameters:
       - name: pid
@@ -59,7 +59,7 @@ paths:
       summary: Update fields of a product passed by id
       tags:
         - Products
-      segurity:
+      security:
         - cookieAuth: []
       parameters:
         - name: pid
@@ -83,7 +83,7 @@ paths:
       summary: Delete a product by its id
       tags:
         - Products
-      segurity:
+      security:
         - cookieAuth: []
       parameters:
       - name: pid
