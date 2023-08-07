@@ -6,14 +6,14 @@ const { authorization }  = require("../passportJwt/authorization")
 const router             = Router()
 const userController     = new UserController()
 
-router.get("/", passportCall("jwt"), authorization("admin"), userController.getAllUsers)
+router.get("/", passportCall("jwt"), authorization(["admin"]), userController.getAllUsers)
 
-router.get("/:uid", passportCall("jwt"), userController.getById)
+router.get("/:uid", passportCall("jwt"), authorization(["admin"]), userController.getById)
 
-router.put("/:uid", passportCall("jwt"), userController.updateOldUser)
+router.put("/:uid", passportCall("jwt"), authorization(["admin", "premium"]), userController.updateOldUser)
 
-router.put("/premium/:uid",passportCall("jwt"), userController.changeOfRole)
+router.put("/premium/:uid",passportCall("jwt"), authorization(["user", "premium"]), userController.changeOfRole)
 
-router.delete("/:uid", passportCall("jwt"), userController.deleteByUser)
+router.delete("/:uid", passportCall("jwt"), authorization(["admin"]), userController.deleteByUser)
 
 module.exports = router
