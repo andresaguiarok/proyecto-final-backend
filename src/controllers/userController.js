@@ -29,7 +29,7 @@ class UserController{
             const user = await userService.getUser({_id: uid})
 
             !user
-            ? res.send({status:"error", message: "User not available"})
+            ? res.send({ status:"error", message: "User not available" })
             : res.send({ status:"the user was found",payload: user })
         } catch (error) {
            console.log(error); 
