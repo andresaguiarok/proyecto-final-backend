@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "test:chai": "mocha test/chai.test.js",
     "test": "mocha test/products.test.js",
     "dev": "nodemon app.js --mode development",
     "start": "node app.js --mode production"
