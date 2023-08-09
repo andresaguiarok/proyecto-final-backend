@@ -16,7 +16,7 @@ router.post("/recover-password", sessionControler.recoverPassword)
 
 router.post("/change-of-password", passportCallUrl("urlJwt"), sessionControler.changePassword)
 
-router.get("/current", passportCall("jwt"), authorization("user"), sessionControler.infoCurrent)
+router.get("/current", passportCall("jwt"), authorization(["user", "premium", "admin"]), sessionControler.infoCurrent)
 
 router.get("/privada", passport.authenticate("jwt",{session:false}), sessionControler.privada)
 
