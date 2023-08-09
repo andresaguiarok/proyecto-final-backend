@@ -61,7 +61,7 @@ class SessionController {
             req.user = user
 
             req.user.role
-            ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 100, httpOnly: true }).redirect("/api/products")
+            ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 1000, httpOnly: true }).redirect("/api/products")
             : res.status(404).send({status:"Error"})
 
         } catch (error) {
