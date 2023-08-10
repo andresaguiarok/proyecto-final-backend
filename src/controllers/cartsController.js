@@ -91,13 +91,13 @@ class CartController {
                     status: "error",
                     message:"Cart o product not found"
                 })
+            }else{
+                res.status(200).send({
+                    status: "success",
+                    message: "cart was deleted successfully",
+                    payload: cart
+                })
             }
-    
-            res.status(200).send({
-                status: "success",
-                message: "cart was deleted successfully",
-                payload: cart
-            })
         } catch (error) {
             console.log(error);
         }
