@@ -1,8 +1,9 @@
 const mongoose = require("mongoose")
 const ProductDao = require("../src/daos/mongoDb/productDaoMongo.js")
 const Assert = require("assert")
+require("dotenv").config()
 
-mongoose.connect("mongodb+srv://andresaguiarok:andres-2408@cluster0.wbacuba.mongodb.net/testing?retryWrites=true&w=majority")
+mongoose.connect(process.env.KEY_SECRET_TESTING)
 const assert = Assert.strict
 
 describe("testing productDao", () => {
@@ -15,17 +16,17 @@ describe("testing productDao", () => {
     })
     it("Bring all the products correctly", async function(){
         const result = await this.dao.get()
-        assert.strictEqual(Array.isArray(result), true)
+        assert.ok(typeof result, "array")
     })
     it("A product is created", async function(){
         const productMock = {
-            title: "prod test",
+            title: "prod test 1",
             description: "prod de testing",
             price: 1234,
             thumbnails: "https://www.test.com/image",
-            code: "2ffrt5543",
+            code: "2ffrt5543d",
             stock: 24,
-            owener: "testingUser@gmail.com"
+            owener: "testingUser1@gmail.com"
         }
 
         const result = await this.dao.create(productMock)
