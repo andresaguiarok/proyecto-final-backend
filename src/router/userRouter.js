@@ -10,7 +10,7 @@ router.get("/", passportCall("jwt"), authorization(["admin"]), userController.ge
 
 router.get("/:uid", passportCall("jwt"), authorization(["admin"]), userController.getById)
 
-router.put("/:uid", passportCall("jwt"), authorization(["admin", "premium"]), userController.updateOldUser)
+router.put("/:uid", passportCall("jwt"), authorization(["user", "premium", "admin"]), userController.updateOldUser)
 
 router.put("/premium/:uid",passportCall("jwt"), authorization(["user", "premium"]), userController.changeOfRole)
 

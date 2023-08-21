@@ -37,6 +37,14 @@ class UserController{
         }
     }
 
+    uploadDocuments = async(req, res) => {
+        try {
+            res.send("Hola mundo")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     updateOldUser = async(req, res) => {
         try {
             const {uid} = req.params
