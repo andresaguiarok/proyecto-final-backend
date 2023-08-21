@@ -42,6 +42,7 @@ class SessionController {
         try {
             const { email, password } = req.body
             const user = await userService.getUser({email})
+            let Accesstoken = generateToken(user)
 
             //Validacion de campos vacios  
             if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"}) 
@@ -56,13 +57,13 @@ class SessionController {
             if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
                 user.role = "admin"
             }
-            
-            let Accesstoken = generateToken(user)
+                     
             req.user = user
 
             req.user.role
+            await userService.updateUser({ _id: user._id }, { lastConnection: Date() })
             ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 1000, httpOnly: true }).redirect("/api/products")
-            : res.status(404).send({status:"Error"})
+            : res.status(404).send({status:"Error", message: "There was an error when logging in"})
 
         } catch (error) {
             console.log(error)
@@ -152,7 +153,12 @@ class SessionController {
     } 
 
     logout = async(req, res) => {
-        res.clearCookie("CoderCookieToken").redirect("/login")
+        try {
+            await userService.updateUser({ _id: req.user._id }, { lastConnection: Date() })
+            res.clearCookie("CoderCookieToken").redirect("/login")
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }
