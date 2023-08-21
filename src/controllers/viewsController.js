@@ -22,6 +22,10 @@ class ViewsController {
     changePassword = (req,res) => {
         res.render("changePassword", {title: "Change of Password", style: "register.css"})
     }
+
+    userDocuments = (req,res) => {
+        res.render("userDocument", {title: "User Document", style: "uploadDocuments.css"})
+    }
 }
 
 module.exports = ViewsController
