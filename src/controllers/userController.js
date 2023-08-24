@@ -1,5 +1,5 @@
 const { userService, cartService }  = require("../service/services.js");
-const { logger } = require("../utils/logger.js");
+const { logger }                    = require("../utils/logger.js");
 const { sendSms }                   = require("../utils/twilioMessage.js");
 
 class UserController{
@@ -39,7 +39,24 @@ class UserController{
 
     uploadDocuments = async(req, res) => {
         try {
-            res.send("Hola mundo")
+            const {uid} = req.params
+            const user = await userService.getUser({_id: uid})
+            const files = req.files
+
+            if(files){
+                files.forEach(async file => {
+                    await userService.updateUser(
+                        {_id: uid}, {$addToSet: {documents: {name: file.filename, reference:file.destination}}}
+                    )
+                });
+                return res.status(201).send({
+                    status: "success",
+                    message:`${user.firtsName} the ${files.map(file => file.fieldname)} files were uploaded successfully`
+                })
+            } else {
+                return res.status(400).send({status: "error", message: "error trying to upload files"})
+            }
+
         } catch (error) {
             console.log(error);
         }
