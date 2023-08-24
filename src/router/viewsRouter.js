@@ -19,4 +19,6 @@ router.get("/realTimeProducts", viewsController.realTimeProductsView)
 
 router.get("/chat", passportCall("jwt"), authorization("user"), viewsController.chatView)
 
+router.get("/upload-documents", viewsController.userDocuments)
+
 module.exports = router
