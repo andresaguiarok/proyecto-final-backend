@@ -38,7 +38,9 @@ const userSchema = new Schema ({
     },
     documents: [{
         name: String,
-        reference: String
+        reference: String,
+        docType: String,
+        _id: false
     }],
     lastConnection: {
         type: Date
