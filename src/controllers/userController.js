@@ -46,7 +46,12 @@ class UserController{
             if(files){
                 files.forEach(async file => {
                     await userService.updateUser(
-                        {_id: uid}, {$addToSet: {documents: {name: file.filename, reference:file.destination}}}
+                        {_id: uid},
+                        {$addToSet: 
+                            {documents: 
+                                {name: file.filename, reference:file.destination, docType:file.fieldname}
+                            }
+                        }
                     )
                 });
                 return res.status(201).send({
@@ -91,18 +96,22 @@ class UserController{
         try {
             let {uid} = req.params
             let user = await userService.getUser({_id: uid})
+            const requiredDocs = user.documents.some((doc) => doc.docType.includes("identity" && "myAddress" && "myAccount"))
 
             if(!user) return logger.error("User not found")
 
-            switch (user.role) {
-                case "user":
-                    await userService.updateUser({_id: uid}, {role: "premium"})
-                    return res.send({status:"success", message: "You are now a premium user"})
-                case "premium":
-                    await userService.updateUser({_id: uid}, {role: "user"})
-                    return res.send({status:"success", message:"Now you are a common user"})
+            if(requiredDocs){
+                switch (user.role) {
+                    case "user":
+                        await userService.updateUser({_id: uid}, {role: "premium"})
+                        return res.send({status:"success", message: "You are now a premium user"})
+                    case "premium":
+                        await userService.updateUser({_id: uid}, {role: "user"})
+                        return res.send({status:"success", message:"Now you are a common user"})
+                }
+            }else {
+                return res.status(403).send({status: "error", message: "you need to upload documents to be premium"})
             }
-            logger.info(user.role)
         } catch (error) {
            console.log(error); 
         }
