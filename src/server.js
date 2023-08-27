@@ -5,9 +5,9 @@ const session                = require("express-session")
 const mongoStore             = require("connect-mongo")
 const passport               = require("passport")
 const cors                   = require("cors")
+const compression            = require("express-compression")
 const { Server: ServerHTTP}  = require("http")
 const { Server: ServerIO }   = require("socket.io")
-const compression            = require("express-compression")
 
 const initPassport           = require("./passportJwt/passportJwt.js")
 const { socketProducts }     = require("./utils/socketProducts.js")
@@ -16,6 +16,8 @@ const { errorHandling }      = require("./middleware/errorHandling.js")
 const { addLogger, logger }  = require("./utils/logger.js")
 const swaggerUiExpress       = require("swagger-ui-express")
 const swaggerJsDoc           = require("swagger-jsdoc")
+const { swaggerOptions }     = require("./utils/swaggerOpc.js")
+const specs                  = swaggerJsDoc(swaggerOptions)
 require("dotenv")
 
 const viewRouter             = require("./router/viewsRouter.js")
@@ -66,19 +68,6 @@ initPassportGithub()
 passport.use(passport.initialize())
 passport.use(passport.session())
 
-const swaggerOptions = {
-    definition: {
-        openapi: "3.0.1",
-        info: {
-            title: "Api Documents",
-            description: "Documentation of the following api's"
-        }
-    },
-    apis:[`${__dirname}/docs/**/*.yml`]
-}
-
-const specs                  = swaggerJsDoc(swaggerOptions)
-
 //rutas
 app.use("/",                 viewRouter)
 app.use("/api/users",        userRouter)
@@ -94,8 +83,5 @@ app.use(errorHandling)
 exports.startServer = () => serverHttp.listen(PORT, () => {
     logger.info(`Running in the port: ${PORT}`) 
 })
-
-
-
 
 // socketProducts(socketServer)
