@@ -1,4 +1,4 @@
-const { userService, cartService }  = require("../service/services.js");
+const { userService, cartService}   = require("../service/services.js");
 const { logger }                    = require("../utils/logger.js");
 const { sendSms }                   = require("../utils/twilioMessage.js");
 
@@ -6,20 +6,15 @@ class UserController{
 
     getAllUsers = async(req, res) => {
         try {
-            const users = await userService.getUsers()
+            const usersDb  = await userService.getUsers()
+            const users    = usersDb.map(({firtsName, email, role}) => ({firtsName, email, role})) 
             
-            if(users){
-                res.status(200).send({
-                    status:"information was successfully extracted from the database",
-                    payload: users
-                })
-            }else{
-                throw({status:"Error", message: "No user data found"})
-            }
+            users
+            ? res.status(200).send({ status:"information was successfully extracted from the database", payload: users })
+            : res.status(500).send({ status:"Error", message: "No user data found" })
             
         } catch (error) {
-           console.log(error);
-           return res.status(500).send(error) 
+           console.log(error); 
         }
     }
 
