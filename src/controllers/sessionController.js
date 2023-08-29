@@ -1,10 +1,9 @@
-const objectConfig                     = require("../config/objectConfig.js")
-const { userService, contactService }  = require("../service/services.js")
-const { validPassword, creaHash }      = require("../utils/bcryptHash.js")
-const { generateToken,
-     generateTokenUrl }                = require("../utils/jsonWebToken.js")
-const transport                        = require("../utils/nodeMailer.js")
-const { logger } = require("../utils/logger.js")
+const objectConfig                         = require("../config/objectConfig.js")
+const { userService, contactService }      = require("../service/services.js")
+const { validPassword, creaHash }          = require("../utils/bcryptHash.js")
+const { generateToken, generateTokenUrl }  = require("../utils/jsonWebToken.js")
+const transport                            = require("../utils/nodeMailer.js")
+
 class SessionController {
 
     register = async (req,res) => {
@@ -55,7 +54,7 @@ class SessionController {
  
             //Validacion de usuario ADMIN
             if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
-                user.role = "admin"
+                await userService.updateUser({_id: user._id}, {role: "admin"})
             }
                      
             req.user = user
@@ -109,7 +108,7 @@ class SessionController {
             const user = req.user
             const { password, verifyPassword } = req.body
 
-            if(password == "" || verifyPassword =="") {
+            if(password == "" || verifyPassword == "") {
                 return res.status(400).send({status:"Error", message:"Fill in the required fields"})
             }
 
