@@ -3,6 +3,8 @@ const { v4:uuidv4 }                 = require("uuid")
 const { CustomError }               = require("../customErrors/customError.js")
 const { typeErrors }                = require("../customErrors/typeErrors.js")
 const { generateInfoProductError }  = require("../customErrors/info.js")
+const objectConfig                  = require("../config/objectConfig.js")
+const transport                     = require("../utils/nodeMailer.js")
 
 class ProductController {
 
@@ -136,11 +138,20 @@ class ProductController {
                 req.user.email !== product.owener 
                 ? res.status(403).send({
                     status:"Error",
-                    message:`You don't have permission to delete because you are ${req.user.role}`
+                    message:"You do not have permission to remove this product"
                 })
-                : removeProduct(pid)
+                : removeProduct(pid) 
             }else {
-                removeProduct(pid)
+                removeProduct(pid) && await transport.sendMail({
+                    from: objectConfig.gmailUser,
+                    to: product.owener ,
+                    subject: "Removed product",
+                    html:`<div>
+                                <h1>
+                                    Hi user, your product was removed by the admin
+                                </h1>
+                          </div>`
+                })
             }            
         } catch (error) {
             res.send(error)
