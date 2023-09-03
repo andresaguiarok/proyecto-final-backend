@@ -1,6 +1,9 @@
-const { userService, cartService}   = require("../service/services.js");
+const { userService, cartService }  = require("../service/services.js");
+const objectConfig                  = require("../config/objectConfig.js");
 const { logger }                    = require("../utils/logger.js");
 const { sendSms }                   = require("../utils/twilioMessage.js");
+const moment                        = require("moment");
+const transport                     = require("../utils/nodeMailer.js")
 
 class UserController{
 
@@ -21,7 +24,7 @@ class UserController{
     getById = async(req, res) => {
         try {
             const {uid} = req.params
-            const user = await userService.getUser({_id: uid})
+            const user  = await userService.getUser({_id: uid})
 
             !user
             ? res.send({ status:"error", message: "User not available" })
@@ -34,9 +37,9 @@ class UserController{
 
     uploadDocuments = async(req, res) => {
         try {
-            const {uid} = req.params
-            const user = await userService.getUser({_id: uid})
-            const files = req.files
+            const {uid}  = req.params
+            const user   = await userService.getUser({_id: uid})
+            const files  = req.files
 
             if(files){
                 files.forEach(async file => {
@@ -64,10 +67,10 @@ class UserController{
 
     updateOldUser = async(req, res) => {
         try {
-            const {uid} = req.params
+            const {uid}         = req.params
             const userToReplace = req.body
-            const user = await userService.getUser({_id: uid})
-            let result = await userService.updateUser({_id: uid}, userToReplace)
+            const user          = await userService.getUser({_id: uid})
+            let result          = await userService.updateUser({_id: uid}, userToReplace)
 
             if(!user) throw({status:"Error", message:"User not found"})
 
@@ -89,21 +92,18 @@ class UserController{
 
     changeOfRole = async(req, res) => {
         try {
-            let {uid} = req.params
-            let user = await userService.getUser({_id: uid})
+            let {uid}          = req.params
+            let user           = await userService.getUser({_id: uid})
             const requiredDocs = user.documents.some((doc) => doc.docType.includes("identity" && "myAddress" && "myAccount"))
 
             if(!user) return logger.error("User not found")
 
             if(requiredDocs){
-                switch (user.role) {
-                    case "user":
-                        await userService.updateUser({_id: uid}, {role: "premium"})
-                        return res.send({status:"success", message: "You are now a premium user"})
-                    case "premium":
-                        await userService.updateUser({_id: uid}, {role: "user"})
-                        return res.send({status:"success", message:"Now you are a common user"})
-                }
+                user.role == "user"
+                ? await userService.updateUser({_id: uid}, {role: "premium"}) 
+                    && res.send({status:"success", message: "You are now a premium user"})
+                : await userService.updateUser({_id: uid}, {role: "user"}) 
+                    && res.send({status:"success", message:"Now you are a common user"})  
             }else {
                 return res.status(403).send({status: "error", message: "you need to upload documents to be premium"})
             }
@@ -128,6 +128,39 @@ class UserController{
         } catch (error) {
            console.log(error); 
            return res.status(400).send(error) 
+        }
+    }
+
+    deleteInactiveUsers = async(req, res) => {
+        try {
+            const usersDb = await userService.getUsers()
+            
+            usersDb.forEach(async({_id, email, lastConnection, cart, firtsName}) => {
+                const lastConnec = moment(lastConnection, "DD-MM-YYYY")
+                const diferencia = moment().diff(lastConnec, 'days')
+
+                if(diferencia > 2 || !lastConnection){
+                    await userService.deleteUser({_id})
+                    await cartService.deleteCart({_id: cart})
+                    await transport.sendMail({
+                        from: objectConfig.gmailUser,
+                        to: email,
+                        subject: "Inactivity",
+                        html:`<div>
+                                    <h1>
+                                        Hello ${firtsName}, we deleted your account due to inactivity
+                                    </h1>
+                                    <a href="http://localhost:8080/register"> Re-register your user </a>
+                              </div>`
+                    })
+                }
+            })
+
+            usersDb 
+            ? res.send({status: "success", message: "removed some inactive users"}) 
+            : res.send({status: "erorr", message: "There was a server error"})
+        } catch (error) {
+            console.log(error);
         }
     }
 }
