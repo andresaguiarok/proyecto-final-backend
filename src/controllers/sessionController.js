@@ -148,7 +148,7 @@ class SessionController {
 
     gitHubCall = async(req,res) => {
         let Accesstoken = generateToken(req.user)
-        res.status(200).cookie("CoderCookieToken", Accesstoken,{maxAge: 60*60*100, httpOnly: true}).redirect("/api/productos")
+        res.status(200).cookie("CoderCookieToken", Accesstoken,{maxAge: 60*60*100, httpOnly: true}).redirect("/api/products")
     } 
 
     logout = async(req, res) => {
