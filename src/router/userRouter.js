@@ -19,4 +19,6 @@ router.put("/premium/:uid", passportCall("jwt"), authorization(["user", "premium
 
 router.delete("/:uid", passportCall("jwt"), authorization(["admin"]), userController.deleteByUser)
 
+router.delete("/", passportCall("jwt"), authorization(["admin"]), userController.deleteInactiveUsers)
+
 module.exports = router
