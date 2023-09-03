@@ -12,13 +12,12 @@ const initPassportGithub = () => {
         try {
             let user = await userService.getUser({email: profile._json.email})
             
-            if(!user.email){
+            if(!user){
                 let result = await userService.createUser({
                     firtsName: profile._json.name, lastName: profile.username,
                     userName: profile._json.login , email: profile._json.email,
                     birthDate: profile._json.created_at, password: " ",
                 })
-                console.log(result);
                 return done(null,result)
             }
             
