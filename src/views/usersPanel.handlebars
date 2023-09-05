@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="container">
+        {{#each users}}
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    {{#if this.profile}}
+                        <img src= {{this.profilePicture}} class="img-fluid rounded-start" alt="...">
+                    {{else}}
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                            class="img-fluid img-thumbnail" alt="..."
+                        >
+                    {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{this.firtsName}} {{this.lastName}} </h5>
+                            <div class="col-md-12">
+                                <label class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder= {{this.email}}>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Role:</label>
+                                <input type="text" class="form-control m-1" id="role" placeholder= {{this.role}}>
+                            </div>
+                            <p class="card-text"> Last Connection: <small class="text-body-secondary"> {{this.lastConnection}}</small></p>
+                        </div>
+                        <div class="mb-4 text-center">
+                            <button type="submit" class="btnUpdate"> Update </button>
+                            <button class="btnDelete" 
+                                onClick="deleteUser( '{{this._id}}', '{{this.firtsName}}', '{{this.lastName}}' )"
+                            > Delete </button>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/static/javascript/usersPanel.js"></script>
