@@ -84,4 +84,4 @@ exports.startServer = () => serverHttp.listen(PORT, () => {
     logger.info(`Running in the port: ${PORT}`) 
 })
 
-// socketProducts(socketServer)
+socketProducts(socketServer)
