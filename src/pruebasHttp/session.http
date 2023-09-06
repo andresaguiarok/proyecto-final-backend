@@ -16,6 +16,19 @@ POST http://localhost:8080/api/session/register
 Content-Type: application/json
 
 {
+    "firtsName": "alan",
+    "lastName": "maguirre",
+    "email": "maguirre@hotmail.com",
+    "userName": "macpabloo",
+    "birthDate": "1996-08-15",
+    "password": "macalan"
+}
+
+### register
+POST http://localhost:8080/api/session/register
+Content-Type: application/json
+
+{
     "firtsName": "osvaldo",
     "lastName": "aguiar",
     "email": "osvaldooaguiar@hotmail.com",
