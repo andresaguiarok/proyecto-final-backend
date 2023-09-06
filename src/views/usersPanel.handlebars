@@ -23,7 +23,17 @@
                                 <label class="form-label">Role:</label>
                                 <input type="text" class="form-control m-1" id="role" placeholder= {{this.role}}>
                             </div>
-                            <p class="card-text"> Last Connection: <small class="text-body-secondary"> {{this.lastConnection}}</small></p>
+                            {{#if this.lastConnection}}
+                                <p class="card-text">
+                                    Last Connection: 
+                                    <small class="text-body-secondary"> {{this.lastConnection}} </small>
+                                </p>
+                            {{else}}
+                                <p class="card-text">
+                                    Last Connection: 
+                                    <small class="text-body-secondary"> Inactive user </small>
+                                </p>
+                            {{/if}}
                         </div>
                         <div class="mb-4 text-center">
                             <button type="submit" class="btnUpdate"> Update </button>
