@@ -1,0 +1,46 @@
+.container-fluid{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(36, 36, 36, 0.637);
+}
+
+.container{
+    padding: 30px;
+    background-color: rgb(252, 247, 241);
+    border: 3px solid rgba(136, 136, 136, 0.63);
+    border-radius: 5px;
+}
+
+.btnDelete {
+    height: 38px;
+    width: 20%;
+    background-color: rgb(219, 62, 62);
+    border: rgb(221, 38, 38);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnDelete:hover{
+    background-color: rgb(27, 27, 27);
+    color: rgb(219, 62, 62);
+    border: black;
+    transition: 0.4s;
+}
+
+.btnUpdate {
+    height: 38px;
+    width: 20%;
+    background-color: rgb(0, 107, 14);
+    border: rgb(0, 107, 14);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnUpdate:hover{
+    background-color: rgb(27, 27, 27);
+    color: rgb(0, 161, 22);
+    border: black;
+    transition: 0.4s;
+}
