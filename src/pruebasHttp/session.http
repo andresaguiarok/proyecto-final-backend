@@ -18,8 +18,8 @@ Content-Type: application/json
 {
     "firtsName": "alan",
     "lastName": "maguirre",
-    "email": "maguirre@hotmail.com",
-    "userName": "macpabloo",
+    "email": "macguirre@hotmail.com",
+    "userName": "macalan",
     "birthDate": "1996-08-15",
     "password": "macalan"
 }
