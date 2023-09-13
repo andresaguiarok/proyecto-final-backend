@@ -41,7 +41,6 @@ class SessionController {
         try {
             const { email, password } = req.body
             const user = await userService.getUser({email})
-            let Accesstoken = generateToken(user)
 
             //Validacion de campos vacios  
             if(email === "" || password === "") return res.status(400).send({
@@ -58,7 +57,8 @@ class SessionController {
             if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
                 await userService.updateUser({_id: user._id}, {role: "admin"})
             }
-                     
+            
+            let Accesstoken = generateToken(user)
             req.user = user
 
             req.user.role
