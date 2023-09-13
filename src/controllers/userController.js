@@ -121,7 +121,7 @@ class UserController{
                 await userService.deleteUser({_id: uid})
                 await cartService.deleteCart({_id: user.cart._id})
 
-                res.send({ status:"success", payload: user }) 
+                res.status(200).send({ status:"success", payload: user }) 
             }else{
                 res.status(400).send({ status:"error", message:"could not delete user" })
             }
