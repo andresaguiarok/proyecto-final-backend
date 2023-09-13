@@ -8,4 +8,5 @@ const addProduct = async(id, cart) => {
     response.ok
     ? Swal.fire({ icon: 'success', title: responseJson.message, showConfirmButton: false, timer: 1500 })
     : Swal.fire({ icon: 'error', title: responseJson.status, text: responseJson.message })
+    
 }

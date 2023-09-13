@@ -1,5 +1,5 @@
 const deleteProduct = async(product, cart) => {
-    const response = await fetch(`http://localhost:8080/api/carts/${cart}/products/${product}`, {
+    const response = await fetch(`/api/carts/${cart}/products/${product}`, {
         method: 'DELETE'
     })
 
@@ -12,7 +12,7 @@ const deleteProduct = async(product, cart) => {
 }
 
 const deteleAll = async(id) => {
-    const response = await fetch(`http://localhost:8080/api/carts/${id}`, {
+    const response = await fetch(`/api/carts/${id}`, {
         method: 'DELETE'
     })
 
@@ -25,7 +25,7 @@ const deteleAll = async(id) => {
 }
 
 const purchase = async(id) => {
-    const response = await fetch(`http://localhost:8080/api/carts/${id}/purchase`, {
+    const response = await fetch(`/api/carts/${id}/purchase`, {
         method: 'POST'
     })
 

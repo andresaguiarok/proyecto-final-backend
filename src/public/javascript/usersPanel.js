@@ -1,7 +1,7 @@
 let timerInterval
 
 async function deleteUserId(id, fullName){
-  const deleteById = await fetch(`http://localhost:8080/api/users/${id}`, {
+  const deleteById = await fetch(`/api/users/${id}`, {
     method: 'DELETE'
   })
 
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       
       // Metodo PUT para actualizar el usuario por ID y muestra una respuesta
-      const response = await fetch(`http://localhost:8080/api/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: 'PUT',
         headers : { "Content-Type": "application/json" },
         body: JSON.stringify({email, role})
