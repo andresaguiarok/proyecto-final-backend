@@ -67,7 +67,7 @@ class SessionController {
             : res.status(404).send({status:"Error", message: "There was an error when logging in"})
 
         } catch (error) {
-            logger.error(error)
+            console.log(error)
         }
     }
 
