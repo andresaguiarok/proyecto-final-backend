@@ -1,6 +1,6 @@
 let timerInterval
 
-async function deleteUserId(id, fullName){
+const deleteUserId = async(id, fullName) =>{
   const deleteById = await fetch(`/api/users/${id}`, {
     method: 'DELETE'
   })
