@@ -1,5 +1,5 @@
 const addProduct = async(id, cart) => {
-    const response = await fetch(`http://localhost:8080/api/carts/${cart}/products/${id}`, {
+    const response = await fetch(`/api/carts/${cart}/products/${id}`, {
         method: 'PUT'
     })
 
