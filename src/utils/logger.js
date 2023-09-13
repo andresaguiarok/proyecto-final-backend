@@ -42,13 +42,6 @@ switch (mode) {
         logger = winston.createLogger({
             levels: customLevels.levels,
             transports: [
-                new winston.transports.Console({
-                    level: process.env.LEVEL_LOGGER,
-                    format: winston.format.combine(
-                        winston.format.colorize({colors: customLevels.colors, all: true}),
-                        winston.format.simple()
-                    )
-                }),
                 new winston.transports.File({
                     filename: "./error.log", 
                     level: "error",
