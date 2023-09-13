@@ -22,7 +22,7 @@ class UserController{
             // : res.status(500).send({ status:"Error", message: "No user data found" })
             
         } catch (error) {
-           console.log(error); 
+            logger.error(error)
         }
     }
 
@@ -33,9 +33,9 @@ class UserController{
 
             !user
             ? res.send({ status:"error", message: "User not available" })
-            : res.send({ status:"the user was found",payload: user })
+            : res.send({ status:"the user was found", payload: user })
         } catch (error) {
-           console.log(error); 
+            logger.error(error)
         }
     }
 
@@ -65,7 +65,7 @@ class UserController{
             }
 
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -86,7 +86,7 @@ class UserController{
                 status:"Error", message:"Could not update user data"
             })
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -108,7 +108,7 @@ class UserController{
                 return res.status(403).send({status: "error", message: "you need to upload documents to be premium"})
             }
         } catch (error) {
-           console.log(error); 
+            logger.error(error)
         }
     }
 
@@ -123,11 +123,10 @@ class UserController{
 
                 res.send({ status:"success", payload: user }) 
             }else{
-                throw({ status:"error", message:"could not delete user" })
+                res.status(400).send({ status:"error", message:"could not delete user" })
             }
         } catch (error) {
-           console.log(error); 
-           return res.status(400).send(error) 
+            logger.error(error)
         }
     }
 
@@ -160,7 +159,7 @@ class UserController{
             ? res.send({status: "success", message: "removed some inactive users"}) 
             : res.send({status: "error", message: "There was a server error"})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }

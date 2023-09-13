@@ -3,6 +3,7 @@ const { userService, contactService }      = require("../service/services.js")
 const { validPassword, creaHash }          = require("../utils/bcryptHash.js")
 const { generateToken, generateTokenUrl }  = require("../utils/jsonWebToken.js")
 const transport                            = require("../utils/nodeMailer.js")
+const { logger }                           = require("../utils/logger.js");
 
 class SessionController {
 
@@ -13,16 +14,16 @@ class SessionController {
             //validacion si vienen los campos vacios
             if(firtsName == "" || lastName == "" || email == "" || 
             password == "" || userName == "" || birthDate == ""){
-                throw({status: "error" ,message:"Fill in the missing fields"})
+                res.status(400).send({status: "error" ,message:"Fill in the missing fields"})
             }
             //valida si existe email
             if(await userService.getUser({email})){
-                throw({status:"Error", message:"This email is registered"})
+                res.status(400).send({status:"Error", message:"This email is registered"})
             }
 
             //valida si existe el userName
             if(await userService.getUser({userName})) {
-                throw({status:"Error", message:"Username is not available"})
+                res.status(400).send({status:"Error", message:"Username is not available"})
             }
 
             const user = await userService.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
@@ -32,8 +33,7 @@ class SessionController {
                 message:`The user ${user.firtsName} ${user.lastName} registered successfully`, Accesstoken
             })   
         } catch (error) {
-            console.log(error);
-            res.status(400).send(error)
+            logger.error(error)
         }
     }
 
@@ -44,13 +44,15 @@ class SessionController {
             let Accesstoken = generateToken(user)
 
             //Validacion de campos vacios  
-            if(email === "" || password === "") throw({status:"error", message:"Fill in the missing fields"}) 
+            if(email === "" || password === "") return res.status(400).send({
+                status:"error", message:"Fill in the missing fields"
+            }) 
 
             //Validacion si no existe el email
-            if(!user) throw({status:"error", message:"Invalid email"})
+            if(!user) return res.status(400).send({status:"error", message:"Invalid email"})
 
             //Validacion si existe o no el password
-            if(!validPassword(password, user)) throw({status:"error", message:"Invalid password"})
+            if(!validPassword(password, user)) return res.status(400).send({status:"error", message:"Invalid password"})
  
             //Validacion de usuario ADMIN
             if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
@@ -65,8 +67,7 @@ class SessionController {
             : res.status(404).send({status:"Error", message: "There was an error when logging in"})
 
         } catch (error) {
-            console.log(error)
-            res.status(400).send(error)
+            logger.error(error)
         }
     }
 
@@ -99,7 +100,7 @@ class SessionController {
                 return res.status(200).send({status:"Success", message:"An email was sent to verify your identity"})
             }
         } catch (error) {
-            console.log(error)
+            logger.error(error)
         }
     }
 
@@ -127,28 +128,42 @@ class SessionController {
                 })
             }
         } catch (error) {
-            console.log(error)
+            logger.error(error)
         }
     }
 
     infoCurrent = async(req,res) => {
-        const {email} = req.user
-        const contact = await contactService.getContact({email})
-
-        contact 
-        ? res.status(200).send({status:"success", toInfo: contact}) 
-        : res.status(404).send({status:"Error", message:"Your information does not exist"})
+        try {
+            const {email} = req.user
+            const contact = await contactService.getContact({email})
+    
+            contact 
+            ? res.status(200).send({status:"success", toInfo: contact}) 
+            : res.status(404).send({status:"Error", message:"Your information does not exist"})
+        } catch (error) {
+            logger.error(error)
+        }
     }
 
     privada = async(req,res) => {
-        res.send(`Podes ver los productos ${req.user.userName} `)
+        try {
+            res.send(`Podes ver los productos ${req.user.userName} `)
+        } catch (error) {
+            logger.error(error)
+        }
     }
 
     gitHub = async(req,res) => {}
 
     gitHubCall = async(req,res) => {
-        let Accesstoken = generateToken(req.user)
-        res.status(200).cookie("CoderCookieToken", Accesstoken,{maxAge: 60*60*100, httpOnly: true}).redirect("/api/products")
+        try {
+            let Accesstoken = generateToken(req.user)
+            res.status(200).cookie("CoderCookieToken", Accesstoken,{
+                maxAge: 60*60*100, httpOnly: true
+            }).redirect("/api/products")
+        } catch (error) {
+            logger.error(error)
+        }
     } 
 
     logout = async(req, res) => {
@@ -156,7 +171,7 @@ class SessionController {
             await userService.updateUser({ _id: req.user._id }, { lastConnection: Date() })
             res.clearCookie("CoderCookieToken").redirect("/login")
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 

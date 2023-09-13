@@ -1,3 +1,5 @@
+const { logger }    = require("../utils/logger.js");
+
 class CartRepository {
     constructor(dao){
         this.dao = dao
@@ -7,7 +9,7 @@ class CartRepository {
         try {
             return await this.dao.get()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -15,7 +17,7 @@ class CartRepository {
         try {
             return await this.dao.getCart(cid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -23,7 +25,7 @@ class CartRepository {
         try {
             return await this.dao.create()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -31,7 +33,7 @@ class CartRepository {
         try {
             return await this.dao.addAndUpdate(cid, pid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -39,7 +41,7 @@ class CartRepository {
         try {
             return await this.dao.deleteOne(cid, pid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -47,7 +49,7 @@ class CartRepository {
         try {
             return await this.dao.deleteAll(cid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -55,7 +57,7 @@ class CartRepository {
         try {
             return await this.dao.delete(cid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }

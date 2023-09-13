@@ -1,3 +1,5 @@
+const { logger } = require("../utils/logger.js");
+
 class UserRepository{
     constructor(dao){
         this.dao = dao
@@ -7,7 +9,7 @@ class UserRepository{
         try {
             return await this.dao.create(newUser)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -15,7 +17,7 @@ class UserRepository{
         try {
             return await this.dao.getByUser(data)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -23,7 +25,7 @@ class UserRepository{
         try {
             return await this.dao.get()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -31,7 +33,7 @@ class UserRepository{
         try {
             return await this.dao.update(uid, updateData)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -39,7 +41,7 @@ class UserRepository{
         try {
             return await this.dao.delete(uid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }

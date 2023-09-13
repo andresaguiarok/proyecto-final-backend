@@ -1,3 +1,5 @@
+const { logger } = require("../utils/logger.js");
+
 class TicketRepository {
     constructor(dao){
         this.dao = dao
@@ -7,7 +9,7 @@ class TicketRepository {
         try {
             return await this.dao.get()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -15,7 +17,7 @@ class TicketRepository {
         try {
             return await this.dao.getById(tid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -23,7 +25,7 @@ class TicketRepository {
         try {
             return await this.dao.create(ticket)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }

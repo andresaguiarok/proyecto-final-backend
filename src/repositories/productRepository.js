@@ -1,3 +1,5 @@
+const { logger } = require("../utils/logger.js");
+
 class ProductsRespository {
     constructor(dao){
         this.dao = dao
@@ -7,7 +9,7 @@ class ProductsRespository {
         try {
             return await this.dao.get(data)
         } catch (error) {
-            console.log(eorr);
+            logger.error(error)
         }
     }
 
@@ -15,7 +17,7 @@ class ProductsRespository {
         try {
             return await this.dao.getBy(product)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -23,7 +25,7 @@ class ProductsRespository {
         try {
             return await this.dao.create({title, description, price, thumbnails, code, stock, owener});
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -31,7 +33,7 @@ class ProductsRespository {
         try {
             return await this.dao.update(id, updateBody)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -39,7 +41,7 @@ class ProductsRespository {
         try {
             return await this.dao.delete(pid)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 

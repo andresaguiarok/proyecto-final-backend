@@ -1,12 +1,13 @@
-const { cartModel } = require("../models/cartModel.js")
+const { cartModel }    = require("../models/cartModel.js")
 const { productModel } = require("../models/productModel")
+const { logger }       = require("../../utils/logger.js");
 
 class CartDaoMongo{
     async create(){
         try {
             return await cartModel.create({})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -14,7 +15,7 @@ class CartDaoMongo{
         try {
             return await cartModel.find()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -22,7 +23,7 @@ class CartDaoMongo{
         try {
            return await cartModel.findOne({_id: id}).lean()
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -43,7 +44,7 @@ class CartDaoMongo{
                 )
             }
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -53,7 +54,7 @@ class CartDaoMongo{
 
             return await cartModel.updateOne({_id: cid}, {$pull:{products:{product: prod}}})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -61,7 +62,7 @@ class CartDaoMongo{
         try {
             return await cartModel.updateOne({_id: id}, {products:[]})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -69,7 +70,7 @@ class CartDaoMongo{
         try {
             return await cartModel.deleteOne({_id : id})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }

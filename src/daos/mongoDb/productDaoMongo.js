@@ -1,4 +1,5 @@
 const { productModel } = require("../models/productModel")
+const { logger }       = require("../../utils/logger.js");
 
 class ProductDaoMongo{
 
@@ -6,7 +7,7 @@ class ProductDaoMongo{
         try {
             return await productModel.create(newProduct)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -22,7 +23,7 @@ class ProductDaoMongo{
 
             return await productModel.paginate({}, {limit: 6, page: page , lean: true, sort: sortOpt})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -30,7 +31,7 @@ class ProductDaoMongo{
         try {
             return await productModel.findOne({...data})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -38,7 +39,7 @@ class ProductDaoMongo{
         try {
             return await productModel.updateOne({_id: id}, updateBody)
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 
@@ -46,7 +47,7 @@ class ProductDaoMongo{
         try {
             return await productModel.deleteOne({_id: id})
         } catch (error) {
-            console.log(error);
+            logger.error(error)
         }
     }
 }
