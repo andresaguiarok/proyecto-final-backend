@@ -2,10 +2,11 @@ const { Router }         = require("express")
 const { userService,
     cartService }        = require("../service/services.js")
 const { passportCall }   = require("../passportJwt/passportCall.js")
+const { authorization }  = require("../passportJwt/authorization.js")
 
 const router = Router()
 
-router.get("/", passportCall("jwt"), async(req,res) => {
+router.get("/", passportCall("jwt"), authorization(["user", "premium"]), async(req,res) => {
     try {
         const {email} = req.user
         const user = await userService.getUser({email})
@@ -18,12 +19,19 @@ router.get("/", passportCall("jwt"), async(req,res) => {
     }
 })
 
-router.get("/myCart", passportCall("jwt"), async(req,res) => {
+router.get("/myCart", passportCall("jwt"), authorization(["user", "premium"]), async(req,res) => {
     const {cart} = req.user
     const user = await userService.getUser({cart})
     const myCart = await cartService.getCartByID(user.cart._id)
 
-    myCart ? res.send({status:"Success", toCartIs: myCart}) : res.send({status:"Error", message: "Cart not found"})
+    const cartObj = {
+        title: "Cart",
+        style: "cart.css",
+        id: myCart._id,
+        products :  myCart.products
+    }
+
+    myCart ?  res.render("cartById", cartObj) : res.send({status:"Error", message: "Cart not found"})
 })
 router.get("/", (req,res) => {})
 
