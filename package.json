@@ -4,11 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js --mode production",
+    "dev": "nodemon app.js --mode development",
     "test": "mocha test/testRouter.test.js",
     "test:chai": "mocha test/chai.test.js",
-    "test:prod": "mocha test/products.test.js",
-    "dev": "nodemon app.js --mode development",
-    "start": "node app.js --mode production"
+    "test:prod": "mocha test/products.test.js"
+  },
+  "engines": {
+    "node": "18"
   },
   "keywords": [],
   "author": "",
