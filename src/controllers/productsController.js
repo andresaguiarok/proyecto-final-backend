@@ -82,7 +82,8 @@ class ProductController {
 
             let result = await productService.addProduct(title, description, price, thumbnails, code, stock, owener)
 
-            result ? res.status(200).send({ status: "A product has been created successfully", payload: result })
+            result
+            ? res.status(200).send({ status: "A product has been created successfully", payload: result })
             : res.status(404).send({ status:"Error", error: "Something went wrong" })
         } catch(error){
             next(error)
