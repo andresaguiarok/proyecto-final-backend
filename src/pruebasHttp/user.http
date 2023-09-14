@@ -54,7 +54,7 @@ Content-Type: application/json
 PUT http://localhost:8080/api/users/premium/64910d7803c427a0d5e1a839
 
 ### Borra un usuarios
-DELETE http://localhost:8080/api/users/64a892c287609a604619b495
+DELETE http://localhost:4000/api/users/65025121a553c260e6ead8af
 
 ### Borra un usuarios
 DELETE http://localhost:8080/api/users/2
