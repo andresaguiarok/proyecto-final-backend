@@ -1,13 +1,12 @@
 let timerInterval
 
-const deleteUserId = async(id, fullName) =>{
-  const deleteById = await fetch(`/api/users/${id}`, {
+async function deleteUserId(id, fullName){
+  const response = await fetch(`/api/users/${id}`, {
     method: 'DELETE'
   })
+  const responseJson = await response.json()
 
-  let response = await deleteById.json()
-
-  if(deleteById.ok){
+  if(response.ok){
     Swal.fire({
       title: `Deleting user data ${fullName}`,
       html: 'The data will be deleted in <b></b> milliseconds.',
@@ -24,7 +23,7 @@ const deleteUserId = async(id, fullName) =>{
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: `${response.status}, the user is deleted`,
+          title: `${responseJson.status}, the user is deleted`,
           showConfirmButton: false,
           timer: 1500
         })
@@ -37,7 +36,7 @@ const deleteUserId = async(id, fullName) =>{
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: response.message,
+      text: responseJson.message,
     })
   }
 }
@@ -108,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const email = formulario.querySelector('input[name="email"]').value
       const role  = formulario.querySelector('input[name="role"]').value
 
-      //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+      //Se valida si tiene caracteristicas de email
       if (!emailRegex.test(email)) return Swal.fire({
         icon: 'error',
         title: 'the email entered is not valid',
