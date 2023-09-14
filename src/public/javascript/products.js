@@ -3,7 +3,7 @@ const addProduct = async(id, cart) => {
         method: 'PUT'
     })
 
-    let responseJson = await response.json()
+    const responseJson = await response.json()
 
     response.ok
     ? Swal.fire({ icon: 'success', title: responseJson.message, showConfirmButton: false, timer: 1500 })
