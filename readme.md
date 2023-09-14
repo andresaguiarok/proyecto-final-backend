@@ -5,7 +5,7 @@ Este proyecto cuenta con la arquitectura MVC (Modelo-Vista-Controlador) que es u
 
 ## Link del proyecto deployado
 
-LINK : https://backend-ecommerce-1haw.onrender.com/login
+LINK : https://backend-ecommerce-1haw.onrender.com/login.\
 Este proyecto esta deployado en Render.com mediante este repositorio alojado en esta plataforma.
 
 ## Ejecucion de app
