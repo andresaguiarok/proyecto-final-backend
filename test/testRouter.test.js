@@ -150,7 +150,7 @@ describe("Router testing", () => {
             expect(ok).to.be.false
         })
         it("Endpoint PUT: Update a product successfully", async() => {
-            let pid = "64c3060a2fd5c54432ab63f3"
+            let pid = "65025a067a2094c819be2a1e"
             let updateBody = {
                 title: "Test product 2",
                 description: "this product will be used for testing 2",
@@ -171,7 +171,7 @@ describe("Router testing", () => {
         it("Endpoint PUT: Error when updating a product that does not exist", async() => {
             let pid = "64c3060a2fd5c54zxgds63f3"
             let updateBody = {
-                title: "Test product 2",
+                title: "Test product 3",
                 description: "this product will be used for testing 2",
                 thumbnails: "https://www.test.com/on/image-false",
                 stock: 45
@@ -193,8 +193,8 @@ describe("Router testing", () => {
         it("Endpoint PUT: Add a product to cart successfully", async() => {
             let cid = "64910d7703c427a0d5e1a835"
             let pid = "64cfe44584385bc20a41dd1e"
-            let opid = "6490f4a5017e517c3f04c0dd"
-            let otpid = "64c1909fc3e1cce54f5d0c7a"
+            let opid = "64c1909fc3e1cce54f5d0c7a"
+            let otpid = "64a77cbad78e6863649916bb"
 
             const { 
                 _body,
