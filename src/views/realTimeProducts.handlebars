@@ -1,37 +1,59 @@
 <section class="container-fluid">
     <h2 style="width: 100%">Realtime</h2>
     <form id="formData">
-        <fieldset class="contenedor">
+        <fieldset>
             <div class="row">
                 <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" placeholder="Title" id="title">
-                        <input type="text" class="form-control" placeholder="Description" id="description">
+                    <div class="mb-3">
+                        <label class="form-label">title :</label>
+                        <div class="input-group">
+                            <input id="title" type="text" class="form-control" aria-describedby="basic-addon3 basic-addon4" placeholder="product title">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">price :</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input id="price" type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="product price">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" placeholder="Price" id="price">
-                        <input type="text" class="form-control" placeholder="thumbnails" id="thumbnails">
+                    <div class="mb-3">
+                        <label class="form-label">description :</label>
+                        <div class="input-group">
+                            <input id="description" type="text" class="form-control" placeholder="product description">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">thumbnails :</label>
+                        <div class="input-group">
+                            <input id="thumbnails" type="text" class="form-control" placeholder="product thumbnail url">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" placeholder="Code" id="code">
-                        <input type="number" class="form-control" placeholder="stock" id="stock">
+                    <div class="mb-3">
+                        <label class="form-label">code :</label>
+                        <div class="input-group">
+                            <input id="code" type="text" class="form-control" placeholder="product code">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">stock :</label>
+                        <div class="input-group">
+                            <input id="stock" type="number" class="form-control" placeholder="product stock">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <div class="col align-self-center">
+                    <button type="submit" class="btn btn-primary" style="height: 3rem;">Enviar</button>
+                </div>
             </div>
         </fieldset>
     </form>
     <section id="listProducts"></section>
 </section>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/static/javascript/socket.js"></script>
