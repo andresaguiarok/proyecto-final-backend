@@ -12,26 +12,34 @@ class SessionController {
             const {firtsName, lastName, userName, email, birthDate, password} = req.body
             
             //validacion si vienen los campos vacios
-            if(firtsName == "" || lastName == "" || email == "" || 
-            password == "" || userName == "" || birthDate == ""){
-                res.status(400).send({status: "error" ,message:"Fill in the missing fields"})
+            if(!firtsName || !lastName || !email || !password || !userName || !birthDate ){
+                return res.status(400).send({status: "error" ,message:"Fill in the missing fields"})
             }
             //valida si existe email
             if(await userService.getUser({email})){
-                res.status(400).send({status:"Error", message:"This email is registered"})
+                return res.status(400).send({status:"Error", message:"This email is registered"})
             }
 
             //valida si existe el userName
             if(await userService.getUser({userName})) {
-                res.status(400).send({status:"Error", message:"Username is not available"})
+                return res.status(400).send({status:"Error", message:"Username is not available"})
             }
 
-            const user = await userService.createUser({firtsName, lastName, userName, email, birthDate, password: creaHash(password)})
-            let Accesstoken = generateToken({ firtsName, lastName, email })
-            res.status(201).send({
-                status:"success", 
-                message:`The user ${user.firtsName} ${user.lastName} registered successfully`, Accesstoken
-            })   
+            let Accesstoken  = generateToken({ firtsName, lastName, email })
+            const user       = await userService.createUser({
+                firtsName, lastName, userName, email, birthDate, password: creaHash(password)
+            })
+            
+            user 
+            ? res.status(201).send({
+                status:"success",
+                message:`The user ${user.firtsName} ${user.lastName} registered successfully`,
+                Accesstoken
+            }) 
+            : res.status(500).send({
+                status: "error",
+                message: "A problem occurred and the request could not be completed"
+            })
         } catch (error) {
             logger.error(error)
         }
@@ -63,7 +71,8 @@ class SessionController {
 
             req.user.role
             await userService.updateUser({ _id: user._id }, { lastConnection: Date() })
-            ? res.status(200).cookie("CoderCookieToken", Accesstoken, { maxAge: 60 * 60 * 1000, httpOnly: true }).redirect("/api/products")
+            ? res.status(200).cookie("CoderCookieToken", Accesstoken,
+                { maxAge: 60 * 60 * 1000, httpOnly: true }).redirect("/api/products")
             : res.status(404).send({status:"Error", message: "There was an error when logging in"})
 
         } catch (error) {
