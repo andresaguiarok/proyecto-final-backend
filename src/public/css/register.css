@@ -15,12 +15,11 @@
 
 .register{
     background-color: whitesmoke;
-    width: 40%;
+    width: 60%;
     height: 80%;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 30px -14px rgb(0, 0, 0);
-
 }
 
 .buttons {
