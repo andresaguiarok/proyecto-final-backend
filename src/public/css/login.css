@@ -15,7 +15,7 @@
 
 .login {
     background-color: whitesmoke;
-    width: 40%;
+    width: 60%;
     height: 70%;
     border-radius: 20px;
     display: flex;
@@ -25,22 +25,11 @@
     box-shadow: 0 20px 30px -14px rgba(0, 0, 0, 0.486);
 }
 
-#formCookie {
-    width: 70%;
-    height: 70%;
+#formLogin {
+    width: 80%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-}
-
-.buttons{
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 }
 
-.register {
-    display: flex;
-    justify-content: center;
-}
