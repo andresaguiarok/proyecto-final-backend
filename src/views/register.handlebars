@@ -1,42 +1,48 @@
 <article class="backgroundRegister">
     <div class="register">
         <h2 class="text-center p-1">Register</h2>
-        <form class="row g-3 formRegister p-2" id="formRegister">
-            <div class="col-6">
-                <label class="form-label">First name</label>
-                <input name="firtsName" type="text" class="form-control" placeholder="First name">
-            </div>
-            <div class="col-6">
-                <label class="form-label">Last name</label>
-                <input name="lastName" type="text" class="form-control" placeholder="Last name">
-            </div>
-            <div class="col-6">
-                <label for="inputPassword5" class="form-label">User</label>
-                <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping">@</span>
-                    <input name="userName" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        <form id="formRegister">
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label">First name</label>
+                    <input name="firtsName" type="text" class="form-control" placeholder="First name">
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Last name</label>
+                    <input name="lastName" type="text" class="form-control" placeholder="Last name">
                 </div>
             </div>
-            <div class="col-6">
-                <label class="form-label">Birth date</label>
-                <input name="birthDate" type="date" class="form-control">
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputPassword5" class="form-label">User</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">@</span>
+                        <input name="userName" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Birth date</label>
+                    <input name="birthDate" type="date" class="form-control">
+                </div>
             </div>
-            <div class="col-12">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input  name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <div class="row">
+                <div class="col-12">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input  name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="col-12" >
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
             </div>
-            <div class="col-12" >
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="buttons col-12">
-                <li class="page-item btn btn-dark" style="color:white">
+            <div class="row">
+                <li class="page-item btn btn-dark col m-1" style="color:white">
                     <a class="page-link" href="/login"> Log In </a>
                 </li>
-                <button type="submit" class="btn btn-success">Create user</button>
+                <button type="submit" class="btn btn-success col m-1">Create user</button>
             </div> 
         </form>  
     </div>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/static/javascript/session.js"></script>
+<script src="/static/javascript/register.js"></script>
