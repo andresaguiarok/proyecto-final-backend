@@ -1,7 +1,7 @@
 <article class="backgroundLogin">
     <div class="login">
         <h3 class="text-center">Log In</h3>
-        <form id="formCookie" action="/api/session/login" method="post">
+        <form id="formLogin">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Email address</label>
                 <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="My email">
@@ -13,18 +13,19 @@
             <div class="mb-4 text-center">
                 <a href="/login/recover-password" onclick="sendMail"> Recover password </a>
             </div>
-            <div class="mb-4 buttons">
-                <button type="submit" class="btn btn-primary">Log in</button>
-                <li class="page-item btn btn-dark" style="color:white">
+            <div class="row">
+                <button type="submit" class="btn btn-primary col m-1">Log in</button>
+                <li class="page-item btn btn-dark col m-1" style="color:white">
                     <a class="page-link" href="/api/session/github">Log in
                     <img src="https://img.icons8.com/?size=512&id=12599&format=png" style="height:23px">
                     </a>
                 </li>
-                <li class="page-item btn btn-success" style="color:white">
+                <li class="page-item btn btn-success col m-1" style="color:white">
                     <a class="page-link" href="/register"> Create user </a>
                 </li>
             </div>
         </form>
     </div>
 </article>
-{{!-- <script src="/static/javascript/login.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/static/javascript/login.js"></script>
