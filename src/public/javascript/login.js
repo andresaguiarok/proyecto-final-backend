@@ -1,21 +1,30 @@
-console.log("Hola somos login");
-const form = document.getElementById("formCookie")
+const formLogin = document.getElementById("formLogin")
 
-form.addEventListener("submit" , (event) => {
+formLogin.addEventListener("submit" , async(event) => {
     event.preventDefault()
 
-    const data = new FormData(form)
-    const objectUser = {}
+    const data = new FormData(formLogin)
+    const userLogin = {}
 
-    data.forEach((value , key) => objectUser[key] = value)
+    data.forEach((value , key) => userLogin[key] = value)
 
-    fetch("/api/session/login", {
+    const response = await fetch("/api/session/login", {
         headers : {
             "Content-Type": "application/json"
         },
-        method : "POST", 
-        body: JSON.stringify(objectUser)
-
+        method: "POST",
+        body: JSON.stringify(userLogin)
     })
-    .then(res => res.json()).then(res => localStorage.setItem("Codertoken", res.Accesstoken))
-})
+
+    const responseJson = await response.json()
+     
+    response.ok
+    ? Swal.fire({
+        icon: 'success',
+        title: responseJson.message, 
+        html: '<b>redirecting to the home page...</b>',
+        showConfirmButton: false,
+        timer: 1500 
+    })&& setTimeout(() => { window.location.replace("/api/products") }, 2000)
+    : Swal.fire({ icon: 'error', title: responseJson.status, text: responseJson.message })
+});
