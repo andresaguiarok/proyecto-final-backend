@@ -106,5 +106,14 @@
     "thumbnails": "https://www.automobilemag.com/uploads/sites/11/2019/10/2020-Ford-Mustang-Shelby-GT350R-20.jpg",
     "code": "Sh354by",
     "stock": "8"
+  },
+  {
+    "_id": 13,
+    "title": "remera nike sportswear",
+    "description": "Remera de Moda para Hombre",
+    "price": "70.00",
+    "thumbnails": "https://nikearprod.vtexassets.com/arquivos/ids/597037-800-800?v=638180268261500000&width=800&height=800&aspect=true",
+    "code": "23XRT4",
+    "stock": "4"
   }
 ]
