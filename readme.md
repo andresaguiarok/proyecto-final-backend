@@ -19,10 +19,12 @@ Para el uso del repositorio debe instarlar todas las dependecias correspondiente
 
 ## Api docs
 Se puede probar diferentes endpoints tanto como :\
-Sesiones    : Registrarse y loggearse como usuario.\
-Productos   : Crear, leer , actualizar , eliminar un producto.\
-Cart        : Añadir o eliminar un producto, borrar todos los productos del carrito o crear un opcion de compra del carrito.\
-Usuarios    : buscar varios o un usuario y actualizar informacion de un usuario.
+
+    *Sesiones    : Registrarse y loggearse como usuario.
+    *Productos   : Crear, leer , actualizar , eliminar un producto.
+    *Cart        : Añadir o eliminar un producto, borrar todos los productos del carrito o crear un opcion de
+        compra del carrito.
+    *Usuarios    : buscar varios o un usuario y actualizar informacion de un usuario.
 
 <img src="./src/public/images/api.docs.png">
 
