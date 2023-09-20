@@ -44,4 +44,4 @@ Se puede probar diferentes endpoints tanto como :
  * premium  : usuario con algunos privilegios.
  * admin    : administrador/es de la app.
 
-[![Alt text](./src/public/images/giphy.mp4)]
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenV4MTdqMTc3ZDNyYnZ1YzBraGNsbjJlMmttc2NsOWd1enp5aXYxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UDqlL5CBlMV4X93vnS/giphy.gif">
