@@ -28,17 +28,17 @@ Usuarios    : buscar varios o un usuario y actualizar informacion de un usuario.
 
 ## Uso del aplicativo
 
-1 - Al ingresar por primera vez a la plataforma tendras que dirigirte a la ruta `/register` para poder registrarte como usuario.\
+1 - Al ingresar por primera vez a la plataforma tendras que dirigirte a la ruta `/register` para poder registrarte como usuario.
 
-2 - Una vez ya registrado te redirigira a la ruta `/login` , una vez ahi te logearas como usuario para poder acceder a la home page.\
+2 - Una vez ya registrado te redirigira a la ruta `/login` , una vez ahi te logearas como usuario para poder acceder a la home page.
 
-3 - Una vez en la home page podras ver tu nombre de usuario , tu rol y tambien contaras con un boton para ir a tu carrito de compras.\
+3 - Una vez en la home page podras ver tu nombre de usuario , tu rol y tambien contaras con un boton para ir a tu carrito de compras.
 
-4 - En la home page tendras un listados de productos que podras observar detalles del producto , contara con un boton para añadir a tu carrito.\
+4 - En la home page tendras un listados de productos que podras observar detalles del producto , contara con un boton para añadir a tu carrito.
 
-5 - En tu carrito tendras tres botones , uno para eliminar un producto del carrito especifico , uno para borrar todos los productos del carrito y uno para generar la orden/ticket de compra.\
+5 - En tu carrito tendras tres botones , uno para eliminar un producto del carrito especifico , uno para borrar todos los productos del carrito y uno para generar la orden/ticket de compra.
 
 6 - Esta app cuenta con algunas rutas limitadas para diferentes tipo de jerarquias de usuarios :\
- * user     : usuario comun.\
- * premium  : usuario con algunos privilegios.\
- * admin    : administrador/es de la app.\
+ * user     : usuario comun.
+ * premium  : usuario con algunos privilegios.
+ * admin    : administrador/es de la app.
