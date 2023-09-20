@@ -44,4 +44,4 @@ Se puede probar diferentes endpoints tanto como :
  * premium  : usuario con algunos privilegios.
  * admin    : administrador/es de la app.
 
-<img src="./src/public/images/giphy.mp4">
+[![Alt text](./src/public/images/giphy.mp4)]
