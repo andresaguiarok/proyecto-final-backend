@@ -1,5 +1,3 @@
-console.log("estamos conectados")
-
 const formRegister = document.getElementById("formRegister")
 
 formRegister.addEventListener("submit" , async(event) => {
