@@ -18,7 +18,7 @@ Es necesario installar `NODE.JS` & `NODEMON` de manera global\
 Para el uso del repositorio debe instarlar todas las dependecias correspondientes ejecutando **npm i**.
 
 ## Api docs
-Se puede probar diferentes endpoints tanto como :\
+Se puede probar diferentes endpoints tanto como :
  * Sesiones    : Registrarse y loggearse como usuario.
  * Productos   : Crear, leer , actualizar , eliminar un producto.
  * Cart        : Añadir o eliminar un producto, borrar todos los productos del carrito o crear un opcion de
@@ -39,7 +39,9 @@ Se puede probar diferentes endpoints tanto como :\
 
 5 - En tu carrito tendras tres botones , uno para eliminar un producto del carrito especifico , uno para borrar todos los productos del carrito y uno para generar la orden/ticket de compra.
 
-6 - Esta app cuenta con algunas rutas limitadas para diferentes tipo de jerarquias de usuarios :\
+6 - Esta app cuenta con algunas rutas limitadas para diferentes tipo de jerarquias de usuarios :
  * user     : usuario comun.
  * premium  : usuario con algunos privilegios.
  * admin    : administrador/es de la app.
+
+<img src="./src/public/images/giphy.mp4">
